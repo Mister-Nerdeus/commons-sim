@@ -1,0 +1,22 @@
+{
+  "name": "@commons-sim/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "commons-sim": "dist/main.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node --watch src/main.ts",
+    "test": "node --test dist/test.js",
+    "lint": "echo \"(add eslint later)\"",
+    "format": "prettier -w .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "determinism:baseline": "node dist/determinismBaseline.js"
+  },
+  "dependencies": {
+    "@commons-sim/engine": "workspace:*",
+    "@commons-sim/shared": "workspace:*"
+  }
+}
