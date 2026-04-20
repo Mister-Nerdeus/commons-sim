@@ -1,6 +1,6 @@
 import { simulateScenario } from "@commons-sim/engine";
-import { loadScenario, stableStringify } from "./io";
-import { sha256 } from "./hash";
+import { loadScenario, stableStringify } from "./io.js";
+import { sha256 } from "./hash.js";
 
 const [, , cmd, ...args] = process.argv;
 

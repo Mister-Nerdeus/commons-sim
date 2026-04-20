@@ -1,12 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { simulateScenario } from "@commons-sim/engine";
-import { loadScenario, stableStringify } from "./io";
-import { sha256 } from "./hash";
+import { loadScenario, stableStringify } from "./io.js";
+import { sha256 } from "./hash.js";
 
-const scenarioPath = path.resolve("scenarios/baseline-48.json");
-const snapshotPath = path.resolve("scenarios/baseline-48.snapshot.json");
-const hashPath = path.resolve("scenarios/baseline-48.snapshot.sha256");
+const thisDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(thisDir, "../../..");
+
+const scenarioPath = path.join(repoRoot, "scenarios/baseline-48.json");
+const snapshotPath = path.join(repoRoot, "scenarios/baseline-48.snapshot.json");
+const hashPath = path.join(repoRoot, "scenarios/baseline-48.snapshot.sha256");
 
 const s = loadScenario(scenarioPath);
 const out = simulateScenario(s);

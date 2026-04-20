@@ -1,6 +1,6 @@
 import type { Scenario } from "@commons-sim/shared";
-import { mulberry32 } from "./rng";
-import { deriveResidentCount, type EngineOptions, type SimOutputs, type DemandModel } from "./model";
+import { mulberry32 } from "./rng.js";
+import { deriveResidentCount, type EngineOptions, type SimOutputs, type DemandModel } from "./model.js";
 
 /**
  * Phase 1 modeling philosophy:

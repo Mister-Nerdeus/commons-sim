@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { simulateScenario } from "./simulate";
+import { simulateScenario } from "./simulate.js";
 
 test("simulateScenario is deterministic for same input", () => {
   const scenario: any = {

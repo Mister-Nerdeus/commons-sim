@@ -1,0 +1,10 @@
+# Default ownership
+* @Mister-Nerdeus
+
+# Engine and model contract
+/packages/engine/ @Mister-Nerdeus
+/packages/shared/ @Mister-Nerdeus
+
+# Delivery and governance controls
+/.github/ @Mister-Nerdeus
+/docs/program/ @Mister-Nerdeus

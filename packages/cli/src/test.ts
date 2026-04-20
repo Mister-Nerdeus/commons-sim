@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { stableStringify } from "./io";
+import { stableStringify } from "./io.js";
 
 test("stableStringify sorts keys", () => {
   const s = stableStringify({ b: 1, a: 2 });

@@ -23,7 +23,9 @@ This is a **planning engine first**, a game layer second.
 
 ### Install
 ```bash
-pnpm install
+corepack enable
+corepack prepare pnpm@9.0.0 --activate
+pnpm install --frozen-lockfile
 pnpm build
 ```
 
@@ -54,5 +56,7 @@ pnpm determinism:baseline
 - [Issue dependency map](docs/program/DEPENDENCY_MAP.md)
 - [Batch audit template](docs/program/BATCH_AUDIT_TEMPLATE.md)
 - [Change-control rules](docs/program/CHANGE_CONTROL.md)
+- [Branch governance and required checks](docs/program/BRANCH_GOVERNANCE.md)
+- [Local setup and runtime contract](docs/setup/LOCAL_SETUP.md)
 - [Codex issue template](.github/ISSUE_TEMPLATE/codex-issue.md)
 - [Pull request template](.github/pull_request_template.md)

@@ -1,0 +1,496 @@
+{
+  "horizonMonths": 60,
+  "meta": {
+    "engineVersion": "0.1.0",
+    "seed": 1337
+  },
+  "scenarioId": "baseline-48",
+  "series": [
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.64738346349944,
+      "laborHours": 317.1425295945705,
+      "monthIndex": 0,
+      "reserveUsd": 25548.753720312397,
+      "totalOpexUsd": 10975.074406247973
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.7104876433023,
+      "laborHours": 317.2507081885182,
+      "monthIndex": 1,
+      "reserveUsd": 26097.658890656323,
+      "totalOpexUsd": 10978.10340687851
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 235.73077003755114,
+      "laborHours": 329.2854780072305,
+      "monthIndex": 2,
+      "reserveUsd": 26663.412738746447,
+      "totalOpexUsd": 11315.076961802455
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 233.84442629506813,
+      "laborHours": 326.05174587725963,
+      "monthIndex": 3,
+      "reserveUsd": 27224.63936185461,
+      "totalOpexUsd": 11224.53246216327
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 231.4347878409715,
+      "laborHours": 321.9209370988083,
+      "monthIndex": 4,
+      "reserveUsd": 27780.082852672942,
+      "totalOpexUsd": 11108.869816366632
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 230.87214584538597,
+      "laborHours": 320.9564079635188,
+      "monthIndex": 5,
+      "reserveUsd": 28334.176002701868,
+      "totalOpexUsd": 11081.863000578527
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 232.51855536389573,
+      "laborHours": 323.7788242809641,
+      "monthIndex": 6,
+      "reserveUsd": 28892.22053557522,
+      "totalOpexUsd": 11160.890657466995
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 232.76773676127436,
+      "laborHours": 324.205992390756,
+      "monthIndex": 7,
+      "reserveUsd": 29450.86310380228,
+      "totalOpexUsd": 11172.85136454117
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 232.7159017187354,
+      "laborHours": 324.11713231783216,
+      "monthIndex": 8,
+      "reserveUsd": 30009.381267927245,
+      "totalOpexUsd": 11170.3632824993
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 232.71158606047462,
+      "laborHours": 324.10973404652793,
+      "monthIndex": 9,
+      "reserveUsd": 30567.889074472383,
+      "totalOpexUsd": 11170.156130902782
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 234.0344479982199,
+      "laborHours": 326.37749736837696,
+      "monthIndex": 10,
+      "reserveUsd": 31129.57174966811,
+      "totalOpexUsd": 11233.653503914555
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.71845860173246,
+      "laborHours": 317.2643726886842,
+      "monthIndex": 11,
+      "reserveUsd": 31678.496050312267,
+      "totalOpexUsd": 10978.486012883159
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 231.7103354939604,
+      "laborHours": 322.3933045039321,
+      "monthIndex": 12,
+      "reserveUsd": 32234.60085549777,
+      "totalOpexUsd": 11122.096103710099
+    },
+    {
+      "burnoutIndex": 2.220446049250313e-16,
+      "costPerHouseholdUsd": 231.0315650982864,
+      "laborHours": 321.2296981113481,
+      "monthIndex": 13,
+      "reserveUsd": 32789.07661173366,
+      "totalOpexUsd": 11089.515124717747
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.85204459667546,
+      "laborHours": 317.49337725144363,
+      "monthIndex": 14,
+      "reserveUsd": 33338.32151876568,
+      "totalOpexUsd": 10984.898140640422
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 235.59120568087476,
+      "laborHours": 329.0462248243567,
+      "monthIndex": 15,
+      "reserveUsd": 33903.740412399784,
+      "totalOpexUsd": 11308.37787268199
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 232.95589948462717,
+      "laborHours": 324.5285570593609,
+      "monthIndex": 16,
+      "reserveUsd": 34462.834571162886,
+      "totalOpexUsd": 11181.883175262104
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 237.05932676531344,
+      "laborHours": 331.5630038262516,
+      "monthIndex": 17,
+      "reserveUsd": 35031.77695539964,
+      "totalOpexUsd": 11378.847684735045
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 233.69996586773598,
+      "laborHours": 325.80409943040456,
+      "monthIndex": 18,
+      "reserveUsd": 35592.65687348221,
+      "totalOpexUsd": 11217.598361651328
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 227.52824764358922,
+      "laborHours": 315.22401104615295,
+      "monthIndex": 19,
+      "reserveUsd": 36138.72466782682,
+      "totalOpexUsd": 10921.355886892283
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.8143838908251,
+      "laborHours": 317.42881604141445,
+      "monthIndex": 20,
+      "reserveUsd": 36687.8791891648,
+      "totalOpexUsd": 10983.090426759605
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.92418343047163,
+      "laborHours": 317.6170438236656,
+      "monthIndex": 21,
+      "reserveUsd": 37237.29722939793,
+      "totalOpexUsd": 10988.360804662638
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 231.6752242544745,
+      "laborHours": 322.33311380767054,
+      "monthIndex": 22,
+      "reserveUsd": 37793.31776760867,
+      "totalOpexUsd": 11120.410764214776
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 229.84686532217623,
+      "laborHours": 319.19878420944497,
+      "monthIndex": 23,
+      "reserveUsd": 38344.95024438189,
+      "totalOpexUsd": 11032.64953546446
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 231.22041631667503,
+      "laborHours": 321.55344305715715,
+      "monthIndex": 24,
+      "reserveUsd": 38899.87924354192,
+      "totalOpexUsd": 11098.579983200401
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 234.83868043824205,
+      "laborHours": 327.7561815512721,
+      "monthIndex": 25,
+      "reserveUsd": 39463.4920765937,
+      "totalOpexUsd": 11272.256661035619
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 234.7823677754906,
+      "laborHours": 327.6596455579839,
+      "monthIndex": 26,
+      "reserveUsd": 40026.96975925488,
+      "totalOpexUsd": 11269.55365322355
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.72256992271286,
+      "laborHours": 317.27142066750775,
+      "monthIndex": 27,
+      "reserveUsd": 40575.90392706939,
+      "totalOpexUsd": 10978.683356290217
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 227.94621156608528,
+      "laborHours": 315.94052062757476,
+      "monthIndex": 28,
+      "reserveUsd": 41122.974834828,
+      "totalOpexUsd": 10941.418155172094
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 234.18715224200568,
+      "laborHours": 326.6392760720097,
+      "monthIndex": 29,
+      "reserveUsd": 41685.02400020881,
+      "totalOpexUsd": 11240.983307616272
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.62449094955875,
+      "laborHours": 317.1032852849578,
+      "monthIndex": 30,
+      "reserveUsd": 42233.722778487754,
+      "totalOpexUsd": 10973.97556557882
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 234.98432780943554,
+      "laborHours": 328.00586275903237,
+      "monthIndex": 31,
+      "reserveUsd": 42797.6851652304,
+      "totalOpexUsd": 11279.247734852906
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.83451661599432,
+      "laborHours": 317.46332928456167,
+      "monthIndex": 32,
+      "reserveUsd": 43346.88800510879,
+      "totalOpexUsd": 10984.056797567728
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 235.6425529276918,
+      "laborHours": 329.1342486760431,
+      "monthIndex": 33,
+      "reserveUsd": 43912.430132135254,
+      "totalOpexUsd": 11310.842540529207
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 226.948194514275,
+      "laborHours": 314.2296342530429,
+      "monthIndex": 34,
+      "reserveUsd": 44457.10579896951,
+      "totalOpexUsd": 10893.5133366852
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 232.94499673352723,
+      "laborHours": 324.5098666289038,
+      "monthIndex": 35,
+      "reserveUsd": 45016.17379112998,
+      "totalOpexUsd": 11181.359843209308
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 231.4938811060883,
+      "laborHours": 322.02223983900853,
+      "monthIndex": 36,
+      "reserveUsd": 45571.75910578459,
+      "totalOpexUsd": 11111.706293092238
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 230.93883860120675,
+      "laborHours": 321.07073840206874,
+      "monthIndex": 37,
+      "reserveUsd": 46126.01231842749,
+      "totalOpexUsd": 11085.064252857925
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 229.6505118160709,
+      "laborHours": 318.86217819897865,
+      "monthIndex": 38,
+      "reserveUsd": 46677.17354678606,
+      "totalOpexUsd": 11023.224567171403
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 226.6803546980607,
+      "laborHours": 313.7704802823898,
+      "monthIndex": 39,
+      "reserveUsd": 47221.20639806141,
+      "totalOpexUsd": 10880.657025506915
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.1731558524988,
+      "laborHours": 316.3295679757122,
+      "monthIndex": 40,
+      "reserveUsd": 47768.821972107406,
+      "totalOpexUsd": 10952.311480919943
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 229.41829515733738,
+      "laborHours": 318.46409249829264,
+      "monthIndex": 41,
+      "reserveUsd": 48319.42588048502,
+      "totalOpexUsd": 11012.078167552194
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 230.24234552910443,
+      "laborHours": 319.8767502784647,
+      "monthIndex": 42,
+      "reserveUsd": 48872.00750975487,
+      "totalOpexUsd": 11051.632585397012
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 233.00731648240483,
+      "laborHours": 324.6167004841226,
+      "monthIndex": 43,
+      "reserveUsd": 49431.22506931264,
+      "totalOpexUsd": 11184.351191155432
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 229.87392493046912,
+      "laborHours": 319.24517210937563,
+      "monthIndex": 44,
+      "reserveUsd": 49982.92248914576,
+      "totalOpexUsd": 11033.948396662518
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 233.02232338655855,
+      "laborHours": 324.6424266055289,
+      "monthIndex": 45,
+      "reserveUsd": 50542.1760652735,
+      "totalOpexUsd": 11185.07152255481
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 231.5833684405276,
+      "laborHours": 322.17564669804733,
+      "monthIndex": 46,
+      "reserveUsd": 51097.97614953077,
+      "totalOpexUsd": 11116.001685145326
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 231.8972532398518,
+      "laborHours": 322.71373492546024,
+      "monthIndex": 47,
+      "reserveUsd": 51654.529557306414,
+      "totalOpexUsd": 11131.068155512887
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 236.2833586326187,
+      "laborHours": 330.23277274163206,
+      "monthIndex": 48,
+      "reserveUsd": 52221.6096180247,
+      "totalOpexUsd": 11341.601214365697
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 237.3921232897321,
+      "laborHours": 332.1335121538264,
+      "monthIndex": 49,
+      "reserveUsd": 52791.35071392005,
+      "totalOpexUsd": 11394.82191790714
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 234.3172160847721,
+      "laborHours": 326.8622426596093,
+      "monthIndex": 50,
+      "reserveUsd": 53353.71203252351,
+      "totalOpexUsd": 11247.22637206906
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 227.0554550088427,
+      "laborHours": 314.41350938658746,
+      "monthIndex": 51,
+      "reserveUsd": 53898.64512454473,
+      "totalOpexUsd": 10898.66184042445
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.36700625853084,
+      "laborHours": 316.6618829574814,
+      "monthIndex": 52,
+      "reserveUsd": 54446.72593956521,
+      "totalOpexUsd": 10961.61630040948
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 229.49381972615268,
+      "laborHours": 318.5935631876903,
+      "monthIndex": 53,
+      "reserveUsd": 54997.51110690797,
+      "totalOpexUsd": 11015.703346855329
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 227.9910302568143,
+      "laborHours": 316.0173526688245,
+      "monthIndex": 54,
+      "reserveUsd": 55544.689579524325,
+      "totalOpexUsd": 10943.569452327087
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.03489592940517,
+      "laborHours": 316.09255096469457,
+      "monthIndex": 55,
+      "reserveUsd": 56091.973329754896,
+      "totalOpexUsd": 10945.675004611448
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 229.49757296164424,
+      "laborHours": 318.59999730567586,
+      "monthIndex": 56,
+      "reserveUsd": 56642.767504862844,
+      "totalOpexUsd": 11015.883502158924
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 230.2794217525684,
+      "laborHours": 319.94030951868865,
+      "monthIndex": 57,
+      "reserveUsd": 57195.43811706901,
+      "totalOpexUsd": 11053.412244123283
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 229.15063430483852,
+      "laborHours": 318.0052453225803,
+      "monthIndex": 58,
+      "reserveUsd": 57745.399639400624,
+      "totalOpexUsd": 10999.23044663225
+    },
+    {
+      "burnoutIndex": 0,
+      "costPerHouseholdUsd": 228.33014524146367,
+      "laborHours": 316.59869264250915,
+      "monthIndex": 59,
+      "reserveUsd": 58293.39198798014,
+      "totalOpexUsd": 10959.846971590256
+    }
+  ],
+  "summary": {
+    "avgBurnoutIndex": 3.7007434154171884e-18,
+    "avgCostPerHouseholdUsd": 231.20411102763958,
+    "avgLaborHoursPerMonth": 321.52549113309647,
+    "reserveEndUsd": 58293.39198798014
+  }
+}

@@ -1,1 +1,1 @@
-export * from "./scenarioSchema";
+export * from "./scenarioSchema.js";
