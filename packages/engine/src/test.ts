@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { SimulationOutputSchema } from "@commons-sim/shared";
 import { simulateScenario } from "./simulate.js";
 
 test("simulateScenario is deterministic for same input", () => {
@@ -23,4 +24,5 @@ test("simulateScenario is deterministic for same input", () => {
   const a = simulateScenario(scenario);
   const b = simulateScenario(scenario);
   assert.deepEqual(a, b);
+  assert.equal(SimulationOutputSchema.safeParse(a).success, true);
 });

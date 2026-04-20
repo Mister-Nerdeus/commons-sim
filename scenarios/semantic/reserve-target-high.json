@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "semantic-reserve-high-target",
+  "title": "Semantic reserve target high",
+  "seed": 1337,
+  "horizonMonths": 24,
+  "timestep": "month",
+  "householdCount": 12,
+  "householdMix": { "singles": 12, "couples": 0, "families": 0 },
+  "occupantsPerType": { "single": 1, "couple": 2, "family": 4.5 },
+  "participation": { "meals": 0.9, "laundry": 0.9, "cleaning": 0.9 },
+  "serviceTiers": { "meals": 2, "laundry": 2, "cleaning": 2 },
+  "wageModel": { "fullyLoadedUsdPerHour": 28, "overheadMultiplier": 1.2 },
+  "utilities": { "electricity_kwh": 0.2, "water_gal": 0.01, "sewer_gal": 0.01, "gas_therm": 1.4 },
+  "equipment": [],
+  "reservePolicy": { "initialReserveUsd": 0, "targetMonthsOfOpex": 12, "maxReserveUsd": 50000 }
+}

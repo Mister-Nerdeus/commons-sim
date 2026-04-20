@@ -24,6 +24,8 @@ export type SimOutputs = {
 
   // For determinism gates: stable hash input (JSON string) should match snapshot.
   meta: {
+    modelVersion: string;
+    assumptionSetVersion: string;
     engineVersion: string;
     seed: number;
   };
@@ -31,12 +33,8 @@ export type SimOutputs = {
 
 export type EngineOptions = {
   engineVersion?: string;
-};
-
-export type DemandModel = {
-  mealsPerResidentPerDay: number; // e.g., shared meal participation density
-  laundryLoadsPerHouseholdPerWeek: number;
-  cleaningHoursPerHouseholdPerMonth: number;
+  modelVersion?: string;
+  assumptionSetVersion?: string;
 };
 
 export function deriveResidentCount(s: Scenario) {

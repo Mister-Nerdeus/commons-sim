@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "node --test dist/test.js",
+    "test": "node --test dist/test.js dist/submodels.test.js dist/semantic.test.js",
     "lint": "echo \"(add eslint later)\"",
     "format": "prettier -w .",
     "typecheck": "tsc -p tsconfig.json --noEmit"
