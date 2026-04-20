@@ -1,0 +1,10 @@
+services:
+  commons-sim-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: commons-sim:web
+    container_name: commons-sim-web
+    ports:
+      - "8080:80"
+    restart: unless-stopped

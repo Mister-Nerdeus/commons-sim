@@ -41,6 +41,15 @@ pnpm determinism:init   # local only, writes/updates goldens
 pnpm determinism:check  # check only, used by CI
 ```
 
+### Docker deploy (web)
+```bash
+docker compose build
+docker compose up -d
+```
+
+Web app URL:
+- `http://localhost:8080/commons-sim/`
+
 ## Packages
 - `@commons-sim/shared` — scenario schema/contracts (Zod) + types
 - `@commons-sim/engine` — deterministic simulation engine (pure functions)

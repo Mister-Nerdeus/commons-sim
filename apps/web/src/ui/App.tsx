@@ -291,7 +291,7 @@ export default function App() {
       <section className="panel assumptions">
         <h2>Explainability Layer</h2>
         <ul>
-          {explainabilityLines.map((line) => (
+          {explainabilityLines.map((line: string) => (
             <li key={line}>{line}</li>
           ))}
         </ul>
