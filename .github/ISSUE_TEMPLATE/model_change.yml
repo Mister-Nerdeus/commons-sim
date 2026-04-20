@@ -1,0 +1,21 @@
+name: Model change proposal
+description: Change an equation/assumption (requires docs + determinism update if accepted)
+labels: ["model"]
+body:
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed change (include units)
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Rationale / sources
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected impact on outputs
+      description: If outputs change, snapshots will need updating.
