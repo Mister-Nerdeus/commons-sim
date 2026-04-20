@@ -4,7 +4,14 @@
 # Engine and model contract
 /packages/engine/ @Mister-Nerdeus
 /packages/shared/ @Mister-Nerdeus
+/packages/cli/ @Mister-Nerdeus
 
 # Delivery and governance controls
 /.github/ @Mister-Nerdeus
 /docs/program/ @Mister-Nerdeus
+/docs/audits/ @Mister-Nerdeus
+/docs/data/ @Mister-Nerdeus
+/docs/gates/ @Mister-Nerdeus
+/docs/scenarios/ @Mister-Nerdeus
+/docs/contracts/ @Mister-Nerdeus
+/artifacts/ @Mister-Nerdeus

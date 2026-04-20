@@ -1,0 +1,72 @@
+{
+  "baseSummary": {
+    "avgBurnoutIndex": 0.058203977661625876,
+    "avgCostPerHouseholdUsd": 231.20411102763958,
+    "avgLaborHoursPerMonth": 321.52549113309647,
+    "reserveEndUsd": 34184.46575372142
+  },
+  "runs": [
+    {
+      "delta": -0.1,
+      "key": "wage",
+      "summary": {
+        "avgBurnoutIndex": 0.058203977661625876,
+        "avgCostPerHouseholdUsd": 212.4484573782089,
+        "avgLaborHoursPerMonth": 321.52549113309647,
+        "reserveEndUsd": 31394.54425162928
+      }
+    },
+    {
+      "delta": -0.1,
+      "key": "utilities",
+      "summary": {
+        "avgBurnoutIndex": 0.058203977661625876,
+        "avgCostPerHouseholdUsd": 229.78206190763964,
+        "avgLaborHoursPerMonth": 321.52549113309647,
+        "reserveEndUsd": 33979.69068044142
+      }
+    },
+    {
+      "delta": -0.1,
+      "key": "participation",
+      "summary": {
+        "avgBurnoutIndex": 0.0044122471282892215,
+        "avgCostPerHouseholdUsd": 212.22520825820905,
+        "avgLaborHoursPerMonth": 289.3729420197868,
+        "reserveEndUsd": 31362.39637834928
+      }
+    },
+    {
+      "delta": 0.1,
+      "key": "wage",
+      "summary": {
+        "avgBurnoutIndex": 0.058203977661625876,
+        "avgCostPerHouseholdUsd": 249.95976467707024,
+        "avgLaborHoursPerMonth": 321.52549113309647,
+        "reserveEndUsd": 36974.38725581356
+      }
+    },
+    {
+      "delta": 0.1,
+      "key": "utilities",
+      "summary": {
+        "avgBurnoutIndex": 0.058203977661625876,
+        "avgCostPerHouseholdUsd": 232.62616014763964,
+        "avgLaborHoursPerMonth": 321.52549113309647,
+        "reserveEndUsd": 34389.24082700142
+      }
+    },
+    {
+      "delta": 0.1,
+      "key": "participation",
+      "summary": {
+        "avgBurnoutIndex": 0.11402437542778844,
+        "avgCostPerHouseholdUsd": 250.1830137970703,
+        "avgLaborHoursPerMonth": 353.67804024640617,
+        "reserveEndUsd": 37006.53512909356
+      }
+    }
+  ],
+  "scenarioId": "cn-001-balanced-48",
+  "seed": 1337
+}

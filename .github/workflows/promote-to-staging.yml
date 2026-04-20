@@ -1,0 +1,25 @@
+name: promote-to-staging
+
+on:
+  pull_request:
+    branches: [staging]
+  workflow_dispatch:
+
+jobs:
+  validate_release_candidate:
+    if: github.event_name == 'workflow_dispatch' || (github.base_ref == 'staging' && github.head_ref == 'develop')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile=false
+      - run: pnpm build
+      - run: pnpm test
+      - run: pnpm determinism:check
+      - run: echo "RC validation completed for staging promotion"

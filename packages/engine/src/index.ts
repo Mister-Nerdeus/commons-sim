@@ -6,3 +6,4 @@ export * from "./labor.js";
 export * from "./utilities.js";
 export * from "./reserve.js";
 export * from "./metrics.js";
+export * from "./sensitivity.js";

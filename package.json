@@ -15,6 +15,9 @@
     "determinism:init": "pnpm --filter @commons-sim/cli... build && node packages/cli/dist/determinismInit.js",
     "determinism:check": "pnpm --filter @commons-sim/cli... build && node packages/cli/dist/determinismCheck.js",
     "determinism:baseline": "pnpm determinism:check",
+    "env:parity:check": "node scripts/parity/verify-env-parity.mjs && node scripts/parity/verify-seed-contract.mjs",
+    "staging:baseline:capture": "node scripts/data/capture-staging-baseline.mjs",
+    "staging:baseline:reset": "node scripts/data/reset-staging-from-baseline.mjs",
     "smoke:cli": "pnpm --filter @commons-sim/cli... build && node packages/cli/dist/main.js run scenarios/baseline-48.json",
     "dev:web": "pnpm --filter @commons-sim/web dev",
     "dev:cli": "pnpm --filter @commons-sim/cli dev"

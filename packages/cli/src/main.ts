@@ -1,5 +1,6 @@
-import { simulateScenario } from "@commons-sim/engine";
-import { loadScenario, stableStringify } from "./io.js";
+import { runSensitivity, simulateScenario } from "@commons-sim/engine";
+import { migrateProjectManifest, type ProjectManifest } from "@commons-sim/shared";
+import { loadProjectManifest, loadScenario, saveProjectManifest, stableStringify } from "./io.js";
 import { sha256 } from "./hash.js";
 
 const [, , cmd, ...args] = process.argv;
@@ -34,6 +35,9 @@ Commands:
   run <scenario.json> [--seed N]
   compare <a.json> <b.json> [--seed N]
   validate <scenario.json>
+  sensitivity <scenario.json>
+  project-save <scenario.json> <manifest.json>
+  project-load <manifest.json>
 `);
   process.exit(EXIT_USAGE);
 }
@@ -134,6 +138,66 @@ try {
           ok: true,
           scenarioId: scenario.id,
           version: scenario.version,
+        },
+        null,
+        2,
+      ),
+    );
+    process.exit(EXIT_OK);
+  }
+
+  if (cmd === "sensitivity") {
+    const file = args[0];
+    if (!file) usage();
+    const scenario = loadScenarioStrict(file);
+    const out = runSensitivity(scenario);
+    const text = stableStringify(out);
+    console.log(text);
+    console.error(`hash=${sha256(text)}`);
+    process.exit(EXIT_OK);
+  }
+
+  if (cmd === "project-save") {
+    const scenarioFile = args[0];
+    const manifestFile = args[1];
+    if (!scenarioFile || !manifestFile) usage();
+
+    const scenario = loadScenarioStrict(scenarioFile);
+    const now = new Date().toISOString();
+    const manifest: ProjectManifest = {
+      manifestVersion: 1,
+      projectId: scenario.id,
+      projectTitle: scenario.title,
+      createdAtUtc: now,
+      updatedAtUtc: now,
+      sourceBranch: "develop",
+      scenario,
+      metadata: {
+        notes: "Saved via CLI project-save",
+        engineVersion: "0.1.0",
+      },
+    };
+
+    saveProjectManifest(manifestFile, manifest);
+    console.log(JSON.stringify({ ok: true, saved: manifestFile, projectId: manifest.projectId }, null, 2));
+    process.exit(EXIT_OK);
+  }
+
+  if (cmd === "project-load") {
+    const manifestFile = args[0];
+    if (!manifestFile) usage();
+
+    const parsed = loadProjectManifest(manifestFile);
+    const migrated = migrateProjectManifest(parsed);
+    const output = simulateScenario(migrated.manifest.scenario);
+    console.log(
+      JSON.stringify(
+        {
+          ok: true,
+          migratedFrom: migrated.migratedFrom,
+          projectId: migrated.manifest.projectId,
+          scenarioId: output.scenarioId,
+          summary: output.summary,
         },
         null,
         2,

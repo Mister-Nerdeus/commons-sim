@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "migratedFrom": null,
+  "projectId": "baseline-48",
+  "scenarioId": "baseline-48",
+  "summary": {
+    "avgCostPerHouseholdUsd": 231.20411102763958,
+    "avgLaborHoursPerMonth": 321.52549113309647,
+    "reserveEndUsd": 34184.46575372142,
+    "avgBurnoutIndex": 0.058203977661625876
+  }
+}

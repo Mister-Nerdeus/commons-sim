@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "cn-003-lean-service-36",
+  "title": "Canonical lean-service 36 households",
+  "seed": 77,
+  "horizonMonths": 60,
+  "timestep": "month",
+  "householdCount": 36,
+  "householdMix": { "singles": 16, "couples": 12, "families": 8 },
+  "occupantsPerType": { "single": 1, "couple": 2, "family": 4.2 },
+  "participation": { "meals": 0.55, "laundry": 0.58, "cleaning": 0.35 },
+  "serviceTiers": { "meals": 1, "laundry": 1, "cleaning": 1 },
+  "wageModel": { "fullyLoadedUsdPerHour": 27, "overheadMultiplier": 1.12 },
+  "utilities": { "electricity_kwh": 0.15, "water_gal": 0.0058, "sewer_gal": 0.0062, "gas_therm": 1.2 },
+  "equipment": [
+    {
+      "id": "kitchen-line-lite",
+      "name": "Lean kitchen line",
+      "category": "kitchen",
+      "capexUsd": 64000,
+      "usefulLifeYears": 10,
+      "annualMaintenanceUsd": 3200
+    }
+  ],
+  "reservePolicy": { "initialReserveUsd": 18000, "targetMonthsOfOpex": 2.5, "maxReserveUsd": 180000 }
+}

@@ -1,0 +1,54 @@
+{
+  "generatedAtUtc": "2026-04-20T05:56:52.922Z",
+  "scenarioCount": 3,
+  "results": [
+    {
+      "scenarioId": "cn-001-balanced-48",
+      "horizonMonths": 60,
+      "summary": {
+        "avgBurnoutIndex": 0.058203977661625876,
+        "avgCostPerHouseholdUsd": 231.20411102763958,
+        "avgLaborHoursPerMonth": 321.52549113309647,
+        "reserveEndUsd": 34184.46575372142
+      },
+      "meta": {
+        "assumptionSetVersion": "phase1-2026-04-19",
+        "engineVersion": "0.1.0",
+        "modelVersion": "1.1.0",
+        "seed": 1337
+      }
+    },
+    {
+      "scenarioId": "cn-002-family-heavy-64",
+      "horizonMonths": 60,
+      "summary": {
+        "avgBurnoutIndex": 0.28478138763420485,
+        "avgCostPerHouseholdUsd": 336.5124630849804,
+        "avgLaborHoursPerMonth": 602.7121057030696,
+        "reserveEndUsd": 66074.58458506709
+      },
+      "meta": {
+        "assumptionSetVersion": "phase1-2026-04-19",
+        "engineVersion": "0.1.0",
+        "modelVersion": "1.1.0",
+        "seed": 2024
+      }
+    },
+    {
+      "scenarioId": "cn-003-lean-service-36",
+      "horizonMonths": 60,
+      "summary": {
+        "avgBurnoutIndex": 0,
+        "avgCostPerHouseholdUsd": 95.51371494950754,
+        "avgLaborHoursPerMonth": 79.96560900304709,
+        "reserveEndUsd": 18000
+      },
+      "meta": {
+        "assumptionSetVersion": "phase1-2026-04-19",
+        "engineVersion": "0.1.0",
+        "modelVersion": "1.1.0",
+        "seed": 77
+      }
+    }
+  ]
+}

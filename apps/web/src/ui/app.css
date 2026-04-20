@@ -52,12 +52,33 @@ body {
   cursor: pointer;
 }
 
+.hidden-input {
+  display: none;
+}
+
 .panel {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 10px 30px rgba(20, 30, 40, 0.08);
+}
+
+.wizard-panel h2 {
+  margin-top: 0;
+}
+
+.wizard-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+
+.status-line {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .selectors {

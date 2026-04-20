@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "id": "cn-002-family-heavy-64",
+  "title": "Canonical family-heavy 64 household mix",
+  "seed": 2024,
+  "horizonMonths": 60,
+  "timestep": "month",
+  "householdCount": 64,
+  "householdMix": { "singles": 10, "couples": 18, "families": 36 },
+  "occupantsPerType": { "single": 1, "couple": 2, "family": 4.8 },
+  "participation": { "meals": 0.82, "laundry": 0.75, "cleaning": 0.62 },
+  "serviceTiers": { "meals": 2, "laundry": 2, "cleaning": 1 },
+  "wageModel": { "fullyLoadedUsdPerHour": 30, "overheadMultiplier": 1.18 },
+  "utilities": { "electricity_kwh": 0.18, "water_gal": 0.007, "sewer_gal": 0.0078, "gas_therm": 1.35 },
+  "equipment": [
+    {
+      "id": "kitchen-line-2",
+      "name": "Expanded kitchen line",
+      "category": "kitchen",
+      "capexUsd": 112000,
+      "usefulLifeYears": 10,
+      "annualMaintenanceUsd": 5600
+    },
+    {
+      "id": "laundry-2",
+      "name": "Expanded laundry equipment",
+      "category": "laundry",
+      "capexUsd": 34000,
+      "usefulLifeYears": 8,
+      "annualMaintenanceUsd": 1800
+    }
+  ],
+  "reservePolicy": { "initialReserveUsd": 30000, "targetMonthsOfOpex": 3, "maxReserveUsd": 320000 }
+}

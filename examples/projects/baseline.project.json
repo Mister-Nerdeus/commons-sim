@@ -1,0 +1,73 @@
+{
+  "createdAtUtc": "2026-04-20T05:56:52.626Z",
+  "manifestVersion": 1,
+  "metadata": {
+    "engineVersion": "0.1.0",
+    "notes": "Saved via CLI project-save"
+  },
+  "projectId": "baseline-48",
+  "projectTitle": "Baseline 48 households (mixed, moderate shared services)",
+  "scenario": {
+    "equipment": [
+      {
+        "annualMaintenanceUsd": 4500,
+        "capexUsd": 85000,
+        "category": "kitchen",
+        "id": "kitchen-line-1",
+        "name": "Commercial kitchen line (baseline)",
+        "usefulLifeYears": 10
+      },
+      {
+        "annualMaintenanceUsd": 1200,
+        "capexUsd": 22000,
+        "category": "laundry",
+        "id": "laundry-1",
+        "name": "Laundry equipment set",
+        "usefulLifeYears": 8
+      }
+    ],
+    "horizonMonths": 60,
+    "householdCount": 48,
+    "householdMix": {
+      "couples": 16,
+      "families": 20,
+      "singles": 12
+    },
+    "id": "baseline-48",
+    "occupantsPerType": {
+      "couple": 2,
+      "family": 4.5,
+      "single": 1
+    },
+    "participation": {
+      "cleaning": 0.5,
+      "laundry": 0.7,
+      "meals": 0.75
+    },
+    "reservePolicy": {
+      "initialReserveUsd": 25000,
+      "maxReserveUsd": 250000,
+      "targetMonthsOfOpex": 3
+    },
+    "seed": 1337,
+    "serviceTiers": {
+      "cleaning": 1,
+      "laundry": 1,
+      "meals": 2
+    },
+    "timestep": "month",
+    "title": "Baseline 48 households (mixed, moderate shared services)",
+    "utilities": {
+      "electricity_kwh": 0.16,
+      "sewer_gal": 0.007,
+      "water_gal": 0.006
+    },
+    "version": 1,
+    "wageModel": {
+      "fullyLoadedUsdPerHour": 28,
+      "overheadMultiplier": 1.15
+    }
+  },
+  "sourceBranch": "develop",
+  "updatedAtUtc": "2026-04-20T05:56:52.626Z"
+}

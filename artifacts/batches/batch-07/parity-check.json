@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "path": ".github/workflows/deploy-dev.yml",
+      "branch": "develop",
+      "environment": "dev",
+      "ok": true,
+      "hasBranch": true,
+      "hasEnvironment": true
+    },
+    {
+      "path": ".github/workflows/deploy-staging.yml",
+      "branch": "staging",
+      "environment": "staging",
+      "ok": true,
+      "hasBranch": true,
+      "hasEnvironment": true
+    },
+    {
+      "path": ".github/workflows/deploy-prod.yml",
+      "branch": "main",
+      "environment": "production",
+      "ok": true,
+      "hasBranch": true,
+      "hasEnvironment": true
+    }
+  ]
+}

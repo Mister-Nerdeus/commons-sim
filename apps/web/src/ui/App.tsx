@@ -1,5 +1,12 @@
-import React, { useMemo, useState } from "react";
-import { ScenarioSchema } from "@commons-sim/shared";
+import React, { useMemo, useRef, useState } from "react";
+import {
+  buildStarterScenario,
+  explainSummaryDeltas,
+  migrateProjectManifest,
+  ProjectManifestSchema,
+  ScenarioSchema,
+  type StarterTemplateId,
+} from "@commons-sim/shared";
 import { simulateScenario } from "@commons-sim/engine";
 import baseline from "../../../../scenarios/baseline-48.json";
 import exampleBasic from "../../../../examples/scenarios/basic.json";
@@ -28,9 +35,19 @@ const SCENARIO_OPTIONS: ScenarioOption[] = [
   { id: "example-high-service", label: "Example High Service", data: exampleHighService },
 ];
 
+const STARTER_TEMPLATES: Array<{ id: StarterTemplateId; label: string; summary: string }> = [
+  { id: "starter-balanced-24", label: "Starter Balanced 24", summary: "Mixed household distribution" },
+  { id: "starter-family-48", label: "Starter Family Focus 48", summary: "Higher family participation and demand" },
+  { id: "starter-lean-18", label: "Starter Lean 18", summary: "Lower service intensity and reserve target" },
+];
+
 export default function App() {
   const [baselineId, setBaselineId] = useState("baseline-48");
   const [candidateId, setCandidateId] = useState("example-high-service");
+  const [customCandidate, setCustomCandidate] = useState<any | null>(null);
+  const [starterId, setStarterId] = useState<StarterTemplateId>("starter-balanced-24");
+  const [statusMessage, setStatusMessage] = useState("No project actions yet.");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const baselineScenario = useMemo(() => {
     const selected = SCENARIO_OPTIONS.find((s) => s.id === baselineId) ?? SCENARIO_OPTIONS[0]!;
@@ -38,9 +55,10 @@ export default function App() {
   }, [baselineId]);
 
   const candidateScenario = useMemo(() => {
+    if (customCandidate) return ScenarioSchema.parse(customCandidate);
     const selected = SCENARIO_OPTIONS.find((s) => s.id === candidateId) ?? SCENARIO_OPTIONS[1]!;
     return ScenarioSchema.parse(selected.data);
-  }, [candidateId]);
+  }, [candidateId, customCandidate]);
 
   const baselineOutput = useMemo(() => simulateScenario(baselineScenario), [baselineScenario]);
   const candidateOutput = useMemo(() => simulateScenario(candidateScenario), [candidateScenario]);
@@ -77,6 +95,11 @@ export default function App() {
       },
     ],
     [baselineOutput, candidateOutput],
+  );
+
+  const explainabilityLines = useMemo(
+    () => explainSummaryDeltas(baselineOutput.summary, candidateOutput.summary),
+    [baselineOutput.summary, candidateOutput.summary],
   );
 
   const assumptionsWarnings = useMemo(() => {
@@ -124,36 +147,60 @@ export default function App() {
     [baselineScenario, candidateScenario],
   );
 
-  const exportReport = () => {
-    const lines = [
-      "# commons-sim comparison report",
-      "",
-      `Baseline: ${baselineScenario.id}`,
-      `Candidate: ${candidateScenario.id}`,
-      `Model version: ${candidateOutput.meta.modelVersion}`,
-      `Assumption set version: ${candidateOutput.meta.assumptionSetVersion}`,
-      "",
-      "## Metric deltas",
-      ...deltas.map((metric) => {
-        const delta = metric.candidate - metric.baseline;
-        return `- ${metric.label}: baseline=${formatValue(metric.baseline, metric.format)}, candidate=${formatValue(metric.candidate, metric.format)}, delta=${formatDelta(delta, metric.format)}`;
-      }),
-      "",
-      "## Assumption warnings",
-      ...(assumptionsWarnings.length > 0 ? assumptionsWarnings.map((warning) => `- ${warning}`) : ["- None"]),
-      "",
-      "## Assumption registry",
-      ...assumptionRegistry.map((item) => `- ${item.key}: baseline=${item.baseline}, candidate=${item.candidate}`),
-    ];
+  const applyStarterTemplate = () => {
+    const generated = buildStarterScenario(starterId);
+    setCustomCandidate(generated);
+    setStatusMessage(`Applied starter template: ${generated.id}`);
+  };
 
-    const text = lines.join("\n");
-    const blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+  const saveProjectManifest = () => {
+    const now = new Date().toISOString();
+    const manifest = ProjectManifestSchema.parse({
+      manifestVersion: 1,
+      projectId: candidateScenario.id,
+      projectTitle: candidateScenario.title,
+      createdAtUtc: now,
+      updatedAtUtc: now,
+      sourceBranch: "develop",
+      scenario: candidateScenario,
+      metadata: {
+        notes: "Saved from guided planning wizard",
+        engineVersion: candidateOutput.meta.engineVersion,
+      },
+    });
+
+    const blob = new Blob([JSON.stringify(manifest, null, 2)], { type: "application/json;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${baselineScenario.id}-vs-${candidateScenario.id}.md`;
+    link.download = `${manifest.projectId}.project.json`;
     link.click();
     URL.revokeObjectURL(url);
+    setStatusMessage(`Saved project manifest: ${manifest.projectId}`);
+  };
+
+  const onLoadManifestClick = () => fileInputRef.current?.click();
+
+  const onManifestSelected: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(String(reader.result));
+        const migrated = migrateProjectManifest(parsed);
+        setCustomCandidate(migrated.manifest.scenario);
+        setStatusMessage(
+          migrated.migratedFrom === null
+            ? `Loaded manifest v1: ${migrated.manifest.projectId}`
+            : `Loaded and migrated manifest v${migrated.migratedFrom}: ${migrated.manifest.projectId}`,
+        );
+      } catch (error) {
+        setStatusMessage(`Manifest load failed: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    };
+    reader.readAsText(file);
+    event.target.value = "";
   };
 
   return (
@@ -161,12 +208,36 @@ export default function App() {
       <header className="hero">
         <div>
           <h1>Scenario Comparison Workspace</h1>
-          <p>Baseline versus candidate deltas with traceable model metadata.</p>
+          <p>Guided project creation, explainability, and persistence-aware release comparison.</p>
         </div>
-        <button className="export-button" onClick={exportReport}>
-          Export Comparison Report
-        </button>
       </header>
+
+      <section className="panel wizard-panel">
+        <h2>Guided Planning Wizard</h2>
+        <div className="wizard-controls">
+          <label>
+            Starter template
+            <select value={starterId} onChange={(e) => setStarterId(e.target.value as StarterTemplateId)}>
+              {STARTER_TEMPLATES.map((template) => (
+                <option key={template.id} value={template.id}>
+                  {template.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button className="export-button" onClick={applyStarterTemplate}>
+            Create Project
+          </button>
+          <button className="export-button" onClick={saveProjectManifest}>
+            Save Project Manifest
+          </button>
+          <button className="export-button" onClick={onLoadManifestClick}>
+            Load Project Manifest
+          </button>
+          <input ref={fileInputRef} className="hidden-input" type="file" accept=".json" onChange={onManifestSelected} />
+        </div>
+        <p className="status-line">{statusMessage}</p>
+      </section>
 
       <section className="panel selectors">
         <label>
@@ -182,12 +253,21 @@ export default function App() {
 
         <label>
           Candidate scenario
-          <select value={candidateId} onChange={(e) => setCandidateId(e.target.value)}>
+          <select
+            value={customCandidate ? "__custom__" : candidateId}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value === "__custom__") return;
+              setCustomCandidate(null);
+              setCandidateId(value);
+            }}
+          >
             {SCENARIO_OPTIONS.map((option) => (
               <option key={option.id} value={option.id}>
                 {option.label}
               </option>
             ))}
+            <option value="__custom__">Custom (wizard/loaded manifest)</option>
           </select>
         </label>
       </section>
@@ -206,6 +286,15 @@ export default function App() {
             <DeltaCard key={metric.key} metric={metric} />
           ))}
         </div>
+      </section>
+
+      <section className="panel assumptions">
+        <h2>Explainability Layer</h2>
+        <ul>
+          {explainabilityLines.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
       </section>
 
       <section className="panel assumptions">
