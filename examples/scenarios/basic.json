@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "example-basic",
+  "title": "Example Basic Scenario",
+  "seed": 42,
+  "horizonMonths": 12,
+  "timestep": "month",
+  "householdCount": 8,
+  "householdMix": { "singles": 8, "couples": 0, "families": 0 },
+  "occupantsPerType": { "single": 1, "couple": 2, "family": 4.5 },
+  "participation": { "meals": 0.6, "laundry": 0.8, "cleaning": 0.5 },
+  "serviceTiers": { "meals": 1, "laundry": 1, "cleaning": 1 },
+  "wageModel": { "fullyLoadedUsdPerHour": 27, "overheadMultiplier": 1.15 },
+  "utilities": { "electricity_kwh": 0.2, "water_gal": 0.01, "sewer_gal": 0.01, "gas_therm": 1.2 },
+  "equipment": [],
+  "reservePolicy": { "initialReserveUsd": 5000, "targetMonthsOfOpex": 3, "maxReserveUsd": 50000 }
+}

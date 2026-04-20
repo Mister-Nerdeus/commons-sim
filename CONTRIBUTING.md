@@ -12,7 +12,8 @@ Commands:
 - `pnpm build`
 - `pnpm test`
 - `pnpm smoke:cli`
-- `pnpm determinism:baseline`
+- `pnpm determinism:init` (local updates only)
+- `pnpm determinism:check` (verification only)
 
 Reference: `docs/setup/LOCAL_SETUP.md`
 

@@ -22,6 +22,8 @@ test("baseline and semantic fixtures validate against ScenarioSchema", () => {
     path.join(root, "scenarios/semantic/reserve-target-high.json"),
     path.join(root, "scenarios/semantic/gas-low.json"),
     path.join(root, "scenarios/semantic/gas-high.json"),
+    path.join(root, "examples/scenarios/basic.json"),
+    path.join(root, "examples/scenarios/high-service.json"),
   ];
 
   for (const fixture of fixtures) {

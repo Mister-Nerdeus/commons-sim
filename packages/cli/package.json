@@ -9,11 +9,13 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "node --watch src/main.ts",
-    "test": "node --test dist/test.js",
+    "test": "c8 --reporter=text-summary --check-coverage --lines 60 --functions 45 --branches 50 --statements 60 node --test dist/test.js dist/determinism.test.js dist/integration.test.js",
     "lint": "echo \"(add eslint later)\"",
     "format": "prettier -w .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "determinism:baseline": "node dist/determinismBaseline.js"
+    "determinism:init": "node dist/determinismInit.js",
+    "determinism:check": "node dist/determinismCheck.js",
+    "determinism:baseline": "node dist/determinismCheck.js"
   },
   "dependencies": {
     "@commons-sim/engine": "workspace:*",

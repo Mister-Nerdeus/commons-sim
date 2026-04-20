@@ -20,6 +20,7 @@ pnpm install --frozen-lockfile
 pnpm build
 pnpm test
 pnpm smoke:cli
+pnpm determinism:check
 ```
 
 ## Verification Commands
@@ -29,7 +30,8 @@ node --version
 pnpm build
 pnpm test
 pnpm smoke:cli
-pnpm determinism:baseline
+pnpm determinism:init
+pnpm determinism:check
 ```
 
 ## CI Parity

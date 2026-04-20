@@ -35,9 +35,10 @@ pnpm --filter @commons-sim/cli build
 node packages/cli/dist/main.js run scenarios/baseline-48.json
 ```
 
-### Determinism baseline (creates snapshot first run)
+### Determinism commands
 ```bash
-pnpm determinism:baseline
+pnpm determinism:init   # local only, writes/updates goldens
+pnpm determinism:check  # check only, used by CI
 ```
 
 ## Packages
@@ -63,5 +64,19 @@ pnpm determinism:baseline
 - [Input contract](docs/contracts/INPUT_CONTRACT.md)
 - [Output contract](docs/contracts/OUTPUT_CONTRACT.md)
 - [Migration notes](docs/contracts/MIGRATION_NOTES.md)
+- [Determinism policy](docs/testing/DETERMINISM.md)
+- [Test strategy and coverage policy](docs/testing/TEST_STRATEGY.md)
+- [CLI usage](docs/cli/USAGE.md)
+- [CLI output format](docs/cli/OUTPUT_FORMAT.md)
+- [Web workspace spec](docs/product/WEB_WORKSPACE_SPEC.md)
+- [Model assumptions registry](docs/model/ASSUMPTIONS.md)
+- [ADR-001 Runtime and determinism](docs/adr/ADR-001-runtime-determinism.md)
+- [ADR-002 Engine contract](docs/adr/ADR-002-engine-contract.md)
+- [ADR-003 CLI contract](docs/adr/ADR-003-cli-contract.md)
+- [Alpha report template](docs/product/ALPHA_REPORT_TEMPLATE.md)
+- [Sample exported report](docs/product/SAMPLE_EXPORTED_REPORT.md)
+- [Batch 4 alpha audit](docs/audits/BATCH_04_ALPHA_AUDIT.md)
+- [Next 15 backlog](docs/program/NEXT_15_BACKLOG.md)
+- [Risk register](docs/program/RISK_REGISTER.md)
 - [Codex issue template](.github/ISSUE_TEMPLATE/codex-issue.md)
 - [Pull request template](.github/pull_request_template.md)

@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "node --test dist/test.js dist/contracts.test.js",
+    "test": "c8 --reporter=text-summary --check-coverage --lines 60 --functions 60 --branches 50 --statements 60 node --test dist/test.js dist/contracts.test.js",
     "lint": "echo \"(add eslint later)\"",
     "format": "prettier -w .",
     "typecheck": "tsc -p tsconfig.json --noEmit"
