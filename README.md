@@ -58,6 +58,8 @@ pnpm determinism:check  # check only, used by CI
 - [Batch audit template](docs/program/BATCH_AUDIT_TEMPLATE.md)
 - [Change-control rules](docs/program/CHANGE_CONTROL.md)
 - [Branch governance and required checks](docs/program/BRANCH_GOVERNANCE.md)
+- [Branch topology and promotion authority](docs/program/BRANCH_TOPOLOGY.md)
+- [Environment topology and branch mapping](docs/program/ENVIRONMENT_TOPOLOGY.md)
 - [Local setup and runtime contract](docs/setup/LOCAL_SETUP.md)
 - [Engine submodel architecture](docs/model/ENGINE_SUBMODELS.md)
 - [Semantic fix log](docs/model/SEMANTIC_FIXES.md)
