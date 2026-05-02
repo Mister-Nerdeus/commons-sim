@@ -1,0 +1,44 @@
+{
+  "submissionVersion": 1,
+  "id": "balanced-48-baseline-submission",
+  "benchmarkId": "balanced-48",
+  "title": "Balanced 48 Baseline Submission",
+  "authorDisplayName": "commons-sim",
+  "createdAtUtc": "2026-05-01T00:00:00.000Z",
+  "designNotes": "Baseline submission used as a deterministic challenge-score fixture.",
+  "declaredRisks": ["Baseline has not been externally calibrated."],
+  "proposedScenario": {
+    "version": 1,
+    "id": "baseline-48-submission",
+    "title": "Balanced 48 baseline submission",
+    "seed": 1337,
+    "horizonMonths": 60,
+    "timestep": "month",
+    "householdCount": 48,
+    "householdMix": { "singles": 12, "couples": 16, "families": 20 },
+    "occupantsPerType": { "single": 1, "couple": 2, "family": 4.5 },
+    "participation": { "meals": 0.75, "laundry": 0.7, "cleaning": 0.5 },
+    "serviceTiers": { "meals": 2, "laundry": 1, "cleaning": 1 },
+    "wageModel": { "fullyLoadedUsdPerHour": 28, "overheadMultiplier": 1.15 },
+    "utilities": { "electricity_kwh": 0.16, "water_gal": 0.006, "sewer_gal": 0.007 },
+    "equipment": [
+      {
+        "id": "kitchen-line-1",
+        "name": "Commercial kitchen line (baseline)",
+        "category": "kitchen",
+        "capexUsd": 85000,
+        "usefulLifeYears": 10,
+        "annualMaintenanceUsd": 4500
+      },
+      {
+        "id": "laundry-1",
+        "name": "Laundry equipment set",
+        "category": "laundry",
+        "capexUsd": 22000,
+        "usefulLifeYears": 8,
+        "annualMaintenanceUsd": 1200
+      }
+    ],
+    "reservePolicy": { "initialReserveUsd": 25000, "targetMonthsOfOpex": 3, "maxReserveUsd": 250000 }
+  }
+}

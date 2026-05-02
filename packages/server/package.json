@@ -1,5 +1,5 @@
 {
-  "name": "@commons-sim/engine",
+  "name": "@commons-sim/server",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -7,12 +7,14 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "c8 --reporter=text-summary --check-coverage --lines 65 --functions 65 --branches 55 --statements 65 node --test dist/test.js dist/submodels.test.js dist/semantic.test.js dist/sensitivity.test.js dist/challenge.test.js",
+    "dev": "node dist/main.js",
+    "test": "c8 --reporter=text-summary --check-coverage --lines 60 --functions 60 --branches 50 --statements 60 node --test dist/server.test.js",
     "lint": "echo \"(add eslint later)\"",
     "format": "prettier -w .",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@commons-sim/engine": "workspace:*",
     "@commons-sim/shared": "workspace:*"
   }
 }

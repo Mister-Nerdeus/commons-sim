@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -p tsconfig.json && vite build",
-    "test": "echo \"(add tests later)\"",
+    "test": "pnpm typecheck",
     "lint": "echo \"(add eslint later)\"",
     "format": "prettier -w .",
     "typecheck": "tsc -p tsconfig.json --noEmit"

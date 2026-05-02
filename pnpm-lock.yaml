@@ -67,6 +67,15 @@ importers:
         specifier: workspace:*
         version: link:../shared
 
+  packages/server:
+    dependencies:
+      '@commons-sim/engine':
+        specifier: workspace:*
+        version: link:../engine
+      '@commons-sim/shared':
+        specifier: workspace:*
+        version: link:../shared
+
   packages/shared:
     dependencies:
       zod:

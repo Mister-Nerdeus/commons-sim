@@ -1,0 +1,47 @@
+FROM node:20-alpine AS build
+
+WORKDIR /app
+
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json ./
+COPY packages/shared/package.json packages/shared/package.json
+COPY packages/engine/package.json packages/engine/package.json
+COPY packages/server/package.json packages/server/package.json
+
+RUN pnpm install --frozen-lockfile
+
+COPY packages/shared packages/shared
+COPY packages/engine packages/engine
+COPY packages/server packages/server
+COPY examples/challenges examples/challenges
+
+RUN pnpm --filter @commons-sim/shared build \
+  && pnpm --filter @commons-sim/engine build \
+  && pnpm --filter @commons-sim/server build
+
+FROM node:20-alpine AS runtime
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=8787
+ENV COMMONS_SIM_BENCHMARK_DIR=/app/examples/challenges/benchmarks
+ENV COMMONS_SIM_STORAGE_DIR=/data/commons-sim
+
+COPY --from=build /app/packages/shared/dist packages/shared/dist
+COPY --from=build /app/packages/shared/package.json packages/shared/package.json
+COPY --from=build /app/packages/engine/dist packages/engine/dist
+COPY --from=build /app/packages/engine/package.json packages/engine/package.json
+COPY --from=build /app/packages/server/dist packages/server/dist
+COPY --from=build /app/packages/server/package.json packages/server/package.json
+COPY --from=build /app/examples/challenges examples/challenges
+
+RUN mkdir -p node_modules/@commons-sim \
+  && ln -s ../../packages/shared node_modules/@commons-sim/shared \
+  && ln -s ../../packages/engine node_modules/@commons-sim/engine
+
+EXPOSE 8787
+
+CMD ["node", "packages/server/dist/main.js"]

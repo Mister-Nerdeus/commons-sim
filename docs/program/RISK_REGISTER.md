@@ -10,3 +10,6 @@
 | R-501 GitHub settings drift from documented policy | High | Active | Maintainer | Add API-backed settings audit and block releases on mismatch |
 | R-502 Runtime engine mismatch (Node 22 vs Node 20 target) | Medium | Active | Maintainer | Enforce Node 20 in local/CI with version check gate |
 | R-503 Web workflow testing gap for wizard/persistence | High | Active | Maintainer | Add automated web tests and release evidence snapshots |
+| R-601 Challenge benchmark comparability | High | Active | Maintainer | Split leaderboards by locked benchmark class and reject modified locked fields |
+| R-602 Real-world model overclaim | High | Active | Maintainer | Use safety/resilience proxies, require human review, and avoid guaranteed social outcome claims |
+| R-603 Competition integrity gap | High | Active | Maintainer | Add server-side re-simulation, signed hashes, persistent submissions, and anti-cheat checks |

@@ -1,6 +1,31 @@
-import { runSensitivity, simulateScenario } from "@commons-sim/engine";
-import { migrateProjectManifest, type ProjectManifest } from "@commons-sim/shared";
-import { loadProjectManifest, loadScenario, saveProjectManifest, stableStringify } from "./io.js";
+import {
+  assessCapacity,
+  assessCashflow,
+  runChallengeStressTests,
+  runSensitivity,
+  simulateScenario,
+} from "@commons-sim/engine";
+import {
+  ChallengeResultSchema,
+  migrateProjectManifest,
+  scorePrototypeChallenge,
+  validateChallengeSubmission,
+  type ChallengeBenchmark,
+  type ChallengeReadinessGate,
+  type ChallengeResult,
+  type ChallengeSubmission,
+  type ProjectManifest,
+} from "@commons-sim/shared";
+import {
+  loadChallengeBenchmark,
+  loadChallengeSubmission,
+  loadProjectManifest,
+  loadScenario,
+  saveProjectManifest,
+  stableStringify,
+} from "./io.js";
+import fs from "node:fs";
+import path from "node:path";
 import { sha256 } from "./hash.js";
 
 const [, , cmd, ...args] = process.argv;
@@ -15,6 +40,8 @@ type CliErrorCode =
   | "SCENARIO_NOT_FOUND"
   | "SCENARIO_PARSE_ERROR"
   | "SCENARIO_VALIDATION_ERROR"
+  | "CHALLENGE_BENCHMARK_ERROR"
+  | "CHALLENGE_SUBMISSION_ERROR"
   | "RUNTIME_ERROR";
 
 class CliError extends Error {
@@ -36,6 +63,8 @@ Commands:
   compare <a.json> <b.json> [--seed N]
   validate <scenario.json>
   sensitivity <scenario.json>
+  challenge-score <benchmark.json> <submission.json>
+  challenge-batch <benchmark.json> <submissions-dir>
   project-save <scenario.json> <manifest.json>
   project-load <manifest.json>
 `);
@@ -157,6 +186,44 @@ try {
     process.exit(EXIT_OK);
   }
 
+  if (cmd === "challenge-score") {
+    const benchmarkFile = args[0];
+    const submissionFile = args[1];
+    if (!benchmarkFile || !submissionFile) usage();
+
+    const benchmark = loadChallengeBenchmarkStrict(benchmarkFile);
+    const submission = loadChallengeSubmissionStrict(submissionFile);
+    const result = buildChallengeResult(benchmark, submission);
+    const text = stableStringify(result);
+    console.log(text);
+    console.error(`hash=${sha256(text)}`);
+    process.exit(result.validation.ok ? EXIT_OK : EXIT_VALIDATION);
+  }
+
+  if (cmd === "challenge-batch") {
+    const benchmarkFile = args[0];
+    const submissionsDir = args[1];
+    if (!benchmarkFile || !submissionsDir) usage();
+
+    const benchmark = loadChallengeBenchmarkStrict(benchmarkFile);
+    const files = fs
+      .readdirSync(path.resolve(submissionsDir))
+      .filter((file) => file.endsWith(".json"))
+      .sort();
+    const results = files
+      .map((file) => buildChallengeResult(benchmark, loadChallengeSubmissionStrict(path.join(submissionsDir, file))))
+      .sort((a, b) => b.totalScore - a.totalScore || a.submissionId.localeCompare(b.submissionId));
+    const text = stableStringify({
+      benchmarkId: benchmark.id,
+      benchmarkClassId: benchmark.benchmarkClassId,
+      count: results.length,
+      results,
+    });
+    console.log(text);
+    console.error(`hash=${sha256(text)}`);
+    process.exit(results.every((result) => result.validation.ok) ? EXIT_OK : EXIT_VALIDATION);
+  }
+
   if (cmd === "project-save") {
     const scenarioFile = args[0];
     const manifestFile = args[1];
@@ -209,4 +276,122 @@ try {
   throw new CliError("USAGE_ERROR", `Unknown command: ${cmd}`, EXIT_USAGE);
 } catch (error) {
   writeError(error);
+}
+
+function loadChallengeBenchmarkStrict(filePath: string): ChallengeBenchmark {
+  try {
+    return loadChallengeBenchmark(filePath);
+  } catch (error) {
+    throw loadChallengeError("CHALLENGE_BENCHMARK_ERROR", `Challenge benchmark load failed: ${filePath}`, error);
+  }
+}
+
+function loadChallengeSubmissionStrict(filePath: string): ChallengeSubmission {
+  try {
+    return loadChallengeSubmission(filePath);
+  } catch (error) {
+    throw loadChallengeError("CHALLENGE_SUBMISSION_ERROR", `Challenge submission load failed: ${filePath}`, error);
+  }
+}
+
+function loadChallengeError(code: CliErrorCode, prefix: string, error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  return new CliError(code, `${prefix}: ${message}`, EXIT_VALIDATION);
+}
+
+function buildChallengeResult(benchmark: ChallengeBenchmark, submission: ChallengeSubmission): ChallengeResult {
+  const validation = validateChallengeSubmission(benchmark, submission);
+  const baselineOutput = simulateScenario(benchmark.lockedScenario);
+  const candidateOutput = simulateScenario(submission.proposedScenario);
+  const challengeScore = scorePrototypeChallenge(
+    baselineOutput.summary,
+    candidateOutput.summary,
+    submission.proposedScenario,
+  );
+  const capacity = assessCapacity(submission.proposedScenario);
+  const cashflow = assessCashflow(submission.proposedScenario, candidateOutput.summary, benchmark.budgetCapUsd);
+  const stressResults = runChallengeStressTests(submission.proposedScenario);
+  const targetGates = benchmarkTargetGates(benchmark, candidateOutput.summary, submission.proposedScenario.householdCount);
+  const readinessGates: ChallengeReadinessGate[] = [
+    ...challengeScore.gates,
+    ...targetGates,
+    {
+      key: "locked-fields",
+      label: "Locked benchmark fields unchanged",
+      passed: validation.ok,
+      detail: validation.ok
+        ? "Submission preserves locked benchmark fields."
+        : `Submission changed ${validation.violations.length} locked field(s).`,
+    },
+    {
+      key: "capacity",
+      label: "Capacity covers modeled demand",
+      passed: capacity.passed,
+      detail: capacity.passed ? "All modeled service demand clears capacity." : "One or more services exceed capacity.",
+    },
+    {
+      key: "capital-budget",
+      label: "Upfront capital fits budget cap",
+      passed: cashflow.budgetCapPassed,
+      detail: cashflow.budgetCapPassed
+        ? "Upfront capital stays inside the benchmark budget cap."
+        : "Upfront capital exceeds the benchmark budget cap.",
+    },
+  ];
+  const outputEnvelope = {
+    candidateOutput,
+    capacity,
+    cashflow,
+    stressResults,
+  };
+  const prototypePackageReady = readinessGates.every((gate) => gate.passed);
+
+  return ChallengeResultSchema.parse({
+    resultVersion: 1,
+    submissionId: submission.id,
+    benchmarkId: benchmark.id,
+    benchmarkClassId: benchmark.benchmarkClassId,
+    engineVersion: candidateOutput.meta.engineVersion,
+    modelVersion: candidateOutput.meta.modelVersion,
+    scoringVersion: benchmark.scoringProfileId,
+    inputHash: sha256(stableStringify({ benchmark, submission })),
+    outputHash: sha256(stableStringify(outputEnvelope)),
+    totalScore: validation.ok ? challengeScore.totalScore : 0,
+    maxScore: challengeScore.maxScore,
+    componentScores: challengeScore.components,
+    readinessGates,
+    capacity,
+    cashflow,
+    stressResults,
+    prototypePackageReady,
+    validation,
+  });
+}
+
+function benchmarkTargetGates(
+  benchmark: ChallengeBenchmark,
+  summary: ReturnType<typeof simulateScenario>["summary"],
+  householdCount: number,
+): ChallengeReadinessGate[] {
+  const reserveMonths = summary.avgCostPerHouseholdUsd <= 0 ? 0 : summary.reserveEndUsd / (summary.avgCostPerHouseholdUsd * householdCount);
+  return [
+    {
+      key: "target-cost",
+      label: "Benchmark cost target",
+      passed: summary.avgCostPerHouseholdUsd <= benchmark.minimumTargets.maxAvgCostPerHouseholdUsd,
+      detail: `Average household cost must be <= ${benchmark.minimumTargets.maxAvgCostPerHouseholdUsd.toFixed(2)}.`,
+    },
+    {
+      key: "target-reserve",
+      label: "Benchmark reserve target",
+      passed: reserveMonths >= benchmark.minimumTargets.minReserveMonths,
+      detail: `Reserve months proxy is ${reserveMonths.toFixed(2)}; target is ${benchmark.minimumTargets.minReserveMonths.toFixed(2)}.`,
+    },
+    {
+      key: "target-burnout",
+      label: "Benchmark burnout target",
+      passed: summary.avgBurnoutIndex <= benchmark.minimumTargets.maxBurnoutIndex,
+      detail: `Burnout proxy must be <= ${benchmark.minimumTargets.maxBurnoutIndex.toFixed(2)}.`,
+    },
+  ];
 }

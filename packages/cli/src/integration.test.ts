@@ -89,3 +89,36 @@ test("cli project-save and project-load round-trip succeeds", () => {
   assert.equal(load.status, 0);
   assert.match(load.stdout, /"scenarioId": "baseline-48"/);
 });
+
+test("cli challenge-score command succeeds for matching benchmark submission", () => {
+  const root = repoRoot();
+  const cliEntry = path.join(root, "packages/cli/dist/main.js");
+  const benchmark = path.join(root, "examples/challenges/benchmarks/balanced-48.benchmark.json");
+  const submission = path.join(root, "examples/challenges/submissions/balanced-48-baseline.submission.json");
+
+  const result = spawnSync(process.execPath, [cliEntry, "challenge-score", benchmark, submission], {
+    cwd: root,
+    encoding: "utf-8",
+  });
+
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /"benchmarkId": "balanced-48"/);
+  assert.match(result.stdout, /"validation": \{/);
+  assert.match(result.stdout, /"capacity": \{/);
+});
+
+test("cli challenge-batch command ranks challenge submissions", () => {
+  const root = repoRoot();
+  const cliEntry = path.join(root, "packages/cli/dist/main.js");
+  const benchmark = path.join(root, "examples/challenges/benchmarks/balanced-48.benchmark.json");
+  const submissions = path.join(root, "examples/challenges/submissions");
+
+  const result = spawnSync(process.execPath, [cliEntry, "challenge-batch", benchmark, submissions], {
+    cwd: root,
+    encoding: "utf-8",
+  });
+
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /"count": 1/);
+  assert.match(result.stdout, /"results": \[/);
+});

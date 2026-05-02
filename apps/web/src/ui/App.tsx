@@ -1,16 +1,24 @@
 import React, { useMemo, useRef, useState } from "react";
 import {
   buildStarterScenario,
+  ChallengeBenchmarkSchema,
   explainSummaryDeltas,
   migrateProjectManifest,
   ProjectManifestSchema,
   ScenarioSchema,
+  scorePrototypeChallenge,
+  validateChallengeSubmission,
+  type ChallengeBenchmark,
   type StarterTemplateId,
+  type PrototypeChallengeScore,
+  type Scenario,
 } from "@commons-sim/shared";
 import { simulateScenario } from "@commons-sim/engine";
 import baseline from "../../../../scenarios/baseline-48.json";
 import exampleBasic from "../../../../examples/scenarios/basic.json";
 import exampleHighService from "../../../../examples/scenarios/high-service.json";
+import canonicalFamily from "../../../../examples/scenarios/canonical/cn-002-family-heavy-64.json";
+import canonicalLean from "../../../../examples/scenarios/canonical/cn-003-lean-service-36.json";
 import "./app.css";
 
 type ScenarioOption = {
@@ -29,6 +37,11 @@ type MetricDelta = {
   format: MetricFormat;
 };
 
+type ChallengeEntry = {
+  scenario: Scenario;
+  score: PrototypeChallengeScore;
+};
+
 const SCENARIO_OPTIONS: ScenarioOption[] = [
   { id: "baseline-48", label: "Baseline 48", data: baseline },
   { id: "example-basic", label: "Example Basic", data: exampleBasic },
@@ -41,11 +54,18 @@ const STARTER_TEMPLATES: Array<{ id: StarterTemplateId; label: string; summary: 
   { id: "starter-lean-18", label: "Starter Lean 18", summary: "Lower service intensity and reserve target" },
 ];
 
+const CHALLENGE_BENCHMARKS: ChallengeBenchmark[] = [
+  buildBenchmark("balanced-48", "Balanced 48", "balanced-48", baseline, 150000, 240),
+  buildBenchmark("family-heavy-64", "Family Heavy 64", "family-heavy-64", canonicalFamily, 210000, 350),
+  buildBenchmark("lean-36", "Lean Service 36", "lean-36", canonicalLean, 90000, 140),
+];
+
 export default function App() {
   const [baselineId, setBaselineId] = useState("baseline-48");
   const [candidateId, setCandidateId] = useState("example-high-service");
   const [customCandidate, setCustomCandidate] = useState<any | null>(null);
   const [starterId, setStarterId] = useState<StarterTemplateId>("starter-balanced-24");
+  const [challengeBenchmarkId, setChallengeBenchmarkId] = useState("balanced-48");
   const [statusMessage, setStatusMessage] = useState("No project actions yet.");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -146,6 +166,47 @@ export default function App() {
     ],
     [baselineScenario, candidateScenario],
   );
+
+  const activeBenchmark = useMemo(
+    () => CHALLENGE_BENCHMARKS.find((benchmark) => benchmark.id === challengeBenchmarkId) ?? CHALLENGE_BENCHMARKS[0]!,
+    [challengeBenchmarkId],
+  );
+
+  const benchmarkOutput = useMemo(() => simulateScenario(activeBenchmark.lockedScenario), [activeBenchmark]);
+
+  const challengeEntries = useMemo<ChallengeEntry[]>(() => {
+    const scenarioById = new Map<string, Scenario>();
+
+    for (const scenario of buildChallengeCandidateScenarios(activeBenchmark)) {
+      scenarioById.set(scenario.id, scenario);
+    }
+
+    if (customCandidate && scenarioMatchesBenchmark(activeBenchmark, candidateScenario)) {
+      scenarioById.set(candidateScenario.id, candidateScenario);
+    }
+
+    return Array.from(scenarioById.values())
+      .map((scenario) => {
+        const output = simulateScenario(scenario);
+        return {
+          scenario,
+          score: scorePrototypeChallenge(benchmarkOutput.summary, output.summary, scenario),
+        };
+      })
+      .sort((a, b) => b.score.totalScore - a.score.totalScore || a.scenario.title.localeCompare(b.scenario.title));
+  }, [activeBenchmark, benchmarkOutput.summary, candidateScenario, customCandidate]);
+
+  const activeChallengeScore = useMemo(
+    () => scorePrototypeChallenge(benchmarkOutput.summary, candidateOutput.summary, candidateScenario),
+    [benchmarkOutput.summary, candidateOutput.summary, candidateScenario],
+  );
+
+  const activeCandidateMatchesBenchmark = useMemo(
+    () => scenarioMatchesBenchmark(activeBenchmark, candidateScenario),
+    [activeBenchmark, candidateScenario],
+  );
+
+  const topChallengeEntry = challengeEntries[0];
 
   const applyStarterTemplate = () => {
     const generated = buildStarterScenario(starterId);
@@ -279,6 +340,100 @@ export default function App() {
         <MetaCard title="Assumption Set" value={candidateOutput.meta.assumptionSetVersion} />
       </section>
 
+      <section className="panel challenge-mode">
+        <div className="section-heading">
+          <div>
+            <h2>Prototype Challenge Mode</h2>
+            <p>Rank scenarios by real-world prototype strength: cost, family support, resilience, fairness, sustainability, and feasibility.</p>
+          </div>
+          {topChallengeEntry ? (
+            <div className="top-score">
+              <span>Leader</span>
+              <strong>{topChallengeEntry.score.totalScore.toFixed(1)}</strong>
+            </div>
+          ) : null}
+        </div>
+
+        <label className="benchmark-select">
+          Challenge benchmark
+          <select value={challengeBenchmarkId} onChange={(e) => setChallengeBenchmarkId(e.target.value)}>
+            {CHALLENGE_BENCHMARKS.map((benchmark) => (
+              <option key={benchmark.id} value={benchmark.id}>
+                {benchmark.title}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <div className="challenge-grid">
+          <div className="leaderboard">
+            <h3>Leaderboard</h3>
+            {challengeEntries.map((entry, index) => (
+              <button
+                key={entry.scenario.id}
+                className={`leaderboard-row ${entry.scenario.id === candidateScenario.id ? "active-row" : ""}`}
+                onClick={() => {
+                  setCustomCandidate(entry.scenario);
+                  setStatusMessage(`Loaded challenge entry: ${entry.scenario.id}`);
+                }}
+              >
+                <span className="rank">{index + 1}</span>
+                <span className="leaderboard-title">
+                  <strong>{entry.scenario.title}</strong>
+                  <small>{entry.score.rankLabel}</small>
+                </span>
+                <span className="leaderboard-score">{entry.score.totalScore.toFixed(1)}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="score-panel">
+            <div className="score-header">
+              <div>
+                <h3>{candidateScenario.title}</h3>
+                <p>
+                  {activeCandidateMatchesBenchmark
+                    ? activeChallengeScore.rankLabel
+                    : `Not eligible for ${activeBenchmark.benchmarkClassId}`}
+                </p>
+              </div>
+              <strong>
+                {activeCandidateMatchesBenchmark ? activeChallengeScore.totalScore.toFixed(1) : "0.0"} /{" "}
+                {activeChallengeScore.maxScore}
+              </strong>
+            </div>
+
+            <div className="score-components">
+              {activeChallengeScore.components.map((component) => (
+                <ScoreBar key={component.key} label={component.label} score={component.score} maxScore={component.maxScore} />
+              ))}
+            </div>
+
+            <div className="readiness-gates">
+              <h4>Prototype Readiness Gates</h4>
+              {!activeCandidateMatchesBenchmark ? (
+                <div className="gate-row gate-fail">
+                  <span>Needs work</span>
+                  <div>
+                    <strong>Benchmark eligibility</strong>
+                    <small>Candidate changes locked demand, wage, utility, horizon, or household assumptions.</small>
+                  </div>
+                </div>
+              ) : null}
+              {activeChallengeScore.gates.map((gate) => (
+                <div key={gate.key} className={`gate-row ${gate.passed ? "gate-pass" : "gate-fail"}`}>
+                  <span>{gate.passed ? "Pass" : "Needs work"}</span>
+                  <div>
+                    <strong>{gate.label}</strong>
+                    <small>{gate.detail}</small>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="panel">
         <h2>Delta Cards</h2>
         <div className="delta-grid">
@@ -356,6 +511,109 @@ function DeltaCard(props: { metric: MetricDelta }) {
       <p className={`delta ${directionClass}`}>Delta: {formatDelta(delta, props.metric.format)}</p>
     </article>
   );
+}
+
+function ScoreBar(props: { label: string; score: number; maxScore: number }) {
+  const percent = props.maxScore === 0 ? 0 : Math.max(0, Math.min(100, (props.score / props.maxScore) * 100));
+
+  return (
+    <div className="score-bar-row">
+      <div className="score-bar-label">
+        <span>{props.label}</span>
+        <strong>
+          {props.score.toFixed(1)} / {props.maxScore}
+        </strong>
+      </div>
+      <div className="score-track" aria-hidden="true">
+        <div className="score-fill" style={{ width: `${percent}%` }} />
+      </div>
+    </div>
+  );
+}
+
+function buildBenchmark(
+  id: string,
+  title: string,
+  benchmarkClassId: string,
+  scenarioData: unknown,
+  budgetCapUsd: number,
+  maxAvgCostPerHouseholdUsd: number,
+): ChallengeBenchmark {
+  return ChallengeBenchmarkSchema.parse({
+    benchmarkVersion: 1,
+    id,
+    title,
+    benchmarkClassId,
+    lockedScenario: ScenarioSchema.parse(scenarioData),
+    budgetCapUsd,
+    minimumTargets: {
+      maxAvgCostPerHouseholdUsd,
+      minReserveMonths: 2,
+      maxBurnoutIndex: 0.6,
+      minMealCoverage: 0.5,
+      minLaundryCoverage: 0.5,
+    },
+  });
+}
+
+function buildChallengeCandidateScenarios(benchmark: ChallengeBenchmark): Scenario[] {
+  const base = benchmark.lockedScenario;
+  return [
+    {
+      ...base,
+      id: `${benchmark.id}-status-quo`,
+      title: `${benchmark.title} Status Quo`,
+    },
+    {
+      ...base,
+      id: `${benchmark.id}-lean-ops`,
+      title: `${benchmark.title} Lean Operations`,
+      participation: {
+        meals: Math.max(0.5, base.participation.meals * 0.86),
+        laundry: Math.max(0.5, base.participation.laundry * 0.9),
+        cleaning: Math.max(0.25, base.participation.cleaning * 0.8),
+      },
+      serviceTiers: {
+        meals: Math.max(1, base.serviceTiers.meals - 1),
+        laundry: Math.max(1, base.serviceTiers.laundry),
+        cleaning: Math.max(0, base.serviceTiers.cleaning - 1),
+      },
+    },
+    {
+      ...base,
+      id: `${benchmark.id}-family-support`,
+      title: `${benchmark.title} Family Support`,
+      participation: {
+        meals: Math.min(1, base.participation.meals * 1.1),
+        laundry: Math.min(1, base.participation.laundry * 1.08),
+        cleaning: Math.min(1, base.participation.cleaning * 1.12),
+      },
+      serviceTiers: {
+        meals: Math.min(3, base.serviceTiers.meals + 1),
+        laundry: Math.min(3, base.serviceTiers.laundry + 1),
+        cleaning: base.serviceTiers.cleaning,
+      },
+      reservePolicy: {
+        ...base.reservePolicy,
+        targetMonthsOfOpex: Math.max(base.reservePolicy.targetMonthsOfOpex, 4),
+      },
+    },
+  ].map((scenario) => ScenarioSchema.parse(scenario));
+}
+
+function scenarioMatchesBenchmark(benchmark: ChallengeBenchmark, scenario: Scenario) {
+  const submission = {
+    submissionVersion: 1 as const,
+    id: `${scenario.id}-ui-check`,
+    benchmarkId: benchmark.id,
+    title: scenario.title,
+    authorDisplayName: "web",
+    createdAtUtc: "2026-05-01T00:00:00.000Z",
+    proposedScenario: scenario,
+    designNotes: "UI eligibility check.",
+    declaredRisks: [],
+  };
+  return validateChallengeSubmission(benchmark, submission).ok;
 }
 
 function formatValue(value: number, format: MetricFormat) {

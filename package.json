@@ -20,7 +20,8 @@
     "staging:baseline:reset": "node scripts/data/reset-staging-from-baseline.mjs",
     "smoke:cli": "pnpm --filter @commons-sim/cli... build && node packages/cli/dist/main.js run scenarios/baseline-48.json",
     "dev:web": "pnpm --filter @commons-sim/web dev",
-    "dev:cli": "pnpm --filter @commons-sim/cli dev"
+    "dev:cli": "pnpm --filter @commons-sim/cli dev",
+    "dev:server": "pnpm --filter @commons-sim/server build && node packages/server/dist/main.js"
   },
   "devDependencies": {
     "@types/node": "^20.17.58",

@@ -24,6 +24,34 @@ stdout JSON:
 }
 ```
 
+## `challenge-score`
+stdout: stable JSON challenge result with:
+- `benchmarkId`
+- `benchmarkClassId`
+- `totalScore`
+- `componentScores`
+- `readinessGates`
+- `capacity`
+- `cashflow`
+- `stressResults`
+- `inputHash`
+- `outputHash`
+- `validation`
+
+stderr: `hash=<sha256>` for deterministic result tracking.
+
+## `challenge-batch`
+stdout JSON:
+```json
+{
+  "benchmarkId": "balanced-48",
+  "benchmarkClassId": "balanced-48",
+  "count": 1,
+  "results": []
+}
+```
+Results are sorted by descending `totalScore`.
+
 ## Error Output (Machine-Detectable)
 On failure, stderr emits JSON:
 ```json
@@ -40,4 +68,6 @@ Error codes currently emitted:
 - `SCENARIO_NOT_FOUND`
 - `SCENARIO_PARSE_ERROR`
 - `SCENARIO_VALIDATION_ERROR`
+- `CHALLENGE_BENCHMARK_ERROR`
+- `CHALLENGE_SUBMISSION_ERROR`
 - `RUNTIME_ERROR`

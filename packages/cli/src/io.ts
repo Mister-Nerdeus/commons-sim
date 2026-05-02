@@ -1,12 +1,26 @@
 import fs from "node:fs";
 import path from "node:path";
-import { ProjectManifestSchema, ScenarioSchema, type ProjectManifest, type Scenario } from "@commons-sim/shared";
+import {
+  ChallengeBenchmarkSchema,
+  ChallengeSubmissionSchema,
+  ProjectManifestSchema,
+  ScenarioSchema,
+  type ChallengeBenchmark,
+  type ChallengeSubmission,
+  type ProjectManifest,
+  type Scenario,
+} from "@commons-sim/shared";
 
 export function loadScenario(filePath: string): Scenario {
-  const abs = path.resolve(filePath);
-  const raw = fs.readFileSync(abs, "utf-8");
-  const json = JSON.parse(raw);
-  return ScenarioSchema.parse(json);
+  return ScenarioSchema.parse(loadJson(filePath));
+}
+
+export function loadChallengeBenchmark(filePath: string): ChallengeBenchmark {
+  return ChallengeBenchmarkSchema.parse(loadJson(filePath));
+}
+
+export function loadChallengeSubmission(filePath: string): ChallengeSubmission {
+  return ChallengeSubmissionSchema.parse(loadJson(filePath));
 }
 
 export function stableStringify(obj: unknown): string {
@@ -21,10 +35,13 @@ export function saveProjectManifest(filePath: string, manifest: ProjectManifest)
 }
 
 export function loadProjectManifest(filePath: string): ProjectManifest {
+  return ProjectManifestSchema.parse(loadJson(filePath));
+}
+
+function loadJson(filePath: string): unknown {
   const abs = path.resolve(filePath);
   const raw = fs.readFileSync(abs, "utf-8");
-  const json = JSON.parse(raw);
-  return ProjectManifestSchema.parse(json);
+  return JSON.parse(raw);
 }
 
 function sortKeys(x: any): any {

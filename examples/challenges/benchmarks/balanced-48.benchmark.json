@@ -1,0 +1,52 @@
+{
+  "benchmarkVersion": 1,
+  "id": "balanced-48",
+  "title": "Balanced 48 Household Prototype Challenge",
+  "benchmarkClassId": "balanced-48",
+  "pricePackId": "us-default-2026",
+  "equipmentCatalogId": "community-services-v1",
+  "regulatoryPackId": "us-generic-planning-v1",
+  "scoringProfileId": "prototype-challenge-v1",
+  "budgetCapUsd": 150000,
+  "minimumTargets": {
+    "maxAvgCostPerHouseholdUsd": 240,
+    "minReserveMonths": 2,
+    "maxBurnoutIndex": 0.6,
+    "minMealCoverage": 0.5,
+    "minLaundryCoverage": 0.5
+  },
+  "lockedScenario": {
+    "version": 1,
+    "id": "baseline-48",
+    "title": "Baseline 48 households (mixed, moderate shared services)",
+    "seed": 1337,
+    "horizonMonths": 60,
+    "timestep": "month",
+    "householdCount": 48,
+    "householdMix": { "singles": 12, "couples": 16, "families": 20 },
+    "occupantsPerType": { "single": 1, "couple": 2, "family": 4.5 },
+    "participation": { "meals": 0.75, "laundry": 0.7, "cleaning": 0.5 },
+    "serviceTiers": { "meals": 2, "laundry": 1, "cleaning": 1 },
+    "wageModel": { "fullyLoadedUsdPerHour": 28, "overheadMultiplier": 1.15 },
+    "utilities": { "electricity_kwh": 0.16, "water_gal": 0.006, "sewer_gal": 0.007 },
+    "equipment": [
+      {
+        "id": "kitchen-line-1",
+        "name": "Commercial kitchen line (baseline)",
+        "category": "kitchen",
+        "capexUsd": 85000,
+        "usefulLifeYears": 10,
+        "annualMaintenanceUsd": 4500
+      },
+      {
+        "id": "laundry-1",
+        "name": "Laundry equipment set",
+        "category": "laundry",
+        "capexUsd": 22000,
+        "usefulLifeYears": 8,
+        "annualMaintenanceUsd": 1200
+      }
+    ],
+    "reservePolicy": { "initialReserveUsd": 25000, "targetMonthsOfOpex": 3, "maxReserveUsd": 250000 }
+  }
+}

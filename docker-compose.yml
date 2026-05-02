@@ -8,3 +8,26 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
+    depends_on:
+      - commons-sim-api
+
+  commons-sim-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: commons-sim:api
+    container_name: commons-sim-api
+    environment:
+      PORT: "8787"
+      HOST: "0.0.0.0"
+      COMMONS_SIM_ADMIN_TOKEN: "${COMMONS_SIM_ADMIN_TOKEN:-change-me-local-admin-token}"
+      COMMONS_SIM_BENCHMARK_DIR: "/app/examples/challenges/benchmarks"
+      COMMONS_SIM_STORAGE_DIR: "/data/commons-sim"
+    ports:
+      - "8787:8787"
+    volumes:
+      - commons-sim-api-data:/data/commons-sim
+    restart: unless-stopped
+
+volumes:
+  commons-sim-api-data:
