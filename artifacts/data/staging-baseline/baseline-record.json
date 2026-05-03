@@ -1,8 +1,13 @@
 {
+  "schemaVersion": 2,
+  "artifactType": "staging-baseline-provenance",
   "baselineName": "staging-main-cutover",
   "sourceBranch": "main",
   "sourceSha": "ed51496b3a37d9a8094d6ad2a7c4f13d3bb21488",
   "capturedAtUtc": "2026-04-20T05:41:02.323Z",
   "capturedBy": "codex-batch06",
-  "notes": "Baseline captured via scripted contract"
+  "resetContract": "metadata-only",
+  "stateRestoreImplemented": false,
+  "reason": "initial staging cutover provenance",
+  "notes": "Baseline captures provenance for the staging cutover. It does not contain a database snapshot or full application-state restore payload."
 }

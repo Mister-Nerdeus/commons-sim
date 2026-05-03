@@ -2,7 +2,7 @@
 
 ## Toolchain Decision Note
 - Node runtime: `20.19.0` (single supported major: `20.x`).
-- Package manager: `pnpm@9.x` only.
+- Package manager: `pnpm@9.0.0` (`9.x` major only after policy update).
 - Module/runtime format: ESM (`"type": "module"`) across packages.
 - TypeScript baseline: root `tsconfig.base.json`; package tsconfigs extend it and explicitly declare Node types where needed.
 
@@ -34,8 +34,10 @@ pnpm determinism:init
 pnpm determinism:check
 ```
 
-## CI Parity
-CI (`.github/workflows/ci.yml`) runs the same install/build/test/smoke flow with Node `20.19.0` and `pnpm install --frozen-lockfile`.
+## CI, Promotion, Deploy, and Docker Parity
+CI, determinism, promotion, deploy, test, and Pages workflows run the same install integrity contract with Node `20.19.0`, pnpm `9.0.0`, and `pnpm install --frozen-lockfile`.
+
+Docker build images use `node:20.19.0-alpine` and activate `pnpm@9.0.0` through Corepack. The workflow runtime policy is maintained in `docs/program/WORKFLOW_RUNTIME_POLICY.md`.
 
 ## Troubleshooting
 - If `--frozen-lockfile` fails, do not bypass it in CI. Regenerate lockfile locally with approved dependency changes and commit the updated lockfile.

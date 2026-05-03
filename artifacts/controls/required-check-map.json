@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "Batch 1 Issue #31 workflow/context inventory",
+  "canonicalRuntime": {
+    "node": "20.19.0",
+    "pnpm": "9.0.0",
+    "install": "pnpm install --frozen-lockfile"
+  },
+  "requiredChecksByBranch": {
+    "develop": [
+      "ci / build_test_smoke",
+      "determinism / determinism"
+    ],
+    "staging": [
+      "ci / build_test_smoke",
+      "dependency-review / dependency-review",
+      "determinism / determinism",
+      "promote-to-staging / validate_release_candidate"
+    ],
+    "main": [
+      "ci / build_test_smoke",
+      "dependency-review / dependency-review",
+      "determinism / determinism",
+      "release-prod / verify_production_release"
+    ]
+  },
+  "machineProducedContexts": [
+    {
+      "context": "api-container / build_api_container",
+      "workflow": ".github/workflows/api-container.yml",
+      "job": "build_api_container",
+      "requiredForProtectedBranches": false
+    },
+    {
+      "context": "ci / build_test_smoke",
+      "workflow": ".github/workflows/ci.yml",
+      "job": "build_test_smoke",
+      "requiredForProtectedBranches": true,
+      "notes": "Canonical build, test, smoke, and embedded determinism check."
+    },
+    {
+      "context": "dependency-review / dependency-review",
+      "workflow": ".github/workflows/dependency-review.yml",
+      "job": "dependency-review",
+      "requiredForProtectedBranches": true,
+      "notes": "Pull-request-only supply-chain review check."
+    },
+    {
+      "context": "deploy-dev / deploy_dev",
+      "workflow": ".github/workflows/deploy-dev.yml",
+      "job": "deploy_dev",
+      "requiredForProtectedBranches": false
+    },
+    {
+      "context": "deploy-prod / deploy_prod",
+      "workflow": ".github/workflows/deploy-prod.yml",
+      "job": "deploy_prod",
+      "requiredForProtectedBranches": false
+    },
+    {
+      "context": "deploy-staging / deploy_staging",
+      "workflow": ".github/workflows/deploy-staging.yml",
+      "job": "deploy_staging",
+      "requiredForProtectedBranches": false
+    },
+    {
+      "context": "determinism / determinism",
+      "workflow": ".github/workflows/determinism.yml",
+      "job": "determinism",
+      "requiredForProtectedBranches": true,
+      "notes": "Standalone determinism check represented explicitly in protected-branch policy."
+    },
+    {
+      "context": "pages / deploy",
+      "workflow": ".github/workflows/pages.yml",
+      "job": "deploy",
+      "requiredForProtectedBranches": false
+    },
+    {
+      "context": "promote-to-staging / validate_release_candidate",
+      "workflow": ".github/workflows/promote-to-staging.yml",
+      "job": "validate_release_candidate",
+      "requiredForProtectedBranches": true,
+      "requiredOn": [
+        "staging"
+      ]
+    },
+    {
+      "context": "release-prod / verify_production_release",
+      "workflow": ".github/workflows/release-prod.yml",
+      "job": "verify_production_release",
+      "requiredForProtectedBranches": true,
+      "requiredOn": [
+        "main"
+      ]
+    },
+    {
+      "context": "test / test",
+      "workflow": ".github/workflows/test.yml",
+      "job": "test",
+      "requiredForProtectedBranches": false
+    },
+    {
+      "context": "verify-env-parity / parity",
+      "workflow": ".github/workflows/verify-env-parity.yml",
+      "job": "parity",
+      "requiredForProtectedBranches": false
+    }
+  ],
+  "determinismRepresentation": {
+    "standaloneRequiredContext": "determinism / determinism",
+    "embeddedCiStep": "ci / build_test_smoke runs pnpm determinism:check"
+  }
+}

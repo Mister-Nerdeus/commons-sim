@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "evidenceType": "github-branch-protection",
+  "repository": "Mister-Nerdeus/commons-sim",
+  "branch": "main",
+  "exportedAtUtc": "2026-05-03T04:00:35.524Z",
+  "exportedBy": "codex-batch11",
+  "source": "gh api repos/Mister-Nerdeus/commons-sim/branches/main/protection",
+  "status": "unavailable",
+  "protection": null,
+  "error": {
+    "message": "Command failed: gh api repos/Mister-Nerdeus/commons-sim/branches/main/protection\ngh: Branch not protected (HTTP 404)\n",
+    "stderr": "gh: Branch not protected (HTTP 404)",
+    "stdout": "{\"message\":\"Branch not protected\",\"documentation_url\":\"https://docs.github.com/rest/branches/branch-protection#get-branch-protection\",\"status\":\"404\"}"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "evidenceType": "github-environment",
+  "repository": "Mister-Nerdeus/commons-sim",
+  "environment": "dev",
+  "exportedAtUtc": "2026-05-03T04:00:34.688Z",
+  "exportedBy": "codex-batch11",
+  "source": "gh api repos/Mister-Nerdeus/commons-sim/environments/dev",
+  "status": "exported",
+  "environmentSettings": {
+    "id": 14340118253,
+    "node_id": "EN_kwDORKaGh88AAAADVrzW7Q",
+    "name": "dev",
+    "url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/environments/dev",
+    "html_url": "https://github.com/Mister-Nerdeus/commons-sim/deployments/activity_log?environments_filter=dev",
+    "created_at": "2026-04-20T06:03:18Z",
+    "updated_at": "2026-04-20T06:03:18Z",
+    "can_admins_bypass": true,
+    "protection_rules": [],
+    "deployment_branch_policy": null
+  },
+  "error": null
+}

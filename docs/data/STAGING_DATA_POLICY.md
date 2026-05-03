@@ -9,6 +9,7 @@ Staging data posture must be reproducible, intentional, and anchored to the base
 - Branch baseline source: `main` SHA `ed51496b3a37d9a8094d6ad2a7c4f13d3bb21488` (staging cutover).
 - Baseline artifact location: `artifacts/data/staging-baseline/`.
 - Baseline record file: `artifacts/data/staging-baseline/baseline-record.json`.
+- Reset contract: metadata-only provenance record. Full state restore is not implemented.
 
 ## Data Rules
 
@@ -22,9 +23,11 @@ Staging data posture must be reproducible, intentional, and anchored to the base
 - Seed/snapshot scripts are versioned in `scripts/data/`.
 - Refresh operations must produce deterministic record files.
 - Every reset/refresh must include timestamp, operator, source SHA, and reason.
+- The current reset path records lineage and operator intent only. It does not restore database rows, uploaded files, external services, or deployed runtime state.
 
 ## Prohibited States
 
 - Unknown data origin in staging.
 - Manual edits with no artifact record.
 - Silent refreshes without runbook execution log.
+- Claiming staging has been fully restored when only metadata provenance has been recorded.

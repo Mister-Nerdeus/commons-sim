@@ -4,17 +4,24 @@ import { dirname, resolve } from "node:path";
 const args = process.argv.slice(2);
 const sourceSha = getArg("--source-sha") ?? "unknown";
 const operator = getArg("--operator") ?? "unknown-operator";
+const reason = getArg("--reason") ?? "baseline provenance refresh";
 const recordPath = resolve("artifacts/data/staging-baseline/baseline-record.json");
 
 mkdirSync(dirname(recordPath), { recursive: true });
 
 const record = {
+  schemaVersion: 2,
+  artifactType: "staging-baseline-provenance",
   baselineName: "staging-main-cutover",
   sourceBranch: "main",
   sourceSha,
   capturedAtUtc: new Date().toISOString(),
   capturedBy: operator,
-  notes: "Baseline captured via scripted contract",
+  resetContract: "metadata-only",
+  stateRestoreImplemented: false,
+  reason,
+  notes:
+    "Baseline captures provenance for the staging cutover. It does not contain a database snapshot or full application-state restore payload.",
 };
 
 writeFileSync(recordPath, `${JSON.stringify(record, null, 2)}\n`, "utf8");
