@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { ProblemGraphSchema, SolutionGraphSchema, WorldGraphSchema } from "./graphContracts.js";
+import { GraphEdgeSchema, ProblemGraphSchema, SolutionGraphSchema, WorldGraphSchema } from "./graphContracts.js";
 
 const root = repoRoot();
 
@@ -17,6 +17,19 @@ test("invalid link fixture fails", () => {
   const parsed = SolutionGraphSchema.safeParse(loadJson("examples/graphs/invalid-link.invalid.json"));
   assert.equal(parsed.success, false);
   assert.match(parsed.error.message, /toNodeId/);
+});
+
+test("graph edge terminal references reject legacy hyphen ids", () => {
+  const parsed = GraphEdgeSchema.safeParse({
+    id: "legacy-terminal",
+    fromNodeId: "community-meals",
+    fromTerminalId: "meal-output",
+    toNodeId: "laundry",
+    toTerminalId: "laundry.clean_loads_out",
+    resourceType: "prepared-meals",
+    linkPattern: "direct connection",
+  });
+  assert.equal(parsed.success, false);
 });
 
 function loadJson(relativePath: string): unknown {

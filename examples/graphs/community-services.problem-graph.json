@@ -4,16 +4,16 @@
   "version": "1.0.0",
   "nodes": [
     { "id": "household-demand", "moduleId": "utility-demand", "label": "Household Demand" },
-    { "id": "meal-need", "moduleId": "community-meals", "label": "Meal Need" }
+    { "id": "laundry-need", "moduleId": "laundry", "label": "Laundry Water Need" }
   ],
   "edges": [
     {
       "id": "demand-to-meals",
       "fromNodeId": "household-demand",
-      "fromTerminalId": "meal-demand",
-      "toNodeId": "meal-need",
-      "toTerminalId": "food-service-need",
-      "resourceType": "service-demand",
+      "fromTerminalId": "water.utility_water_in",
+      "toNodeId": "laundry-need",
+      "toTerminalId": "water.potable_in",
+      "resourceType": "water",
       "linkPattern": "direct connection"
     }
   ]

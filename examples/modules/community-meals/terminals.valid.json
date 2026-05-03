@@ -1,6 +1,6 @@
 [
   {
-    "id": "food-input",
+    "id": "food.ingredients_in",
     "resourceType": "food",
     "unit": "kg/day",
     "timingModel": "daily",
@@ -17,7 +17,7 @@
     }
   },
   {
-    "id": "meal-output",
+    "id": "food.meals_out",
     "resourceType": "prepared-meals",
     "unit": "meals/day",
     "timingModel": "daily",
@@ -31,6 +31,40 @@
     "failureSemantics": {
       "behavior": "shed_load",
       "description": "Unserved meal demand is exposed rather than hidden."
+    }
+  },
+  {
+    "id": "labor.staff_hours_in",
+    "resourceType": "labor",
+    "unit": "hours/month",
+    "timingModel": "daily",
+    "nominalCapacity": 16,
+    "peakCapacity": 24,
+    "qualityAttributes": ["trained", "food-safe"],
+    "direction": "input",
+    "allocationMode": "priority",
+    "spatialScope": "site",
+    "criticality": "medium",
+    "failureSemantics": {
+      "behavior": "degrade",
+      "description": "Meal throughput degrades when staffing is constrained."
+    }
+  },
+  {
+    "id": "waste.organic_out",
+    "resourceType": "organic-waste",
+    "unit": "kg/day",
+    "timingModel": "daily",
+    "nominalCapacity": 20,
+    "peakCapacity": 35,
+    "qualityAttributes": ["compostable"],
+    "direction": "output",
+    "allocationMode": "proportional",
+    "spatialScope": "site",
+    "criticality": "low",
+    "failureSemantics": {
+      "behavior": "buffer",
+      "description": "Organic waste can be buffered for later handling."
     }
   }
 ]

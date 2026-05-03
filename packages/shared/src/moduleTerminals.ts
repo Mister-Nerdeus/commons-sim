@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { UnitIdSchema } from "./semanticPrimitives.js";
 
+const SemanticTerminalIdSchema = z.string().regex(/^[a-z][a-z0-9_]*(?:\.[a-z][a-z0-9_]*)+$/);
+
 export const TerminalDirectionSchema = z.enum(["input", "output", "bidirectional"]);
 export const TerminalAllocationModeSchema = z.enum(["fixed", "priority", "proportional", "on_demand"]);
 export const TerminalCriticalitySchema = z.enum(["low", "medium", "high", "critical"]);
@@ -12,7 +14,7 @@ export const TerminalFailureSemanticsSchema = z.object({
 
 export const ModuleTerminalSchema = z
   .object({
-    id: z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/),
+    id: SemanticTerminalIdSchema,
     resourceType: z.string().min(1),
     unit: UnitIdSchema,
     timingModel: z.enum(["instant", "hourly", "daily", "monthly", "event"]),

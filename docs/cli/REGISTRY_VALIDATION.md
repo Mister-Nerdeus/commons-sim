@@ -20,11 +20,14 @@ Failure output:
 
 ```json
 {
+  "ok": false,
   "error": {
     "code": "MODULE_REGISTRY_VALIDATION_ERROR",
     "message": "..."
   }
 }
 ```
+
+Failure exits nonzero.
 
 The command validates registry contract shape only. It does not execute modules, compile graphs, migrate scenarios, or bind real products.

@@ -30,7 +30,10 @@ test("registry-validate returns machine-readable failure JSON", () => {
 
   assert.equal(result.status, 3);
   const parsed = JSON.parse(result.stderr);
+  assert.equal(parsed.ok, false);
   assert.equal(parsed.error.code, "MODULE_REGISTRY_VALIDATION_ERROR");
+  assert.equal(typeof parsed.error.message, "string");
+  assert.match(parsed.error.message, /Module registry validation failed/);
 });
 
 function repoRoot(): string {

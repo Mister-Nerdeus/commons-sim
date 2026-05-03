@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+const SemanticTerminalIdSchema = z.string().regex(/^[a-z][a-z0-9_]*(?:\.[a-z][a-z0-9_]*)+$/);
+
 export const GraphLinkPatternSchema = z.enum([
   "direct connection",
   "bus",
@@ -18,9 +20,9 @@ export const GraphNodeSchema = z.object({
 export const GraphEdgeSchema = z.object({
   id: z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/),
   fromNodeId: z.string().min(1),
-  fromTerminalId: z.string().min(1),
+  fromTerminalId: SemanticTerminalIdSchema,
   toNodeId: z.string().min(1),
-  toTerminalId: z.string().min(1),
+  toTerminalId: SemanticTerminalIdSchema,
   resourceType: z.string().min(1),
   linkPattern: GraphLinkPatternSchema,
 });

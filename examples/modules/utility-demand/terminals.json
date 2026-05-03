@@ -1,6 +1,6 @@
 [
   {
-    "id": "electricity-demand",
+    "id": "power.electricity_in",
     "resourceType": "electricity",
     "unit": "kwh/day",
     "timingModel": "daily",
@@ -17,7 +17,7 @@
     }
   },
   {
-    "id": "water-demand",
+    "id": "water.utility_water_in",
     "resourceType": "water",
     "unit": "gal/day",
     "timingModel": "daily",

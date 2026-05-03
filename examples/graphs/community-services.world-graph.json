@@ -10,10 +10,10 @@
     {
       "id": "service-route",
       "fromNodeId": "kitchen-building",
-      "fromTerminalId": "meal-output",
+      "fromTerminalId": "food.meals_out",
       "toNodeId": "laundry-room",
-      "toTerminalId": "staff-route",
-      "resourceType": "transport",
+      "toTerminalId": "laundry.loads_in",
+      "resourceType": "prepared-meals",
       "linkPattern": "bus"
     }
   ]

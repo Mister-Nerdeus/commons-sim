@@ -9,9 +9,9 @@
     {
       "id": "missing-node-link",
       "fromNodeId": "community-meals",
-      "fromTerminalId": "meal-output",
+      "fromTerminalId": "food.meals_out",
       "toNodeId": "does-not-exist",
-      "toTerminalId": "meal-input",
+      "toTerminalId": "food.ingredients_in",
       "resourceType": "prepared-meals",
       "linkPattern": "direct connection"
     }

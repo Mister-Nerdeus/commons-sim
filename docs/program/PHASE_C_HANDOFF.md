@@ -16,7 +16,7 @@ Phase B delivered the semantic foundation:
 
 ## Allowed Next Work
 
-Issue #41 may begin. Phase C should create the generic module template contract on top of the Phase B contracts.
+After Batch 13 corrective hardening, the next Phase C issue may begin. Phase C should create the generic module template contract on top of the Phase B contracts.
 
 ## Guardrails
 
@@ -38,6 +38,12 @@ Phase C must not claim any of the following until implemented and audited:
 - `packages/shared/src/moduleTerminals.ts`
 - `packages/shared/src/moduleRegistry.ts`
 - `examples/modules/registry.valid.json`
+
+## Batch 13 Corrections Carried Forward
+
+- Codex issues must use the exact issue contract standard in `docs/program/ISSUE_CONTRACT_STANDARD.md`.
+- `registry-validate` success and failure outputs use a consistent `ok` envelope.
+- Module terminal ids must be semantic and namespaced, for example `food.meals_out`.
 
 ## Validation Gate
 

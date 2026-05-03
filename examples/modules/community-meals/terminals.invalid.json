@@ -1,6 +1,54 @@
 [
   {
-    "id": "Meal Output",
+    "id": "food-input",
+    "resourceType": "food",
+    "unit": "kg/day",
+    "timingModel": "daily",
+    "nominalCapacity": 100,
+    "peakCapacity": 150,
+    "direction": "input",
+    "allocationMode": "priority",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "degrade",
+      "description": "Legacy hyphen-only terminal id must fail."
+    }
+  },
+  {
+    "id": "MealOutput",
+    "resourceType": "prepared-meals",
+    "unit": "meals/day",
+    "timingModel": "daily",
+    "nominalCapacity": 200,
+    "peakCapacity": 220,
+    "direction": "output",
+    "allocationMode": "fixed",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "degrade",
+      "description": "Uppercase terminal id must fail."
+    }
+  },
+  {
+    "id": "food..meals",
+    "resourceType": "prepared-meals",
+    "unit": "meals/day",
+    "timingModel": "daily",
+    "nominalCapacity": 200,
+    "peakCapacity": 220,
+    "direction": "output",
+    "allocationMode": "fixed",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "degrade",
+      "description": "Empty namespace segment must fail."
+    }
+  },
+  {
+    "id": "food.meals-out",
     "resourceType": "prepared-meals",
     "unit": "MealsPerDay",
     "timingModel": "daily",

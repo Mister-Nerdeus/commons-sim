@@ -18,4 +18,6 @@ Link patterns:
 - `controller`
 - `feedback loop`
 
-Graph schemas verify that edge node references exist. They do not compile, schedule, execute, or migrate scenarios. Compiler behavior belongs to Phase C.
+Graph edge terminal references use the same semantic namespaced terminal id convention as module terminals, such as `food.meals_out` or `water.potable_in`.
+
+Graph schemas verify that edge node references exist and that edge terminal references use valid semantic ids. They do not compile, schedule, execute, or migrate scenarios. Compiler behavior belongs to Phase C.

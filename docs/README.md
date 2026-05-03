@@ -12,6 +12,7 @@
 - program/ENVIRONMENT_POLICY.md — deployment environment controls and secrets/config matrix
 - program/DEVELOP_TO_STAGING_PROMOTION.md — release-candidate promotion contract
 - program/STAGING_TO_MAIN_RELEASE.md — production release contract
+- program/ISSUE_CONTRACT_STANDARD.md — required Codex issue structure and evidence rules
 - data/STAGING_DATA_POLICY.md — staging baseline and refresh policy
 - gates/ENV_PARITY_GATES.md — parity controls for config/schema/seed drift
 - scenarios/SCENARIO_LIBRARY.md — canonical scenario set

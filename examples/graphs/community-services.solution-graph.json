@@ -10,11 +10,11 @@
     {
       "id": "service-coordination",
       "fromNodeId": "community-meals",
-      "fromTerminalId": "service-schedule",
+      "fromTerminalId": "food.meals_out",
       "toNodeId": "laundry",
-      "toTerminalId": "service-schedule",
-      "resourceType": "schedule",
-      "linkPattern": "controller"
+      "toTerminalId": "laundry.loads_in",
+      "resourceType": "prepared-meals",
+      "linkPattern": "direct connection"
     }
   ]
 }

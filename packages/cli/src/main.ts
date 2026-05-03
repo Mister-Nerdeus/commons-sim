@@ -115,6 +115,7 @@ function writeError(error: unknown) {
     console.error(
       JSON.stringify(
         {
+          ok: false,
           error: {
             code: error.code,
             message: error.message,
@@ -128,7 +129,7 @@ function writeError(error: unknown) {
   }
 
   const message = error instanceof Error ? error.message : String(error);
-  console.error(JSON.stringify({ error: { code: "RUNTIME_ERROR", message } }, null, 2));
+  console.error(JSON.stringify({ ok: false, error: { code: "RUNTIME_ERROR", message } }, null, 2));
   process.exit(EXIT_RUNTIME);
 }
 

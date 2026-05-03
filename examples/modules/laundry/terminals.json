@@ -1,6 +1,23 @@
 [
   {
-    "id": "water-input",
+    "id": "laundry.loads_in",
+    "resourceType": "laundry-loads",
+    "unit": "loads/day",
+    "timingModel": "daily",
+    "nominalCapacity": 40,
+    "peakCapacity": 60,
+    "qualityAttributes": ["soiled"],
+    "direction": "input",
+    "allocationMode": "priority",
+    "spatialScope": "site",
+    "criticality": "medium",
+    "failureSemantics": {
+      "behavior": "buffer",
+      "description": "Incoming loads become backlog when processing is constrained."
+    }
+  },
+  {
+    "id": "water.potable_in",
     "resourceType": "water",
     "unit": "gal/day",
     "timingModel": "daily",
@@ -17,7 +34,24 @@
     }
   },
   {
-    "id": "clean-load-output",
+    "id": "power.electricity_in",
+    "resourceType": "electricity",
+    "unit": "kwh/day",
+    "timingModel": "daily",
+    "nominalCapacity": 75,
+    "peakCapacity": 120,
+    "qualityAttributes": ["site-electric"],
+    "direction": "input",
+    "allocationMode": "priority",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "shed_load",
+      "description": "Laundry processing is deferred when electricity is constrained."
+    }
+  },
+  {
+    "id": "laundry.clean_loads_out",
     "resourceType": "laundry-loads",
     "unit": "loads/day",
     "timingModel": "daily",

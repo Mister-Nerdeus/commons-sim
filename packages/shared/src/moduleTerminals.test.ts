@@ -16,7 +16,30 @@ test("valid terminal fixtures validate", () => {
 
 test("invalid terminal fixtures fail", () => {
   const terminals = loadJson("examples/modules/community-meals/terminals.invalid.json") as unknown[];
-  assert.equal(ModuleTerminalSchema.safeParse(terminals[0]).success, false);
+  for (const terminal of terminals) {
+    assert.equal(ModuleTerminalSchema.safeParse(terminal).success, false);
+  }
+});
+
+test("legacy hyphen-only terminal ids fail", () => {
+  const parsed = ModuleTerminalSchema.safeParse({
+    id: "food-input",
+    resourceType: "food",
+    unit: "kg/day",
+    timingModel: "daily",
+    nominalCapacity: 1,
+    peakCapacity: 1,
+    qualityAttributes: [],
+    direction: "input",
+    allocationMode: "fixed",
+    spatialScope: "site",
+    criticality: "low",
+    failureSemantics: {
+      behavior: "degrade",
+      description: "Invalid legacy id example.",
+    },
+  });
+  assert.equal(parsed.success, false);
 });
 
 function loadJson(relativePath: string): unknown {
