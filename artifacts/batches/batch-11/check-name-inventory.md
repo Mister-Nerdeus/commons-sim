@@ -45,4 +45,6 @@ For commit `a459f2a6a60c26ee64c5795470806320df7f42e2` on `develop`, GitHub repor
 - `ci`: completed, failure
 - `determinism`: completed, failure
 
-The Batch 11 changes normalize runtime/install behavior that was a likely contributor to workflow drift.
+For pushed Batch 11 commit `ec7e873142d4ac4c95d78ee6bc3e7b3b48120b9a`, GitHub created the expected workflow runs, but jobs did not start. The check-run annotation reported: `The job was not started because your account is locked due to a billing issue.`
+
+The Batch 11 changes normalize runtime/install behavior. Current hosted CI failure is an account/billing execution blocker, not a step-level workflow failure.

@@ -65,6 +65,8 @@ Validation commands passed:
 
 Local pnpm commands emitted an expected warning because the workstation used Node `v22.16.0`; Docker validated Node `20.19.0`.
 
+Post-push GitHub Actions runs were created for commit `ec7e873142d4ac4c95d78ee6bc3e7b3b48120b9a`, but jobs did not start. GitHub reported an account-level billing lock: `The job was not started because your account is locked due to a billing issue.`
+
 ## Residual Risks
 
 See `artifacts/batches/batch-11/risk-register.md`.
@@ -73,6 +75,7 @@ See `artifacts/batches/batch-11/risk-register.md`.
 
 NO-GO for Batch 12 module-contract work until the live GitHub settings are corrected and re-exported:
 
+- resolve the GitHub Actions billing lock and re-run hosted checks
 - apply branch protection/rulesets for `develop`, `staging`, and `main`
 - configure `staging` and `production` environments or explicitly remove those workflow environment contracts
 - re-run the live control exports and update `artifacts/controls/`

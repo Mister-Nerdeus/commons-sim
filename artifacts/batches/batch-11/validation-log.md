@@ -27,3 +27,11 @@ rg "frozen-lockfile=false|node-version: 20($|\r?$)|FROM node:20-alpine|CI checks
 ## Residual Validation Risk
 
 Local non-Docker pnpm validation did not run under Node `20.19.0` because the workstation active Node was `v22.16.0`. Docker builds validated the pinned Node runtime.
+
+## Post-Push CI Evidence
+
+After pushing commit `ec7e873142d4ac4c95d78ee6bc3e7b3b48120b9a`, GitHub created workflow runs for `ci`, `determinism`, `test`, `verify-env-parity`, `deploy-dev`, and `api-container`, but jobs failed before any steps ran.
+
+The check annotation for `ci / build_test_smoke` reported: `The job was not started because your account is locked due to a billing issue.`
+
+This is an account-level Actions execution blocker. It does not contradict the local or Docker validation results above.
