@@ -5,7 +5,9 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { AddressInfo } from "node:net";
+import pg from "pg";
 import { signBody } from "./auth.js";
+import { PostgresStorageAdapter } from "./postgresStorage.js";
 import { createApiServer } from "./server.js";
 
 function repoRoot() {
@@ -29,6 +31,27 @@ async function withTestServer<T>(fn: (baseUrl: string, storageDir: string) => Pr
     await new Promise<void>((resolve, reject) => {
       server.close((error) => (error ? reject(error) : resolve()));
     });
+  }
+}
+
+async function withPostgresTestServer<T>(databaseUrl: string, fn: (baseUrl: string) => Promise<T>): Promise<T> {
+  const root = repoRoot();
+  const storage = await PostgresStorageAdapter.create({ connectionString: databaseUrl });
+  const server = createApiServer({
+    benchmarkDir: path.join(root, "examples/challenges/benchmarks"),
+    storageDir: "postgres-test",
+    storage,
+    adminToken: "test-admin-token",
+  });
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const port = (server.address() as AddressInfo).port;
+  try {
+    return await fn(`http://127.0.0.1:${port}`);
+  } finally {
+    await new Promise<void>((resolve, reject) => {
+      server.close((error) => (error ? reject(error) : resolve()));
+    });
+    await storage.close();
   }
 }
 
@@ -56,7 +79,9 @@ test("server exposes health and benchmark list", async () => {
   await withTestServer(async (baseUrl) => {
     const health = await fetch(`${baseUrl}/health`);
     assert.equal(health.status, 200);
-    assert.equal((await health.json()).ok, true);
+    const healthBody = await health.json();
+    assert.equal(healthBody.ok, true);
+    assert.equal(healthBody.storage.backend, "json");
 
     const benchmarks = await fetch(`${baseUrl}/benchmarks`);
     assert.equal(benchmarks.status, 200);
@@ -94,6 +119,13 @@ test("server accepts valid submission and stores leaderboard result", async () =
     const leaderboardBody = await leaderboard.json();
     assert.equal(leaderboardBody.entries.length, 1);
     assert.equal(leaderboardBody.entries[0].result.submissionId, "balanced-48-baseline-submission");
+
+    const metrics = await fetch(`${baseUrl}/metrics`, { headers: { "x-admin-token": "test-admin-token" } });
+    assert.equal(metrics.status, 200);
+    const metricsBody = await metrics.json();
+    assert.equal(metricsBody.backend, "json");
+    assert.equal(metricsBody.leaderboardEntries, 1);
+    assert.equal(metricsBody.pendingReviews, 1);
   });
 });
 
@@ -223,5 +255,64 @@ test("server rate limits protected write endpoints", async () => {
     assert.equal(limited.status, 429);
   } finally {
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));
+  }
+});
+
+test("server supports Postgres storage with review audit events", async (context) => {
+  const databaseUrl = process.env.COMMONS_SIM_TEST_DATABASE_URL;
+  if (!databaseUrl) {
+    context.skip("Set COMMONS_SIM_TEST_DATABASE_URL to run Postgres integration coverage.");
+    return;
+  }
+
+  const { Pool } = pg;
+  const pool = new Pool({ connectionString: databaseUrl });
+  const submissionId = `postgres-integration-${Date.now()}`;
+  try {
+    await withPostgresTestServer(databaseUrl, async (baseUrl) => {
+      const identity = await createIdentity(baseUrl);
+      const submission = JSON.parse(
+        fs.readFileSync(
+          path.join(repoRoot(), "examples/challenges/submissions/balanced-48-baseline.submission.json"),
+          "utf-8",
+        ),
+      );
+      submission.id = submissionId;
+
+      const health = await fetch(`${baseUrl}/health`);
+      assert.equal(health.status, 200);
+      const healthBody = await health.json();
+      assert.equal(healthBody.storage.backend, "postgres");
+
+      const submitted = await fetch(`${baseUrl}/submissions`, {
+        method: "POST",
+        headers: signedHeaders(identity, submission),
+        body: JSON.stringify(submission),
+      });
+      assert.equal(submitted.status, 201);
+
+      const reviewed = await fetch(`${baseUrl}/admin/review/balanced-48/${submissionId}`, {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-admin-token": "test-admin-token" },
+        body: JSON.stringify({ status: "finalist", note: "Postgres integration review.", seasonId: "open-2026" }),
+      });
+      assert.equal(reviewed.status, 200);
+
+      const metrics = await fetch(`${baseUrl}/metrics`, { headers: { "x-admin-token": "test-admin-token" } });
+      assert.equal(metrics.status, 200);
+      const metricsBody = await metrics.json();
+      assert.equal(metricsBody.backend, "postgres");
+      assert.ok(metricsBody.leaderboardEntries >= 1);
+    });
+
+    const audit = await pool.query<{ count: string }>(
+      "select count(*)::text as count from audit_events where event_type = 'review_status_updated' and payload->>'submissionId' = $1",
+      [submissionId],
+    );
+    assert.equal(Number(audit.rows[0]?.count ?? 0), 1);
+  } finally {
+    await pool.query("delete from audit_events where payload->>'submissionId' = $1", [submissionId]);
+    await pool.query("delete from leaderboard_entries where submission_id = $1", [submissionId]);
+    await pool.end();
   }
 });

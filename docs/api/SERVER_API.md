@@ -1,6 +1,6 @@
 # Server API
 
-The server package provides deterministic server-side re-simulation for Prototype Challenge submissions. It is intentionally file-backed for the current phase.
+The server package provides deterministic server-side re-simulation for Prototype Challenge submissions. It supports a local JSON backend for development and a Postgres backend for production-style deployments.
 
 Package:
 
@@ -21,14 +21,31 @@ Environment variables:
 - `PORT`: API port, default `8787`
 - `HOST`: bind host, default `127.0.0.1`; Docker uses `0.0.0.0`
 - `COMMONS_SIM_BENCHMARK_DIR`: benchmark JSON directory, default `examples/challenges/benchmarks`
-- `COMMONS_SIM_STORAGE_DIR`: durable JSON database/storage directory, default `artifacts/server/leaderboards`
+- `COMMONS_SIM_STORAGE_DIR`: durable JSON database/storage directory when `COMMONS_SIM_STORAGE_BACKEND=json`, default `artifacts/server/leaderboards`
+- `COMMONS_SIM_STORAGE_BACKEND`: `json` or `postgres`, default `json`; Docker Compose uses `postgres`
+- `COMMONS_SIM_DATABASE_URL` or `DATABASE_URL`: Postgres connection string when using the Postgres backend
+- `COMMONS_SIM_MIGRATIONS_DIR`: optional migration SQL directory, default `packages/server/migrations` at runtime
+- `COMMONS_SIM_PG_POOL_MAX`: Postgres connection pool size, default `10`
 - `COMMONS_SIM_ADMIN_TOKEN`: enables protected admin endpoints when set
 
 Docker:
 
 ```bash
 docker compose build commons-sim-api
-docker compose up -d commons-sim-api
+docker compose up -d commons-sim-postgres commons-sim-api
+```
+
+Migration command:
+
+```bash
+COMMONS_SIM_STORAGE_BACKEND=postgres DATABASE_URL=postgres://commons_sim:commons_sim_local@localhost:15432/commons_sim pnpm --filter @commons-sim/server db:migrate
+```
+
+Backup and restore:
+
+```bash
+DATABASE_URL=postgres://commons_sim:commons_sim_local@localhost:15432/commons_sim pnpm --filter @commons-sim/server backup:postgres
+DATABASE_URL=postgres://commons_sim:commons_sim_local@localhost:15432/commons_sim pnpm --filter @commons-sim/server restore:postgres artifacts/backups/example.sql
 ```
 
 ## Endpoints
@@ -38,7 +55,31 @@ docker compose up -d commons-sim-api
 Returns:
 
 ```json
-{ "ok": true }
+{
+  "ok": true,
+  "authRequired": true,
+  "storage": {
+    "backend": "postgres",
+    "ok": true
+  }
+}
+```
+
+### `GET /metrics`
+
+Requires `x-admin-token`.
+
+Returns storage-level operational counters:
+
+```json
+{
+  "backend": "postgres",
+  "identities": 12,
+  "seasons": 2,
+  "leaderboardEntries": 35,
+  "pendingReviews": 8,
+  "finalists": 3
+}
 ```
 
 ### `GET /benchmarks`
@@ -88,7 +129,7 @@ Behavior:
 - re-simulates the proposed scenario server-side
 - checks locked benchmark fields
 - computes score, capacity, cashflow, stress tests, hashes, and readiness gates
-- stores valid results in the durable JSON database under `COMMONS_SIM_STORAGE_DIR`
+- stores valid results in the configured durable storage backend
 
 Status codes:
 
@@ -156,9 +197,16 @@ Requires `x-admin-token`.
 
 Returns identity metadata without secrets.
 
+## Storage
+
+Implemented backends:
+
+- `json`: atomic file-backed local storage, useful for development and demos
+- `postgres`: relational storage with versioned SQL migrations, indexed leaderboard queries, and backup/restore scripts
+
 ## Current Limitations
 
 - Anonymous identity is HMAC-signed but not a substitute for full account management.
 - Rate limiting is in-memory per process.
-- Durable storage is an atomic file-backed JSON database, not Postgres/S3/etc.
-- Public deployments still need secret rotation, backups, monitoring, TLS termination, and abuse operations.
+- Postgres backup scripts require `pg_dump` and `psql` on the operator machine.
+- Managed production still needs provider-level automated backups, point-in-time recovery, TLS termination, centralized logs, alerting, secret rotation, and abuse operations.

@@ -55,8 +55,26 @@ export function listIdentities(storageDir: string): Omit<IdentityRecord, "secret
   return readIdentityDb(storageDir).identities.map(({ secretHash: _secretHash, identitySecret: _identitySecret, ...identity }) => identity);
 }
 
+export function findIdentity(storageDir: string, identityId: string): IdentityRecord | undefined {
+  return readIdentityDb(storageDir).identities.find((item) => item.identityId === identityId);
+}
+
 export function verifySignedBody(
   storageDir: string,
+  headers: SignatureHeaders,
+  body: unknown,
+  maxSkewMs = 5 * 60 * 1000,
+): { ok: true; identityId: string } | { ok: false; reason: string } {
+  if (!headers.identityId || !headers.signature || !headers.timestamp) {
+    return { ok: false, reason: "Missing identity signature headers." };
+  }
+
+  const identity = readIdentityDb(storageDir).identities.find((item) => item.identityId === headers.identityId);
+  return verifySignedBodyWithIdentity(identity, headers, body, maxSkewMs);
+}
+
+export function verifySignedBodyWithIdentity(
+  identity: IdentityRecord | undefined,
   headers: SignatureHeaders,
   body: unknown,
   maxSkewMs = 5 * 60 * 1000,
@@ -69,8 +87,9 @@ export function verifySignedBody(
   if (!Number.isFinite(timestampMs)) return { ok: false, reason: "Invalid signature timestamp." };
   if (Math.abs(Date.now() - timestampMs) > maxSkewMs) return { ok: false, reason: "Signature timestamp outside allowed window." };
 
-  const identity = readIdentityDb(storageDir).identities.find((item) => item.identityId === headers.identityId);
-  if (!identity || identity.disabled) return { ok: false, reason: "Unknown or disabled identity." };
+  if (!identity || identity.identityId !== headers.identityId || identity.disabled) {
+    return { ok: false, reason: "Unknown or disabled identity." };
+  }
 
   if (hashSecret(identity.identitySecret) !== identity.secretHash) return { ok: false, reason: "Identity secret hash mismatch." };
   const expected = signBody(identity.identitySecret, headers.timestamp, body);

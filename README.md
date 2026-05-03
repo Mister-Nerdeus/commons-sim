@@ -50,6 +50,11 @@ docker compose up -d
 Web app URL:
 - `http://localhost:8080/commons-sim/`
 
+API URL:
+- `http://localhost:8787/health`
+
+Docker Compose runs the API with Postgres storage by default. Local non-Docker development still defaults to JSON storage unless `COMMONS_SIM_STORAGE_BACKEND=postgres` and `DATABASE_URL` are set.
+
 ## Packages
 - `@commons-sim/shared` — scenario schema/contracts (Zod) + types
 - `@commons-sim/engine` — deterministic simulation engine (pure functions)
@@ -92,6 +97,7 @@ Web app URL:
 - [CLI usage](docs/cli/USAGE.md)
 - [CLI output format](docs/cli/OUTPUT_FORMAT.md)
 - [Server API](docs/api/SERVER_API.md)
+- [Postgres storage upgrade plan](docs/ops/POSTGRES_STORAGE_UPGRADE_PLAN.md)
 - [Web workspace spec](docs/product/WEB_WORKSPACE_SPEC.md)
 - [Prototype challenge mode technical specification](docs/product/PROTOTYPE_CHALLENGE_TECH_SPEC.md)
 - [Onboarding and explainability](docs/product/ONBOARDING_AND_EXPLAINABILITY.md)
@@ -108,6 +114,7 @@ Web app URL:
 - [Batch 7 parity/scenario/sensitivity audit](docs/audits/BATCH_07_AUDIT.md)
 - [Batch 8 persistence/onboarding audit](docs/audits/BATCH_08_AUDIT.md)
 - [Prototype challenge project audit](docs/audits/PROJECT_AUDIT_PROTOTYPE_CHALLENGE.md)
+- [Gamer input and usage audit](docs/audits/GAMER_INPUT_USAGE_AUDIT.md)
 - [Next 15 backlog](docs/program/NEXT_15_BACKLOG.md)
 - [Next 15 backlog v4](docs/program/NEXT_15_BACKLOG_V4.md)
 - [Risk register](docs/program/RISK_REGISTER.md)

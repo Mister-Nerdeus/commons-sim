@@ -1,16 +1,13 @@
 import http, { type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import { ChallengeSubmissionSchema } from "@commons-sim/shared";
-import { createAnonymousIdentity, listIdentities, verifySignedBody } from "./auth.js";
+import { verifySignedBodyWithIdentity } from "./auth.js";
 import { findBenchmark, listBenchmarks } from "./benchmarkStore.js";
 import { buildChallengeResult } from "./challengeResult.js";
+import { JsonStorageAdapter } from "./jsonStorage.js";
 import { createRateLimiter } from "./rateLimit.js";
-import {
-  listLeaderboardRecords,
-  saveChallengeResult,
-  updateReviewStatus,
-  type ReviewStatus,
-} from "./resultStore.js";
-import { findActiveSeason, listSeasons, upsertSeason, type SeasonRecord } from "./seasonStore.js";
+import { type ReviewStatus } from "./resultStore.js";
+import { type SeasonRecord } from "./seasonStore.js";
+import type { StorageAdapter } from "./storage.js";
 
 export type ApiServerOptions = {
   benchmarkDir: string;
@@ -18,6 +15,7 @@ export type ApiServerOptions = {
   adminToken?: string;
   requireSignedSubmissions?: boolean;
   rateLimitMaxPerMinute?: number;
+  storage?: StorageAdapter;
 };
 
 type ApiError = {
@@ -26,11 +24,17 @@ type ApiError = {
   message: string;
 };
 
+type ResolvedApiServerOptions = Required<
+  Pick<ApiServerOptions, "benchmarkDir" | "storageDir" | "requireSignedSubmissions" | "rateLimitMaxPerMinute" | "storage">
+> &
+  Pick<ApiServerOptions, "adminToken">;
+
 export function createApiServer(options: ApiServerOptions): Server {
-  const resolvedOptions = {
+  const resolvedOptions: ResolvedApiServerOptions = {
     ...options,
     requireSignedSubmissions: options.requireSignedSubmissions ?? true,
     rateLimitMaxPerMinute: options.rateLimitMaxPerMinute ?? 60,
+    storage: options.storage ?? new JsonStorageAdapter(options.storageDir),
   };
   const rateLimiter = createRateLimiter({ maxPerMinute: resolvedOptions.rateLimitMaxPerMinute });
 
@@ -43,8 +47,7 @@ export function createApiServer(options: ApiServerOptions): Server {
 }
 
 async function handleRequest(
-  options: Required<Pick<ApiServerOptions, "benchmarkDir" | "storageDir" | "requireSignedSubmissions" | "rateLimitMaxPerMinute">> &
-    Pick<ApiServerOptions, "adminToken">,
+  options: ResolvedApiServerOptions,
   rateLimiter: ReturnType<typeof createRateLimiter>,
   request: IncomingMessage,
   response: ServerResponse,
@@ -52,7 +55,14 @@ async function handleRequest(
   const url = new URL(request.url ?? "/", "http://localhost");
 
   if (request.method === "GET" && url.pathname === "/health") {
-    writeJson(response, 200, { ok: true, authRequired: options.requireSignedSubmissions });
+    const storage = await options.storage.health();
+    writeJson(response, storage.ok ? 200 : 503, { ok: storage.ok, authRequired: options.requireSignedSubmissions, storage });
+    return;
+  }
+
+  if (request.method === "GET" && url.pathname === "/metrics") {
+    requireAdmin(options, request);
+    writeJson(response, 200, await options.storage.metrics());
     return;
   }
 
@@ -62,7 +72,7 @@ async function handleRequest(
   }
 
   if (request.method === "GET" && url.pathname === "/seasons") {
-    writeJson(response, 200, { seasons: listSeasons(options.storageDir) });
+    writeJson(response, 200, { seasons: await options.storage.listSeasons() });
     return;
   }
 
@@ -70,7 +80,7 @@ async function handleRequest(
     enforceRateLimit(rateLimiter, rateLimitKey(request, "identity"));
     const body = await readJsonBody(request);
     const label = readOptionalString(body, "label") ?? "anonymous-player";
-    const identity = createAnonymousIdentity(options.storageDir, label);
+    const identity = await options.storage.createIdentity(label);
     writeJson(response, 201, identity);
     return;
   }
@@ -85,7 +95,7 @@ async function handleRequest(
       benchmarkId,
       benchmarkClassId: benchmark.benchmarkClassId,
       seasonId: seasonId ?? null,
-      entries: listLeaderboardRecords(options.storageDir, benchmarkId, seasonId),
+      entries: await options.storage.listLeaderboardRecords(benchmarkId, seasonId),
     });
     return;
   }
@@ -96,7 +106,7 @@ async function handleRequest(
     const benchmark = findBenchmark(options.benchmarkDir, benchmarkId);
     if (!benchmark) throw apiError(404, "BENCHMARK_NOT_FOUND", `Benchmark not found: ${benchmarkId}`);
     const seasonId = url.searchParams.get("seasonId") ?? undefined;
-    const entries = listLeaderboardRecords(options.storageDir, benchmarkId, seasonId).filter(
+    const entries = (await options.storage.listLeaderboardRecords(benchmarkId, seasonId)).filter(
       (entry) => entry.review.status === "finalist" || entry.review.status === "approved",
     );
     writeJson(response, 200, { benchmarkId, benchmarkClassId: benchmark.benchmarkClassId, seasonId: seasonId ?? null, entries });
@@ -107,31 +117,31 @@ async function handleRequest(
     enforceRateLimit(rateLimiter, rateLimitKey(request, request.headers["x-identity-id"]?.toString() ?? "submission"));
     const body = await readJsonBody(request);
     const submission = ChallengeSubmissionSchema.parse(body);
-    const identityId = authenticateSubmission(options, request, body);
+    const identityId = await authenticateSubmission(options, request, body);
     const benchmark = findBenchmark(options.benchmarkDir, submission.benchmarkId);
     if (!benchmark) throw apiError(404, "BENCHMARK_NOT_FOUND", `Benchmark not found: ${submission.benchmarkId}`);
-    const season = findActiveSeason(options.storageDir, benchmark.id);
+    const season = await options.storage.findActiveSeason(benchmark.id);
     if (!season) throw apiError(409, "NO_ACTIVE_SEASON", `No active season for benchmark: ${benchmark.id}`);
     const result = buildChallengeResult(benchmark, submission);
     if (!result.validation.ok) {
       writeJson(response, 422, result);
       return;
     }
-    const entry = saveChallengeResult(options.storageDir, result, { identityId, seasonId: season.seasonId });
+    const entry = await options.storage.saveChallengeResult(result, { identityId, seasonId: season.seasonId });
     writeJson(response, 201, entry);
     return;
   }
 
   if (request.method === "GET" && url.pathname === "/admin/identities") {
     requireAdmin(options, request);
-    writeJson(response, 200, { identities: listIdentities(options.storageDir) });
+    writeJson(response, 200, { identities: await options.storage.listIdentities() });
     return;
   }
 
   if (request.method === "POST" && url.pathname === "/admin/seasons") {
     requireAdmin(options, request);
     const body = (await readJsonBody(request)) as SeasonRecord;
-    writeJson(response, 201, { season: upsertSeason(options.storageDir, normalizeSeason(body)) });
+    writeJson(response, 201, { season: await options.storage.upsertSeason(normalizeSeason(body)) });
     return;
   }
 
@@ -144,7 +154,7 @@ async function handleRequest(
     const status = readRequiredReviewStatus(body);
     const note = readOptionalString(body, "note") ?? "";
     const seasonId = readOptionalString(body, "seasonId") ?? undefined;
-    const updated = updateReviewStatus(options.storageDir, benchmarkId, submissionId, seasonId, status, note);
+    const updated = await options.storage.updateReviewStatus(benchmarkId, submissionId, seasonId, status, note);
     if (!updated) throw apiError(404, "SUBMISSION_NOT_FOUND", `Submission not found: ${submissionId}`);
     writeJson(response, 200, updated);
     return;
@@ -153,16 +163,17 @@ async function handleRequest(
   throw apiError(404, "NOT_FOUND", `Route not found: ${request.method} ${url.pathname}`);
 }
 
-function authenticateSubmission(
-  options: Pick<ApiServerOptions, "storageDir" | "requireSignedSubmissions">,
+async function authenticateSubmission(
+  options: Pick<ResolvedApiServerOptions, "requireSignedSubmissions" | "storage">,
   request: IncomingMessage,
   body: unknown,
-): string {
+): Promise<string> {
   if (!options.requireSignedSubmissions) return "unsigned-dev";
-  const verification = verifySignedBody(
-    options.storageDir,
+  const identityId = request.headers["x-identity-id"]?.toString();
+  const verification = verifySignedBodyWithIdentity(
+    identityId ? await options.storage.findIdentity(identityId) : undefined,
     {
-      identityId: request.headers["x-identity-id"]?.toString(),
+      identityId,
       signature: request.headers["x-signature"]?.toString(),
       timestamp: request.headers["x-timestamp"]?.toString(),
     },

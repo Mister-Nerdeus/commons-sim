@@ -13,3 +13,4 @@
 | R-601 Challenge benchmark comparability | High | Active | Maintainer | Split leaderboards by locked benchmark class and reject modified locked fields |
 | R-602 Real-world model overclaim | High | Active | Maintainer | Use safety/resilience proxies, require human review, and avoid guaranteed social outcome claims |
 | R-603 Competition integrity gap | High | Active | Maintainer | Add server-side re-simulation, signed hashes, persistent submissions, and anti-cheat checks |
+| R-604 Managed storage operations | High | Mitigating | Maintainer | Initial Postgres adapter, migrations, local Docker wiring, backup/restore scripts, and health/metrics are implemented; managed provider backups, alerting, and restore drills remain required |

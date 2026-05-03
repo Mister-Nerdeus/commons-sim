@@ -32,4 +32,5 @@
 ## Phase 4 Status
 - Initial file-backed server-side submission verification is implemented in `packages/server`.
 - Signed anonymous identity, in-memory rate limiting, seasons, finalist review workflow, and Docker API wiring are implemented.
-- Production-grade account management, external durable database, rate-limit persistence, backups, monitoring, and human operations remain open.
+- Postgres storage adapter, SQL migrations, local Docker Postgres wiring, backup/restore scripts, and storage health/metrics are implemented.
+- Production-grade account management, rate-limit persistence, managed database provisioning, provider backups, alerting, secret rotation, and human operations remain open.

@@ -23,11 +23,36 @@ services:
       COMMONS_SIM_ADMIN_TOKEN: "${COMMONS_SIM_ADMIN_TOKEN:-change-me-local-admin-token}"
       COMMONS_SIM_BENCHMARK_DIR: "/app/examples/challenges/benchmarks"
       COMMONS_SIM_STORAGE_DIR: "/data/commons-sim"
+      COMMONS_SIM_STORAGE_BACKEND: "postgres"
+      DATABASE_URL: "postgres://commons_sim:commons_sim_local@commons-sim-postgres:5432/commons_sim"
+      COMMONS_SIM_MIGRATIONS_DIR: "/app/packages/server/migrations"
     ports:
       - "8787:8787"
     volumes:
       - commons-sim-api-data:/data/commons-sim
+    depends_on:
+      commons-sim-postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  commons-sim-postgres:
+    image: postgres:16-alpine
+    container_name: commons-sim-postgres
+    environment:
+      POSTGRES_DB: commons_sim
+      POSTGRES_USER: commons_sim
+      POSTGRES_PASSWORD: "${COMMONS_SIM_POSTGRES_PASSWORD:-commons_sim_local}"
+    ports:
+      - "${COMMONS_SIM_POSTGRES_PORT:-15432}:5432"
+    volumes:
+      - commons-sim-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U commons_sim -d commons_sim"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
     restart: unless-stopped
 
 volumes:
   commons-sim-api-data:
+  commons-sim-postgres-data:

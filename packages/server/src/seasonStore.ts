@@ -52,7 +52,7 @@ function writeSeasonDb(storageDir: string, db: SeasonDb) {
   writeJsonFileAtomic(seasonDbPath(storageDir), db);
 }
 
-function defaultSeason(): SeasonRecord {
+export function defaultSeason(): SeasonRecord {
   return {
     seasonId: "open-2026",
     title: "Open Prototype Challenge 2026",

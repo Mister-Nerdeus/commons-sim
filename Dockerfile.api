@@ -20,6 +20,8 @@ RUN pnpm --filter @commons-sim/shared build \
   && pnpm --filter @commons-sim/engine build \
   && pnpm --filter @commons-sim/server build
 
+RUN CI=true pnpm prune --prod
+
 FROM node:20-alpine AS runtime
 
 WORKDIR /app
@@ -32,15 +34,21 @@ ENV COMMONS_SIM_STORAGE_DIR=/data/commons-sim
 
 COPY --from=build /app/packages/shared/dist packages/shared/dist
 COPY --from=build /app/packages/shared/package.json packages/shared/package.json
+COPY --from=build /app/packages/shared/node_modules packages/shared/node_modules
 COPY --from=build /app/packages/engine/dist packages/engine/dist
 COPY --from=build /app/packages/engine/package.json packages/engine/package.json
+COPY --from=build /app/packages/engine/node_modules packages/engine/node_modules
 COPY --from=build /app/packages/server/dist packages/server/dist
 COPY --from=build /app/packages/server/package.json packages/server/package.json
+COPY --from=build /app/packages/server/migrations packages/server/migrations
+COPY --from=build /app/packages/server/scripts packages/server/scripts
+COPY --from=build /app/node_modules node_modules
+COPY --from=build /app/packages/server/node_modules packages/server/node_modules
 COPY --from=build /app/examples/challenges examples/challenges
 
 RUN mkdir -p node_modules/@commons-sim \
-  && ln -s ../../packages/shared node_modules/@commons-sim/shared \
-  && ln -s ../../packages/engine node_modules/@commons-sim/engine
+  && ln -sfn ../../packages/shared node_modules/@commons-sim/shared \
+  && ln -sfn ../../packages/engine node_modules/@commons-sim/engine
 
 EXPOSE 8787
 
