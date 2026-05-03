@@ -14,11 +14,13 @@ import {
   type ChallengeReadinessGate,
   type ChallengeResult,
   type ChallengeSubmission,
+  type ModuleRegistry,
   type ProjectManifest,
 } from "@commons-sim/shared";
 import {
   loadChallengeBenchmark,
   loadChallengeSubmission,
+  loadModuleRegistry,
   loadProjectManifest,
   loadScenario,
   saveProjectManifest,
@@ -42,6 +44,7 @@ type CliErrorCode =
   | "SCENARIO_VALIDATION_ERROR"
   | "CHALLENGE_BENCHMARK_ERROR"
   | "CHALLENGE_SUBMISSION_ERROR"
+  | "MODULE_REGISTRY_VALIDATION_ERROR"
   | "RUNTIME_ERROR";
 
 class CliError extends Error {
@@ -67,6 +70,7 @@ Commands:
   challenge-batch <benchmark.json> <submissions-dir>
   project-save <scenario.json> <manifest.json>
   project-load <manifest.json>
+  registry-validate <registry.json>
 `);
   process.exit(EXIT_USAGE);
 }
@@ -273,6 +277,24 @@ try {
     process.exit(EXIT_OK);
   }
 
+  if (cmd === "registry-validate") {
+    const registryFile = args[0];
+    if (!registryFile) usage();
+    const registry = loadModuleRegistryStrict(registryFile);
+    console.log(
+      JSON.stringify(
+        {
+          ok: true,
+          registryId: registry.registryId,
+          moduleCount: registry.modules.length,
+        },
+        null,
+        2,
+      ),
+    );
+    process.exit(EXIT_OK);
+  }
+
   throw new CliError("USAGE_ERROR", `Unknown command: ${cmd}`, EXIT_USAGE);
 } catch (error) {
   writeError(error);
@@ -291,6 +313,19 @@ function loadChallengeSubmissionStrict(filePath: string): ChallengeSubmission {
     return loadChallengeSubmission(filePath);
   } catch (error) {
     throw loadChallengeError("CHALLENGE_SUBMISSION_ERROR", `Challenge submission load failed: ${filePath}`, error);
+  }
+}
+
+function loadModuleRegistryStrict(filePath: string): ModuleRegistry {
+  try {
+    return loadModuleRegistry(filePath);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new CliError(
+      "MODULE_REGISTRY_VALIDATION_ERROR",
+      `Module registry validation failed: ${filePath}: ${message}`,
+      EXIT_VALIDATION,
+    );
   }
 }
 

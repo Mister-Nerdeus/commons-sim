@@ -1,0 +1,36 @@
+[
+  {
+    "id": "food-input",
+    "resourceType": "food",
+    "unit": "kg/day",
+    "timingModel": "daily",
+    "nominalCapacity": 120,
+    "peakCapacity": 180,
+    "qualityAttributes": ["perishable", "food-safe"],
+    "direction": "input",
+    "allocationMode": "priority",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "degrade",
+      "description": "Meal service degrades when food input is constrained."
+    }
+  },
+  {
+    "id": "meal-output",
+    "resourceType": "prepared-meals",
+    "unit": "meals/day",
+    "timingModel": "daily",
+    "nominalCapacity": 144,
+    "peakCapacity": 216,
+    "qualityAttributes": ["ready-to-serve"],
+    "direction": "output",
+    "allocationMode": "proportional",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "shed_load",
+      "description": "Unserved meal demand is exposed rather than hidden."
+    }
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "id": "electricity-demand",
+    "resourceType": "electricity",
+    "unit": "kwh/day",
+    "timingModel": "daily",
+    "nominalCapacity": 1000,
+    "peakCapacity": 1500,
+    "qualityAttributes": ["aggregate"],
+    "direction": "output",
+    "allocationMode": "on_demand",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "degrade",
+      "description": "Utility demand is visible but unresolved by this stub."
+    }
+  },
+  {
+    "id": "water-demand",
+    "resourceType": "water",
+    "unit": "gal/day",
+    "timingModel": "daily",
+    "nominalCapacity": 3000,
+    "peakCapacity": 4500,
+    "qualityAttributes": ["aggregate"],
+    "direction": "output",
+    "allocationMode": "on_demand",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "degrade",
+      "description": "Water demand is visible but unresolved by this stub."
+    }
+  }
+]

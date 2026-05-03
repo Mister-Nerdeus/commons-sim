@@ -1,0 +1,11 @@
+{
+  "architectureSummary": "Generic shared kitchen and meal coordination workflow for settlement scenarios.",
+  "requiredInputs": ["food ingredients", "labor hours", "water", "electricity"],
+  "outputs": ["prepared meals", "food waste", "service schedule"],
+  "dependencies": ["utility demand", "waste handling", "staff coordination"],
+  "controlStrategy": "Plan meal batches against participation and service-tier demand.",
+  "technologyMaturity": "standard",
+  "footprint": "Shared kitchen and staging area.",
+  "staffingAssumptions": "Staffing scales with participation, service tier, and meal schedule.",
+  "costAssumptions": "Generic costs only; no vendor or regional binding."
+}

@@ -1,0 +1,20 @@
+{
+  "graphId": "community-services-world",
+  "graphKind": "world",
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "kitchen-building", "moduleId": "community-meals", "label": "Shared Kitchen" },
+    { "id": "laundry-room", "moduleId": "laundry", "label": "Laundry Room" }
+  ],
+  "edges": [
+    {
+      "id": "service-route",
+      "fromNodeId": "kitchen-building",
+      "fromTerminalId": "meal-output",
+      "toNodeId": "laundry-room",
+      "toTerminalId": "staff-route",
+      "resourceType": "transport",
+      "linkPattern": "bus"
+    }
+  ]
+}

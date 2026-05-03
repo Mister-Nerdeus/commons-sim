@@ -1,0 +1,14 @@
+{
+  "moduleId": "community-meals",
+  "name": "Community Meals",
+  "version": "1.0.0",
+  "taxonomyPath": {
+    "domain": "human-settlement",
+    "category": "shared-services",
+    "family": "food-preparation",
+    "tags": ["meals", "service"]
+  },
+  "lifecycleStage": "Generic Template",
+  "roles": ["Transform", "Demand", "Coordinate"],
+  "summary": "Problem-first shared meal preparation module class."
+}

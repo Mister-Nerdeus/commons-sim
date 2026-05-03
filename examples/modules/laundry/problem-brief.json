@@ -1,0 +1,10 @@
+{
+  "problemStatement": "Households need reliable laundry capacity without assuming every dwelling owns independent machines.",
+  "stakeholders": ["residents", "operators", "maintenance staff"],
+  "targetScope": "Shared laundry service demand and capacity planning.",
+  "objectives": ["Expose laundry demand", "Coordinate shared equipment use", "Track utility pressure"],
+  "constraints": ["Water availability", "Equipment throughput", "Resident scheduling"],
+  "stressors": ["Peak weekend loads", "Machine outage", "Water restriction"],
+  "failureConsequences": ["Unserved laundry demand", "Resident time burden", "Maintenance backlog"],
+  "successMetrics": ["Loads served per day", "Queue time", "Equipment utilization"]
+}

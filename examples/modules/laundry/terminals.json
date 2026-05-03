@@ -1,0 +1,36 @@
+[
+  {
+    "id": "water-input",
+    "resourceType": "water",
+    "unit": "gal/day",
+    "timingModel": "daily",
+    "nominalCapacity": 600,
+    "peakCapacity": 900,
+    "qualityAttributes": ["potable"],
+    "direction": "input",
+    "allocationMode": "priority",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "shed_load",
+      "description": "Laundry loads are deferred when water is constrained."
+    }
+  },
+  {
+    "id": "clean-load-output",
+    "resourceType": "laundry-loads",
+    "unit": "loads/day",
+    "timingModel": "daily",
+    "nominalCapacity": 40,
+    "peakCapacity": 60,
+    "qualityAttributes": ["clean"],
+    "direction": "output",
+    "allocationMode": "proportional",
+    "spatialScope": "site",
+    "criticality": "medium",
+    "failureSemantics": {
+      "behavior": "buffer",
+      "description": "Unserved loads become backlog."
+    }
+  }
+]

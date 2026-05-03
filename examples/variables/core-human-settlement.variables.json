@@ -1,0 +1,75 @@
+{
+  "registryId": "core-human-settlement-variables",
+  "version": "1.0.0",
+  "variables": [
+    {
+      "id": "population.household_count",
+      "name": "Household Count",
+      "domain": "population",
+      "type": "integer",
+      "unit": "households",
+      "validRange": { "min": 1, "max": 5000 },
+      "defaultValue": 48,
+      "provenance": {
+        "sourceType": "assumption",
+        "sourceRef": "examples/scenarios/baseline-48.json",
+        "method": "Seed scenario baseline"
+      },
+      "uncertainty": {
+        "kind": "bounded",
+        "lower": 1,
+        "upper": 5000,
+        "confidenceInterval": 0.9,
+        "rationale": "Scenario scale bound."
+      },
+      "editability": "editable",
+      "dependencyNotes": ["Must align with household mix totals."],
+      "ai": {
+        "origin": "human-authored",
+        "scope": "variable",
+        "confidence": 1,
+        "validation_status": "schema_valid"
+      }
+    },
+    {
+      "id": "services.meals_participation",
+      "name": "Meals Participation",
+      "domain": "shared-services",
+      "type": "number",
+      "unit": "ratio",
+      "validRange": { "min": 0, "max": 1 },
+      "defaultValue": 0.72,
+      "provenance": {
+        "sourceType": "assumption",
+        "sourceRef": "docs/model/ASSUMPTIONS.md"
+      },
+      "uncertainty": {
+        "kind": "bounded",
+        "lower": 0,
+        "upper": 1,
+        "rationale": "Participation is a scenario lever."
+      },
+      "editability": "editable",
+      "dependencyNotes": ["Affects meal service demand and labor load."]
+    },
+    {
+      "id": "finance.reserve_end",
+      "name": "Ending Reserve",
+      "domain": "finance",
+      "type": "number",
+      "unit": "usd",
+      "validRange": { "min": 0 },
+      "defaultValue": 0,
+      "provenance": {
+        "sourceType": "derived",
+        "sourceRef": "packages/engine/src/simulate.ts"
+      },
+      "uncertainty": {
+        "kind": "none",
+        "rationale": "Derived deterministically from scenario inputs."
+      },
+      "editability": "derived",
+      "dependencyNotes": ["Derived from monthly operating cashflow and reserve policy."]
+    }
+  ]
+}

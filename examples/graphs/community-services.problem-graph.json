@@ -1,0 +1,20 @@
+{
+  "graphId": "community-services-problem",
+  "graphKind": "problem",
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "household-demand", "moduleId": "utility-demand", "label": "Household Demand" },
+    { "id": "meal-need", "moduleId": "community-meals", "label": "Meal Need" }
+  ],
+  "edges": [
+    {
+      "id": "demand-to-meals",
+      "fromNodeId": "household-demand",
+      "fromTerminalId": "meal-demand",
+      "toNodeId": "meal-need",
+      "toTerminalId": "food-service-need",
+      "resourceType": "service-demand",
+      "linkPattern": "direct connection"
+    }
+  ]
+}

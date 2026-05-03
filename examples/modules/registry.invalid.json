@@ -1,0 +1,50 @@
+{
+  "registryId": "invalid-registry",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "moduleId": "community-meals",
+      "version": "1.0.0",
+      "taxonomyPath": {
+        "domain": "human-settlement",
+        "category": "shared-services",
+        "family": "food-preparation"
+      },
+      "lifecycleStage": "Generic Template",
+      "roles": ["Transform"],
+      "metadata": {
+        "name": "Community Meals",
+        "summary": "Shared meal preparation generic module.",
+        "maintainers": ["commons-sim"]
+      },
+      "problemBriefRef": "examples/modules/community-meals/problem-brief.json",
+      "solutionBriefRef": "examples/modules/community-meals/solution-brief.generic.json",
+      "terminalRefs": ["examples/modules/community-meals/terminals.json"],
+      "dependencyRules": ["Valid entry before duplicate."],
+      "provenance": { "sourceType": "assumption", "sourceRef": "invalid fixture" },
+      "validationStatus": "schema_valid"
+    },
+    {
+      "moduleId": "community-meals",
+      "version": "bad",
+      "taxonomyPath": {
+        "domain": "human-settlement",
+        "category": "shared-services",
+        "family": "food-preparation"
+      },
+      "lifecycleStage": "Execution",
+      "roles": [],
+      "metadata": {
+        "name": "",
+        "summary": "",
+        "maintainers": []
+      },
+      "problemBriefRef": "",
+      "solutionBriefRef": "",
+      "terminalRefs": [],
+      "dependencyRules": [],
+      "provenance": { "sourceType": "assumption", "sourceRef": "invalid fixture" },
+      "validationStatus": "schema_valid"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "architectureSummary": "Generic shared laundry room with scheduled machine capacity.",
+  "requiredInputs": ["water", "electricity", "labor hours", "detergent"],
+  "outputs": ["clean laundry loads", "greywater", "service schedule"],
+  "dependencies": ["utility demand", "wastewater handling", "equipment maintenance"],
+  "controlStrategy": "Allocate machine time against household service demand.",
+  "technologyMaturity": "standard",
+  "footprint": "Shared laundry room.",
+  "staffingAssumptions": "Light staffing for coordination, cleaning, and maintenance.",
+  "costAssumptions": "Generic costs only; no equipment brand binding."
+}

@@ -3,10 +3,12 @@ import path from "node:path";
 import {
   ChallengeBenchmarkSchema,
   ChallengeSubmissionSchema,
+  ModuleRegistrySchema,
   ProjectManifestSchema,
   ScenarioSchema,
   type ChallengeBenchmark,
   type ChallengeSubmission,
+  type ModuleRegistry,
   type ProjectManifest,
   type Scenario,
 } from "@commons-sim/shared";
@@ -21,6 +23,10 @@ export function loadChallengeBenchmark(filePath: string): ChallengeBenchmark {
 
 export function loadChallengeSubmission(filePath: string): ChallengeSubmission {
   return ChallengeSubmissionSchema.parse(loadJson(filePath));
+}
+
+export function loadModuleRegistry(filePath: string): ModuleRegistry {
+  return ModuleRegistrySchema.parse(loadJson(filePath));
 }
 
 export function stableStringify(obj: unknown): string {

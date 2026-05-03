@@ -1,0 +1,19 @@
+{
+  "graphId": "invalid-link",
+  "graphKind": "solution",
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "community-meals", "moduleId": "community-meals", "label": "Community Meals" }
+  ],
+  "edges": [
+    {
+      "id": "missing-node-link",
+      "fromNodeId": "community-meals",
+      "fromTerminalId": "meal-output",
+      "toNodeId": "does-not-exist",
+      "toTerminalId": "meal-input",
+      "resourceType": "prepared-meals",
+      "linkPattern": "direct connection"
+    }
+  ]
+}

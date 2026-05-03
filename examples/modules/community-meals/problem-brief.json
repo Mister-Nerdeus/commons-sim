@@ -1,0 +1,10 @@
+{
+  "problemStatement": "Households need reliable meal preparation capacity without assuming every household cooks independently.",
+  "stakeholders": ["residents", "service coordinators", "operators"],
+  "targetScope": "Settlement-scale shared food preparation and distribution.",
+  "objectives": ["Reduce duplicated household labor", "Provide predictable meal capacity", "Expose service demand assumptions"],
+  "constraints": ["Food safety", "Meal timing", "Labor availability"],
+  "stressors": ["Peak mealtime demand", "Staff absence", "Supply interruption"],
+  "failureConsequences": ["Unserved meals", "Resident dissatisfaction", "Emergency labor substitution"],
+  "successMetrics": ["Meals served per day", "Labor hours per meal", "Participation coverage"]
+}

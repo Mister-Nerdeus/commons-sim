@@ -1,0 +1,13 @@
+{
+  "moduleId": "Community Meals",
+  "name": "",
+  "version": "1",
+  "taxonomyPath": {
+    "domain": "human-settlement",
+    "category": "shared-services",
+    "family": ""
+  },
+  "lifecycleStage": "Template",
+  "roles": ["Unknown"],
+  "summary": ""
+}

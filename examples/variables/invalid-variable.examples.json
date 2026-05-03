@@ -1,0 +1,31 @@
+{
+  "registryId": "invalid-variable-examples",
+  "version": "1.0.0",
+  "variables": [
+    {
+      "id": "population.household_count",
+      "name": "Household Count",
+      "domain": "population",
+      "type": "integer",
+      "unit": "households",
+      "validRange": { "min": 1, "max": 10 },
+      "defaultValue": 48,
+      "provenance": { "sourceType": "assumption", "sourceRef": "invalid fixture" },
+      "uncertainty": { "kind": "bounded", "lower": 1, "upper": 10, "rationale": "Invalid default." },
+      "editability": "editable",
+      "dependencyNotes": ["Default exceeds max."]
+    },
+    {
+      "id": "population.household_count",
+      "name": "Duplicate Household Count",
+      "domain": "population",
+      "type": "integer",
+      "validRange": { "min": 1, "max": 5000 },
+      "defaultValue": 48,
+      "provenance": { "sourceType": "assumption", "sourceRef": "invalid fixture" },
+      "uncertainty": { "kind": "none", "rationale": "Duplicate id and missing unit." },
+      "editability": "editable",
+      "dependencyNotes": ["Missing unit."]
+    }
+  ]
+}

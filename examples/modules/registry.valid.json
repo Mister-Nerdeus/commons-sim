@@ -1,0 +1,75 @@
+{
+  "registryId": "core-human-settlement-v1",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "moduleId": "community-meals",
+      "version": "1.0.0",
+      "taxonomyPath": {
+        "domain": "human-settlement",
+        "category": "shared-services",
+        "family": "food-preparation",
+        "tags": ["meals"]
+      },
+      "lifecycleStage": "Generic Template",
+      "roles": ["Transform", "Demand", "Coordinate"],
+      "metadata": {
+        "name": "Community Meals",
+        "summary": "Shared meal preparation generic module.",
+        "maintainers": ["commons-sim"]
+      },
+      "problemBriefRef": "examples/modules/community-meals/problem-brief.json",
+      "solutionBriefRef": "examples/modules/community-meals/solution-brief.generic.json",
+      "terminalRefs": ["examples/modules/community-meals/terminals.json"],
+      "dependencyRules": ["Requires explicit utility and labor assumptions before execution in later phases."],
+      "provenance": { "sourceType": "assumption", "sourceRef": "Phase B seed module pack" },
+      "validationStatus": "schema_valid"
+    },
+    {
+      "moduleId": "laundry",
+      "version": "1.0.0",
+      "taxonomyPath": {
+        "domain": "human-settlement",
+        "category": "shared-services",
+        "family": "laundry",
+        "tags": ["laundry"]
+      },
+      "lifecycleStage": "Generic Template",
+      "roles": ["Transform", "Demand"],
+      "metadata": {
+        "name": "Laundry",
+        "summary": "Shared laundry generic module.",
+        "maintainers": ["commons-sim"]
+      },
+      "problemBriefRef": "examples/modules/laundry/problem-brief.json",
+      "solutionBriefRef": "examples/modules/laundry/solution-brief.generic.json",
+      "terminalRefs": ["examples/modules/laundry/terminals.json"],
+      "dependencyRules": ["Requires explicit water, electricity, and maintenance assumptions before execution in later phases."],
+      "provenance": { "sourceType": "assumption", "sourceRef": "Phase B seed module pack" },
+      "validationStatus": "schema_valid"
+    },
+    {
+      "moduleId": "utility-demand",
+      "version": "1.0.0",
+      "taxonomyPath": {
+        "domain": "human-settlement",
+        "category": "utilities",
+        "family": "demand-stub",
+        "tags": ["utility", "demand"]
+      },
+      "lifecycleStage": "Generic Template",
+      "roles": ["Demand", "Sense"],
+      "metadata": {
+        "name": "Utility Demand Stub",
+        "summary": "Generic utility demand declaration module.",
+        "maintainers": ["commons-sim"]
+      },
+      "problemBriefRef": "examples/modules/utility-demand/problem-brief.json",
+      "solutionBriefRef": "examples/modules/utility-demand/solution-brief.generic.json",
+      "terminalRefs": ["examples/modules/utility-demand/terminals.json"],
+      "dependencyRules": ["Declares demand only; does not resolve supply or costs."],
+      "provenance": { "sourceType": "assumption", "sourceRef": "Phase B seed module pack" },
+      "validationStatus": "schema_valid"
+    }
+  ]
+}

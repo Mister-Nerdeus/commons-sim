@@ -1,0 +1,9 @@
+{
+  "origin": "ai-assisted",
+  "scope": "documentation",
+  "confidence": 0.82,
+  "validation_status": "schema_valid",
+  "model": "codex",
+  "reviewedBy": "maintainer",
+  "notes": "Example artifact tag for semantic primitive metadata."
+}

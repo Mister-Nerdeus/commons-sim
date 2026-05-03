@@ -16,3 +16,11 @@
 - gates/ENV_PARITY_GATES.md — parity controls for config/schema/seed drift
 - scenarios/SCENARIO_LIBRARY.md — canonical scenario set
 - scenarios/STAGING_BENCHMARK_MATRIX.md — staging benchmark mapping
+- contracts/SEMANTIC_PRIMITIVES.md — reusable semantic primitive contracts
+- contracts/VARIABLE_REGISTRY.md — variable registry contract
+- contracts/MODULE_TAXONOMY.md — module lifecycle, role, and taxonomy contract
+- contracts/MODULE_BRIEFS.md — problem and solution brief contracts
+- contracts/MODULE_TERMINALS.md — typed module terminal contract
+- contracts/GRAPH_CONTRACTS.md — problem/solution/world graph skeleton contracts
+- contracts/MODULE_REGISTRY.md — module registry contract
+- cli/REGISTRY_VALIDATION.md — registry validation CLI

@@ -1,0 +1,11 @@
+{
+  "architectureSummary": "Generic utility demand stub that declares demand terminals without resolving supply.",
+  "requiredInputs": ["household count", "service participation"],
+  "outputs": ["electricity demand", "water demand", "service demand"],
+  "dependencies": ["population assumptions", "service tier assumptions"],
+  "controlStrategy": "Declare aggregate demand surfaces for future utility modules.",
+  "technologyMaturity": "concept",
+  "footprint": "No physical footprint in Phase B.",
+  "staffingAssumptions": "No staffing behavior in Phase B.",
+  "costAssumptions": "No costs resolved in Phase B."
+}

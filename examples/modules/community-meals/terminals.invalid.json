@@ -1,0 +1,18 @@
+[
+  {
+    "id": "Meal Output",
+    "resourceType": "prepared-meals",
+    "unit": "MealsPerDay",
+    "timingModel": "daily",
+    "nominalCapacity": 200,
+    "peakCapacity": 100,
+    "direction": "output",
+    "allocationMode": "magic",
+    "spatialScope": "site",
+    "criticality": "high",
+    "failureSemantics": {
+      "behavior": "ignore",
+      "description": ""
+    }
+  }
+]

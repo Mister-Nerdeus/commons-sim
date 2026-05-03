@@ -1,0 +1,10 @@
+{
+  "problemStatement": "Settlement services need a shared demand stub for utilities before detailed utility modules exist.",
+  "stakeholders": ["operators", "service planners", "residents"],
+  "targetScope": "Aggregate utility demand placeholder for early graph contracts.",
+  "objectives": ["Expose demand terminals", "Avoid hidden utility assumptions", "Support later utility module replacement"],
+  "constraints": ["No execution in Phase B", "No real utility binding"],
+  "stressors": ["Peak demand", "Service expansion", "Resource scarcity"],
+  "failureConsequences": ["Untracked utility demand", "Invalid service plans"],
+  "successMetrics": ["Demand represented explicitly", "Terminals validate", "Dependency notes clear"]
+}
