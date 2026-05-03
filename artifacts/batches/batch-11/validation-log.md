@@ -57,7 +57,7 @@ Results:
 - Branch-protection dry run: pass.
 - `staging` branch protection apply: pass.
 - `main` branch protection apply: pass.
-- Branch-protection export: `staging` and `main` exported; `develop` remains unavailable until final evidence commit lands.
+- Branch-protection export: `develop`, `staging`, and `main` exported after live protection was applied.
 - Environment export: `dev`, `production`, and `staging` exported.
 - Environment parity check: pass; local Node warning remains because the workstation runs Node `v22.16.0`.
 - `pnpm test`: pass; local Node warning remains, and the server Postgres integration test remains skipped because `COMMONS_SIM_TEST_DATABASE_URL` is not set.

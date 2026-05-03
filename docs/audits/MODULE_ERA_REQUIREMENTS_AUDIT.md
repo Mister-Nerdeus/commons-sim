@@ -6,13 +6,13 @@ This audit covers the issue list provided for Issues #31-#80. It records actual 
 
 ## Summary
 
-Issues #31-#34 have repo evidence in place, with remaining live-control drift called out below. Issue #35 correctly blocks Batch 2 because hosted CI execution is not healthy and `develop` protection is pending the final evidence push. Issues #36-#80 are not started in this repository and remain blocked by the Batch 1 no-go decision.
+Issues #31-#34 have repo evidence in place, with live branch and environment evidence exported. Issue #35 correctly blocks Batch 2 because hosted CI execution is not healthy. Issues #36-#80 are not started in this repository and remain blocked by the Batch 1 no-go decision.
 
 ## Gate Status
 
 | Range | Theme | Status | Reason |
 | --- | --- | --- | --- |
-| #31-#35 | Control-plane hardening | PARTIAL PASS, NO-GO | Repo artifacts and docs exist; GitHub Actions are blocked by account billing; branch protection is not live. |
+| #31-#35 | Control-plane hardening | PASS FOR CONTROL EVIDENCE, NO-GO FOR HOSTED CI | Repo artifacts, docs, branch protection, and environments exist; GitHub Actions are blocked by account billing. |
 | #36-#40 | Variable and module contract foundation | BLOCKED / NOT IMPLEMENTED | No variable registry, module lifecycle, taxonomy, registry CLI, or Batch 12 audit files exist. |
 | #41-#45 | Generic module system | BLOCKED / NOT IMPLEMENTED | No generic template, ports, dependency graph, metadata policy, or Batch 13 audit exists. |
 | #46-#50 | Real-world binding layer | BLOCKED / NOT IMPLEMENTED | No product binding, cost pack, location profile, binding resolver, or Batch 14 audit exists. |
@@ -27,19 +27,18 @@ Issues #31-#34 have repo evidence in place, with remaining live-control drift ca
 
 | Issue | Status | Evidence | Remaining Gap |
 | --- | --- | --- | --- |
-| #31 | PASS | `artifacts/controls/required-check-map.json`; branch policy and checklists use exact workflow/job contexts. | Live branch protection must be configured to use the map. |
+| #31 | PASS | `artifacts/controls/required-check-map.json`; branch policy and checklists use exact workflow/job contexts; live branch protection uses the map. | None. |
 | #32 | PASS | Workflow and Docker runtime parity; `docs/program/WORKFLOW_RUNTIME_POLICY.md`. | Local workstation should use Node `20.19.0` for release validation. |
-| #33 | PARTIAL PASS | Export scripts and versioned artifacts exist; `dev`, `staging`, and `production` environments export live; `staging` and `main` branch protection export live. | `develop` branch protection still reports `Branch not protected` until the final evidence commit is pushed and the live setting is applied. |
+| #33 | PASS | Export scripts and versioned artifacts exist; `dev`, `staging`, and `production` environments export live; `develop`, `staging`, and `main` branch protection export live. | None for repo-verifiable control evidence. |
 | #34 | PASS | Scripts/docs/artifacts explicitly state metadata-only staging reset behavior. | Full state restore remains future work and must not be claimed. |
-| #35 | PASS AS AUDIT, NO-GO AS GATE | `docs/audits/BATCH_11_AUDIT.md`. | Batch 2 remains blocked by live branch-protection drift and GitHub Actions billing lock. |
+| #35 | PASS AS AUDIT, NO-GO AS GATE | `docs/audits/BATCH_11_AUDIT.md`. | Batch 2 remains blocked by GitHub Actions billing lock. |
 
 ## Required Fixes Before Batch 2
 
 1. Resolve the GitHub Actions account billing lock and re-run hosted checks.
-2. Apply branch protection/rulesets for `develop` using `artifacts/controls/required-check-map.json`.
-3. Re-export branch protection evidence after live settings are applied.
-4. Keep #36-#80 unstarted until #35 moves from no-go to go.
+2. Re-run hosted workflow checks after billing is resolved.
+3. Keep #36-#80 unstarted until #35 moves from no-go to go.
 
 ## Decision
 
-NO-GO for Issues #36-#80. Starting module-era implementation before hosted CI and branch protection are live would violate the Batch 1 invariants.
+NO-GO for Issues #36-#80. Starting module-era implementation before hosted CI can execute would violate the Batch 1 invariants.

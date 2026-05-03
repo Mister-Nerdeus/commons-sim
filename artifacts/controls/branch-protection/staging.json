@@ -3,8 +3,8 @@
   "evidenceType": "github-branch-protection",
   "repository": "Mister-Nerdeus/commons-sim",
   "branch": "staging",
-  "exportedAtUtc": "2026-05-03T04:20:46.342Z",
-  "exportedBy": "codex-compliance-audit",
+  "exportedAtUtc": "2026-05-03T04:22:49.440Z",
+  "exportedBy": "codex-compliance-audit-final",
   "source": "gh api repos/Mister-Nerdeus/commons-sim/branches/staging/protection",
   "status": "exported",
   "protection": {

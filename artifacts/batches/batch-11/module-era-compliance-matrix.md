@@ -4,9 +4,9 @@
 | --- | --- |
 | #31 | PASS |
 | #32 | PASS |
-| #33 | PARTIAL PASS: export path and environments fixed; `staging` and `main` branch protection live; `develop` pending final evidence push |
+| #33 | PASS |
 | #34 | PASS |
-| #35 | PASS AS AUDIT, NO-GO AS GATE |
+| #35 | PASS AS AUDIT, NO-GO FOR HOSTED CI |
 | #36 | BLOCKED / NOT IMPLEMENTED |
 | #37 | BLOCKED / NOT IMPLEMENTED |
 | #38 | BLOCKED / NOT IMPLEMENTED |

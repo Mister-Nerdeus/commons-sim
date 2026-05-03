@@ -16,9 +16,9 @@ Batch 11 covers Issues #31-#35:
 | --- | --- | --- |
 | #31 Align required status checks | PASS | `artifacts/controls/required-check-map.json`, `docs/program/BRANCH_PROTECTION_POLICY.md`, RC and production checklists |
 | #32 Normalize runtime/install parity | PASS | `docs/program/WORKFLOW_RUNTIME_POLICY.md`, workflow diffs, Dockerfile updates, `artifacts/batches/batch-11/runtime-version-inventory.md` |
-| #33 Export live control evidence | PASS WITH LIVE DRIFT | Export scripts and artifacts exist; environment drift was remediated; `staging` and `main` branch protection were applied; `develop` branch protection remains pending final evidence push |
+| #33 Export live control evidence | PASS | Export scripts and artifacts exist; environments and protected branches export live |
 | #34 Narrow staging reset truth claim | PASS | `docs/data/STAGING_RESET_CONTRACT.md`, updated scripts, baseline artifacts, reset verification log |
-| #35 Batch 11 audit | PASS FOR REPO EVIDENCE, NO-GO FOR BATCH 12 | This audit and `artifacts/batches/batch-11/*` |
+| #35 Batch 11 audit | PASS FOR CONTROL EVIDENCE, NO-GO FOR BATCH 12 HOSTED CI | This audit and `artifacts/batches/batch-11/*` |
 
 ## Required-Check Verification
 
@@ -43,8 +43,7 @@ Live export artifacts were produced under `artifacts/controls/`.
 Findings:
 
 - Initial branch protection export returned `Branch not protected` for `develop`, `staging`, and `main`.
-- `staging` and `main` branch protection were applied through `scripts/controls/apply-branch-protection.mjs` and re-exported successfully.
-- `develop` branch protection remains intentionally pending until after the final evidence commit is pushed, because the policy-compliant setting blocks direct admin pushes.
+- `develop`, `staging`, and `main` branch protection were applied through `scripts/controls/apply-branch-protection.mjs` and re-exported successfully.
 - Initial GitHub environment export returned only `dev`; `staging` and `production` were absent from live environment metadata.
 - `staging` and `production` were created through the GitHub environments API and re-exported.
 
@@ -76,9 +75,8 @@ See `artifacts/batches/batch-11/risk-register.md`.
 
 ## Go/No-Go Decision
 
-NO-GO for Batch 12 module-contract work until the live GitHub settings are corrected and re-exported:
+NO-GO for Batch 12 module-contract work until hosted CI can run:
 
 - resolve the GitHub Actions billing lock and re-run hosted checks
-- apply branch protection/rulesets for `develop`
 - decide whether `staging` and `production` need reviewer/wait-time protections beyond the now-created environment records
 - re-run the live control exports and update `artifacts/controls/`
