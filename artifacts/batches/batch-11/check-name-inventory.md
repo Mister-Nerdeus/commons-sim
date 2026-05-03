@@ -1,50 +1,35 @@
-# Batch 11 Check-Name Inventory
+# Batch 11 Validation-Name Inventory
 
 ## Before
 
-Docs used mixed shorthand and exact contexts:
+Docs used mixed shorthand and exact GitHub Actions contexts:
 
 - Branch policy exact contexts: `ci / build_test_smoke`, `dependency-review / dependency-review`, `determinism / determinism`.
 - RC checklist shorthand: `ci`, `determinism`, `dependency-review`.
 - Production checklist shorthand plus implied production gate: `ci`, `determinism`, `dependency-review`, `release-prod`.
-- Runtime workflows used mixed Node/install settings: CI used Node `20.19.0` and frozen lockfile; determinism, promotion, deploy, and test workflows used Node `20` and several used `--frozen-lockfile=false`.
 
-## After
+## Current Local Gate
 
-Canonical required-check map:
+GitHub Actions is not used as a required gate. The canonical map is:
 
-- `develop`: `ci / build_test_smoke`, `determinism / determinism`
-- `staging`: `ci / build_test_smoke`, `dependency-review / dependency-review`, `determinism / determinism`, `promote-to-staging / validate_release_candidate`
-- `main`: `ci / build_test_smoke`, `dependency-review / dependency-review`, `determinism / determinism`, `release-prod / verify_production_release`
+- `artifacts/controls/required-check-map.json`: declares `githubStatusChecksRequired: false`.
+- `artifacts/controls/local-required-check-map.json`: declares required local validation commands.
+- `artifacts/controls/local-validation/latest.json`: records the most recent local validation transcript.
 
-Machine-produced workflow/job contexts represented in `artifacts/controls/required-check-map.json`:
+Required local checks:
 
-- `api-container / build_api_container`
-- `ci / build_test_smoke`
-- `dependency-review / dependency-review`
-- `deploy-dev / deploy_dev`
-- `deploy-prod / deploy_prod`
-- `deploy-staging / deploy_staging`
-- `determinism / determinism`
-- `pages / deploy`
-- `promote-to-staging / validate_release_candidate`
-- `release-prod / verify_production_release`
-- `test / test`
-- `verify-env-parity / parity`
+- `docker build -f Dockerfile.local-validation -t commons-sim:local-validation .`
+- `pnpm install --frozen-lockfile`
+- `pnpm build`
+- `pnpm test`
+- `pnpm smoke:cli`
+- `pnpm determinism:check`
+- `pnpm env:parity:check`
 
-Determinism is explicitly represented as the standalone context `determinism / determinism`; CI also runs `pnpm determinism:check` inside `ci / build_test_smoke`.
+## Determinism Representation
 
-## Example CI Context List
+Determinism is represented by local command `pnpm determinism:check` and by `Dockerfile.local-validation`, which runs determinism under Node `20.19.0`.
 
-For commit `a459f2a6a60c26ee64c5795470806320df7f42e2` on `develop`, GitHub reported these workflow runs before this batch commit:
+## Hosted Workflow Note
 
-- `api-container`: completed, failure
-- `test`: completed, failure
-- `deploy-dev`: completed, failure
-- `verify-env-parity`: completed, failure
-- `ci`: completed, failure
-- `determinism`: completed, failure
-
-For pushed Batch 11 commit `ec7e873142d4ac4c95d78ee6bc3e7b3b48120b9a`, GitHub created the expected workflow runs, but jobs did not start. The check-run annotation reported: `The job was not started because your account is locked due to a billing issue.`
-
-The Batch 11 changes normalize runtime/install behavior. Current hosted CI failure is an account/billing execution blocker, not a step-level workflow failure.
+GitHub Actions workflows may remain in the repository as convenience automation, but protected branch policy and release approval do not depend on hosted workflow status contexts.

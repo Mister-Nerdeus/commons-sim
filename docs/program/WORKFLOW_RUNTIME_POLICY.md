@@ -2,7 +2,7 @@
 
 ## Canonical Runtime
 
-All workflows and Docker build images that run the Node workspace use the same runtime contract:
+All local validation and Docker build images that run the Node workspace use the same runtime contract:
 
 - Node: `20.19.0`
 - pnpm: `9.0.0`
@@ -13,7 +13,7 @@ The root `package.json` declares `packageManager: pnpm@9.0.0`. Workflows install
 
 ## Lockfile Policy
 
-CI, promotion, deploy, Pages, test, and determinism workflows must install with `--frozen-lockfile`. A workflow may not use `--frozen-lockfile=false` unless an exception is documented in this file with:
+Local validation, Docker validation, and any workflow retained for convenience must install with `--frozen-lockfile`. A validation path may not use `--frozen-lockfile=false` unless an exception is documented in this file with:
 
 - workflow path
 - reason
@@ -25,10 +25,9 @@ There are no active exceptions.
 
 ## Runtime Parity Checklist
 
-- [ ] `.github/workflows/ci.yml` uses Node `20.19.0`, pnpm `9`, and `pnpm install --frozen-lockfile`.
-- [ ] `.github/workflows/determinism.yml` uses Node `20.19.0`, pnpm `9`, and `pnpm install --frozen-lockfile`.
-- [ ] Promotion workflows use the same Node, pnpm, and frozen-lockfile policy as CI.
-- [ ] Deploy workflows use the same Node, pnpm, and frozen-lockfile policy as CI.
+- [ ] `Dockerfile.local-validation` uses Node `20.19.0`, pnpm `9.0.0`, and `pnpm install --frozen-lockfile`.
+- [ ] `scripts/controls/run-local-validation.mjs` runs the local validation map and writes evidence.
+- [ ] Any retained convenience workflows use the same Node, pnpm, and frozen-lockfile policy.
 - [ ] Docker build images use `node:20.19.0-alpine` and `pnpm@9.0.0`.
 - [ ] Local setup docs instruct the same Node, pnpm, and frozen-lockfile install contract.
 

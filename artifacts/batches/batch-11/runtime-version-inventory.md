@@ -7,9 +7,20 @@
 - Install: `pnpm install --frozen-lockfile`
 - Docker Node image: `node:20.19.0-alpine`
 
+## Local Validation Inventory
+
+Release-grade local validation runs in `Dockerfile.local-validation` with Node `20.19.0`, pnpm `9.0.0`, and `pnpm install --frozen-lockfile`.
+
+`scripts/controls/run-local-validation.mjs --include-docker` records a transcript and runs:
+
+- host install/build/test/smoke/determinism/env-parity commands
+- `Dockerfile.local-validation`
+- web Docker build
+- API Docker build
+
 ## Workflow Inventory
 
-All Node/pnpm workflows now use Node `20.19.0`. All workflows that run pnpm install now use `pnpm install --frozen-lockfile`.
+Workflows are retained as convenience automation only. They are not acceptance gates. All Node/pnpm workflows use Node `20.19.0`; all workflows that run pnpm install use `pnpm install --frozen-lockfile`.
 
 - `.github/workflows/ci.yml`
 - `.github/workflows/determinism.yml`

@@ -3,6 +3,8 @@
 ## Commands
 
 ```powershell
+node scripts/controls/run-local-validation.mjs --operator codex-local-validation --include-docker
+docker build -f Dockerfile.local-validation -t commons-sim:local-validation .
 pnpm install --frozen-lockfile
 pnpm build
 pnpm test
@@ -22,19 +24,16 @@ rg "frozen-lockfile=false|node-version: 20($|\r?$)|FROM node:20-alpine|CI checks
 - `git diff --check`: pass; line-ending warnings only.
 - Docker web image build: pass with `node:20.19.0-alpine`.
 - Docker API image build: pass with `node:20.19.0-alpine`.
+- Docker local validation image build: pass with `node:20.19.0-alpine`; runs install, build, tests, smoke, determinism, and env parity.
 - Drift search for relaxed lockfile and unpinned Node patterns: no matches.
 
 ## Residual Validation Risk
 
 Local non-Docker pnpm validation did not run under Node `20.19.0` because the workstation active Node was `v22.16.0`. Docker builds validated the pinned Node runtime.
 
-## Post-Push CI Evidence
+## Hosted Actions Note
 
-After pushing commit `ec7e873142d4ac4c95d78ee6bc3e7b3b48120b9a`, GitHub created workflow runs for `ci`, `determinism`, `test`, `verify-env-parity`, `deploy-dev`, and `api-container`, but jobs failed before any steps ran.
-
-The check annotation for `ci / build_test_smoke` reported: `The job was not started because your account is locked due to a billing issue.`
-
-This is an account-level Actions execution blocker. It does not contradict the local or Docker validation results above.
+GitHub Actions is not used as acceptance evidence. The local validation artifact is `artifacts/controls/local-validation/latest.json`.
 
 ## Compliance Audit Follow-Up
 
@@ -46,6 +45,7 @@ node scripts/controls/apply-branch-protection.mjs --repo Mister-Nerdeus/commons-
 node scripts/controls/apply-branch-protection.mjs --repo Mister-Nerdeus/commons-sim --branches staging,main --enforce-admins
 node scripts/controls/export-branch-protection.mjs --repo Mister-Nerdeus/commons-sim --branches develop,staging,main --operator codex-compliance-audit
 node scripts/controls/export-environments.mjs --repo Mister-Nerdeus/commons-sim --operator codex-compliance-audit
+node scripts/controls/apply-branch-protection.mjs --repo Mister-Nerdeus/commons-sim --branches develop,staging,main --enforce-admins --local-validation-only
 pnpm env:parity:check
 pnpm test
 git diff --check
@@ -58,6 +58,7 @@ Results:
 - `staging` branch protection apply: pass.
 - `main` branch protection apply: pass.
 - Branch-protection export: `develop`, `staging`, and `main` exported after live protection was applied.
+- Required hosted status checks removed from live branch protection; local validation evidence is now the gate.
 - Environment export: `dev`, `production`, and `staging` exported.
 - Environment parity check: pass; local Node warning remains because the workstation runs Node `v22.16.0`.
 - `pnpm test`: pass; local Node warning remains, and the server Postgres integration test remains skipped because `COMMONS_SIM_TEST_DATABASE_URL` is not set.

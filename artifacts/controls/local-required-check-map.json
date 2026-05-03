@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "gateType": "local-validation",
+  "canonicalRuntime": {
+    "node": "20.19.0",
+    "pnpm": "9.0.0",
+    "install": "pnpm install --frozen-lockfile"
+  },
+  "requiredLocalChecks": [
+    {
+      "name": "canonical-node20-local-validation",
+      "command": "docker build -f Dockerfile.local-validation -t commons-sim:local-validation .",
+      "required": true
+    },
+    {
+      "name": "runtime-node-version",
+      "command": "node --version",
+      "required": true,
+      "notes": "Must be Node 20.19.0 for release-grade host validation; Docker validation is authoritative when the host runtime differs."
+    },
+    {
+      "name": "runtime-pnpm-version",
+      "command": "pnpm --version",
+      "required": true
+    },
+    {
+      "name": "install-frozen-lockfile",
+      "command": "pnpm install --frozen-lockfile",
+      "required": true
+    },
+    {
+      "name": "workspace-build",
+      "command": "pnpm build",
+      "required": true
+    },
+    {
+      "name": "workspace-tests",
+      "command": "pnpm test",
+      "required": true
+    },
+    {
+      "name": "cli-smoke",
+      "command": "pnpm smoke:cli",
+      "required": true
+    },
+    {
+      "name": "determinism",
+      "command": "pnpm determinism:check",
+      "required": true
+    },
+    {
+      "name": "environment-parity",
+      "command": "pnpm env:parity:check",
+      "required": true
+    }
+  ],
+  "optionalLocalChecks": [
+    {
+      "name": "web-docker-build",
+      "command": "docker build -f Dockerfile -t commons-sim:web-local-validation .",
+      "required": false
+    },
+    {
+      "name": "api-docker-build",
+      "command": "docker build -f Dockerfile.api -t commons-sim:api-local-validation .",
+      "required": false
+    }
+  ],
+  "evidencePath": "artifacts/controls/local-validation/latest.json",
+  "runnerScript": "scripts/controls/run-local-validation.mjs"
+}

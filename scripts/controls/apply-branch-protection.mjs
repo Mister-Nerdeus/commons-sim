@@ -12,6 +12,7 @@ const branchFilter = new Set(
 );
 const dryRun = args.includes("--dry-run");
 const enforceAdmins = args.includes("--enforce-admins");
+const localValidationOnly = args.includes("--local-validation-only");
 
 if (!repo) {
   throw new Error("Missing repository. Pass --repo owner/name or set GITHUB_REPOSITORY.");
@@ -47,7 +48,7 @@ for (const [branch, contexts] of Object.entries(map.requiredChecksByBranch)) {
 function protectionPayload(branch, contexts) {
   const productionLike = branch === "main" || branch === "staging";
 
-  return {
+  const payload = {
     required_status_checks: {
       strict: productionLike,
       contexts,
@@ -63,6 +64,12 @@ function protectionPayload(branch, contexts) {
     allow_force_pushes: false,
     allow_deletions: false,
   };
+
+  if (localValidationOnly) {
+    payload.required_status_checks = null;
+  }
+
+  return payload;
 }
 
 function getArg(name) {

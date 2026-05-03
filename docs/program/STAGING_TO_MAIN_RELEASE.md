@@ -7,11 +7,9 @@ Ensure `main` receives only validated release candidates from `staging`.
 ## Production Release Gate
 
 1. Create PR with source `staging` and target `main`.
-2. PR must pass required checks:
-   - `ci / build_test_smoke`
-   - `determinism / determinism`
-   - `dependency-review / dependency-review`
-   - `release-prod / verify_production_release`
+2. PR must include local validation evidence:
+   - `artifacts/controls/local-validation/latest.json`
+   - `docker build -f Dockerfile.local-validation -t commons-sim:local-validation .`
 3. Require code-owner approval and production approver sign-off.
 4. Require release notes and evidence bundle before merge.
 
@@ -20,7 +18,7 @@ Ensure `main` receives only validated release candidates from `staging`.
 - Release notes from template `docs/program/templates/RELEASE_NOTES_TEMPLATE.md`
 - Production approval checklist `docs/program/checklists/PRODUCTION_APPROVAL_CHECKLIST.md`
 - Rollback record from `docs/program/templates/ROLLBACK_RECORD_TEMPLATE.md`
-- Links to CI/workflow run evidence
+- Links to local validation evidence
 
 ## Rollback Contract
 

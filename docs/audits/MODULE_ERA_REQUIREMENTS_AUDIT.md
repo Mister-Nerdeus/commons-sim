@@ -6,13 +6,13 @@ This audit covers the issue list provided for Issues #31-#80. It records actual 
 
 ## Summary
 
-Issues #31-#34 have repo evidence in place, with live branch and environment evidence exported. Issue #35 correctly blocks Batch 2 because hosted CI execution is not healthy. Issues #36-#80 are not started in this repository and remain blocked by the Batch 1 no-go decision.
+Issues #31-#35 have repo evidence in place, with live branch and environment evidence exported and local validation evidence recorded. Issues #36-#80 are not started in this repository.
 
 ## Gate Status
 
 | Range | Theme | Status | Reason |
 | --- | --- | --- | --- |
-| #31-#35 | Control-plane hardening | PASS FOR CONTROL EVIDENCE, NO-GO FOR HOSTED CI | Repo artifacts, docs, branch protection, and environments exist; GitHub Actions are blocked by account billing. |
+| #31-#35 | Control-plane hardening | PASS / LOCAL-GATE GO | Repo artifacts, docs, branch protection, environments, and local validation evidence exist. |
 | #36-#40 | Variable and module contract foundation | BLOCKED / NOT IMPLEMENTED | No variable registry, module lifecycle, taxonomy, registry CLI, or Batch 12 audit files exist. |
 | #41-#45 | Generic module system | BLOCKED / NOT IMPLEMENTED | No generic template, ports, dependency graph, metadata policy, or Batch 13 audit exists. |
 | #46-#50 | Real-world binding layer | BLOCKED / NOT IMPLEMENTED | No product binding, cost pack, location profile, binding resolver, or Batch 14 audit exists. |
@@ -27,18 +27,18 @@ Issues #31-#34 have repo evidence in place, with live branch and environment evi
 
 | Issue | Status | Evidence | Remaining Gap |
 | --- | --- | --- | --- |
-| #31 | PASS | `artifacts/controls/required-check-map.json`; branch policy and checklists use exact workflow/job contexts; live branch protection uses the map. | None. |
-| #32 | PASS | Workflow and Docker runtime parity; `docs/program/WORKFLOW_RUNTIME_POLICY.md`. | Local workstation should use Node `20.19.0` for release validation. |
+| #31 | PASS | `artifacts/controls/required-check-map.json`; branch policy and checklists use local validation instead of GitHub status contexts. | None. |
+| #32 | PASS | Local validation and Docker runtime parity; `docs/program/WORKFLOW_RUNTIME_POLICY.md`; `Dockerfile.local-validation`. | Host workstation is Node `22`, but release-grade Docker validation runs Node `20.19.0`. |
 | #33 | PASS | Export scripts and versioned artifacts exist; `dev`, `staging`, and `production` environments export live; `develop`, `staging`, and `main` branch protection export live. | None for repo-verifiable control evidence. |
 | #34 | PASS | Scripts/docs/artifacts explicitly state metadata-only staging reset behavior. | Full state restore remains future work and must not be claimed. |
-| #35 | PASS AS AUDIT, NO-GO AS GATE | `docs/audits/BATCH_11_AUDIT.md`. | Batch 2 remains blocked by GitHub Actions billing lock. |
+| #35 | PASS AS AUDIT, GO AS LOCAL GATE | `docs/audits/BATCH_11_AUDIT.md`. | None for local execution. |
 
-## Required Fixes Before Batch 2
+## Required Controls Before Batch 2
 
-1. Resolve the GitHub Actions account billing lock and re-run hosted checks.
-2. Re-run hosted workflow checks after billing is resolved.
-3. Keep #36-#80 unstarted until #35 moves from no-go to go.
+1. Run `node scripts/controls/run-local-validation.mjs --operator <name> --include-docker`.
+2. Attach or commit updated local validation evidence.
+3. Keep each later batch gated by local validation and a batch audit artifact.
 
 ## Decision
 
-NO-GO for Issues #36-#80. Starting module-era implementation before hosted CI can execute would violate the Batch 1 invariants.
+GO for Issue #36 as the next local implementation step. Issues #37-#80 remain not implemented until their dependencies are satisfied in order.

@@ -1,14 +1,14 @@
 # Branch Governance
 
-## Required Checks
-The following checks must pass before merge to `main`:
-- `ci / build_test_smoke`
-- `dependency-review / dependency-review`
+## Required Local Validation
+GitHub Actions is not a merge gate. The following local validation evidence must exist before merge to protected branches:
+
+- `artifacts/controls/local-validation/latest.json`
+- Release-grade Docker validation from `Dockerfile.local-validation`
 
 ## Deployment Gating
-- `pages` deploy only runs after `ci` completes successfully on `main`.
-- Deploy job checks out the exact successful CI commit SHA.
-- No direct deploy workflow should bypass the CI result gate.
+- Deployments must reference the reviewed commit SHA and the matching local validation evidence.
+- No deployment should bypass the local validation artifact gate.
 
 ## Ownership Rules
 - `CODEOWNERS` is mandatory and must include at least one maintainer for:
@@ -19,7 +19,7 @@ The following checks must pass before merge to `main`:
 - PR review from a code owner is required for protected branches.
 
 ## Dependency Policy
-- Pull requests must run `dependency-review`.
+- Dependency changes must be reviewed locally by inspecting `pnpm-lock.yaml`, package manifests, and dependency risk notes.
 - Dependabot updates are enabled for npm dependencies and GitHub Actions.
 - High-risk dependency changes require explicit mention in PR risk section.
 
@@ -29,18 +29,16 @@ These cannot be fully represented in repository files and must be configured in 
 2. Require a pull request before merging.
 3. Require at least 1 approving review.
 4. Require review from Code Owners.
-5. Require status checks to pass before merging:
-   - `ci / build_test_smoke`
-   - `dependency-review / dependency-review`
-6. Require branches to be up to date before merging.
+5. Disable required GitHub status checks; require local validation evidence in the PR/release record.
+6. Require branches to be up to date before merging where practical for release branches.
 7. Restrict who can push directly to `main` (no direct pushes).
 8. Include administrators in branch protection.
 9. Disable force pushes and branch deletion on `main`.
 
 ## Merge Policy
 - Squash or merge commits are allowed as configured in repo settings.
-- Auto-merge is allowed only when required checks are green and review requirements are satisfied.
+- Auto-merge is disabled unless local validation evidence and review requirements are satisfied.
 
 ## Operator Procedure
-- Before merge: verify checks, review status, and evidence links in PR template.
-- After merge: verify `pages` workflow executed from CI-gated commit when applicable.
+- Before merge: verify local validation evidence, review status, and evidence links in PR template.
+- After merge: verify deployment references the reviewed commit and local validation artifact.

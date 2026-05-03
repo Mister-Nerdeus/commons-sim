@@ -1,6 +1,8 @@
 # Batch 11 Artifact Index
 
 - `artifacts/controls/required-check-map.json`
+- `artifacts/controls/local-required-check-map.json`
+- `artifacts/controls/local-validation/latest.json`
 - `artifacts/controls/branch-protection/develop.json`
 - `artifacts/controls/branch-protection/staging.json`
 - `artifacts/controls/branch-protection/main.json`

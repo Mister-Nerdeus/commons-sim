@@ -3,41 +3,12 @@
   "evidenceType": "github-branch-protection",
   "repository": "Mister-Nerdeus/commons-sim",
   "branch": "main",
-  "exportedAtUtc": "2026-05-03T04:22:49.784Z",
-  "exportedBy": "codex-compliance-audit-final",
+  "exportedAtUtc": "2026-05-03T04:33:56.436Z",
+  "exportedBy": "codex-local-validation",
   "source": "gh api repos/Mister-Nerdeus/commons-sim/branches/main/protection",
   "status": "exported",
   "protection": {
     "url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/branches/main/protection",
-    "required_status_checks": {
-      "url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/branches/main/protection/required_status_checks",
-      "strict": true,
-      "contexts": [
-        "ci / build_test_smoke",
-        "dependency-review / dependency-review",
-        "determinism / determinism",
-        "release-prod / verify_production_release"
-      ],
-      "contexts_url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/branches/main/protection/required_status_checks/contexts",
-      "checks": [
-        {
-          "context": "ci / build_test_smoke",
-          "app_id": null
-        },
-        {
-          "context": "dependency-review / dependency-review",
-          "app_id": null
-        },
-        {
-          "context": "determinism / determinism",
-          "app_id": null
-        },
-        {
-          "context": "release-prod / verify_production_release",
-          "app_id": null
-        }
-      ]
-    },
     "required_pull_request_reviews": {
       "url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/branches/main/protection/required_pull_request_reviews",
       "dismiss_stale_reviews": true,

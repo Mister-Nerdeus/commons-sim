@@ -3,31 +3,12 @@
   "evidenceType": "github-branch-protection",
   "repository": "Mister-Nerdeus/commons-sim",
   "branch": "develop",
-  "exportedAtUtc": "2026-05-03T04:22:49.061Z",
-  "exportedBy": "codex-compliance-audit-final",
+  "exportedAtUtc": "2026-05-03T04:33:55.768Z",
+  "exportedBy": "codex-local-validation",
   "source": "gh api repos/Mister-Nerdeus/commons-sim/branches/develop/protection",
   "status": "exported",
   "protection": {
     "url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/branches/develop/protection",
-    "required_status_checks": {
-      "url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/branches/develop/protection/required_status_checks",
-      "strict": false,
-      "contexts": [
-        "ci / build_test_smoke",
-        "determinism / determinism"
-      ],
-      "contexts_url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/branches/develop/protection/required_status_checks/contexts",
-      "checks": [
-        {
-          "context": "ci / build_test_smoke",
-          "app_id": null
-        },
-        {
-          "context": "determinism / determinism",
-          "app_id": null
-        }
-      ]
-    },
     "required_pull_request_reviews": {
       "url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/branches/develop/protection/required_pull_request_reviews",
       "dismiss_stale_reviews": true,

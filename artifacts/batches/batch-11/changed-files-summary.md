@@ -21,14 +21,18 @@
 - `.github/workflows/verify-env-parity.yml`
 - `Dockerfile`
 - `Dockerfile.api`
+- `Dockerfile.local-validation`
+- `.dockerignore`
 - `docs/setup/LOCAL_SETUP.md`
 - `docs/program/WORKFLOW_RUNTIME_POLICY.md`
+- `docs/program/LOCAL_VALIDATION_POLICY.md`
 
 ## Issue #33
 
 - `scripts/controls/export-branch-protection.mjs`
 - `scripts/controls/export-environments.mjs`
 - `scripts/controls/apply-branch-protection.mjs`
+- `scripts/controls/run-local-validation.mjs`
 - `docs/program/LIVE_CONTROL_EVIDENCE.md`
 - `artifacts/controls/branch-protection/*.json`
 - `artifacts/controls/environments/*.json`

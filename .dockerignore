@@ -7,3 +7,10 @@ dist
 artifacts
 coverage
 *.log
+!.github/
+!.github/workflows/
+!.github/workflows/**
+!artifacts/
+!artifacts/data/
+!artifacts/data/staging-baseline/
+!artifacts/data/staging-baseline/**
