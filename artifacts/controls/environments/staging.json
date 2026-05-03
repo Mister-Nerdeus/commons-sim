@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "evidenceType": "github-environment",
+  "repository": "Mister-Nerdeus/commons-sim",
+  "environment": "staging",
+  "exportedAtUtc": "2026-05-03T04:20:46.003Z",
+  "exportedBy": "codex-compliance-audit",
+  "source": "gh api repos/Mister-Nerdeus/commons-sim/environments/staging",
+  "status": "exported",
+  "environmentSettings": {
+    "id": 14857146299,
+    "node_id": "EN_kwDORKaGh88AAAADdY4Puw",
+    "name": "staging",
+    "url": "https://api.github.com/repos/Mister-Nerdeus/commons-sim/environments/staging",
+    "html_url": "https://github.com/Mister-Nerdeus/commons-sim/deployments/activity_log?environments_filter=staging",
+    "created_at": "2026-05-03T04:17:39Z",
+    "updated_at": "2026-05-03T04:17:39Z",
+    "can_admins_bypass": true,
+    "protection_rules": [],
+    "deployment_branch_policy": null
+  },
+  "error": null
+}

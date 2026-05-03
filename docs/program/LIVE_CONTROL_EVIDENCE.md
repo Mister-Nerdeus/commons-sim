@@ -6,6 +6,16 @@ Policy files describe intended controls. Live control evidence records what GitH
 
 ## Export Commands
 
+Apply branch protection from the canonical required-check map:
+
+```powershell
+node scripts/controls/apply-branch-protection.mjs --repo Mister-Nerdeus/commons-sim --dry-run
+node scripts/controls/apply-branch-protection.mjs --repo Mister-Nerdeus/commons-sim --enforce-admins
+node scripts/controls/apply-branch-protection.mjs --repo Mister-Nerdeus/commons-sim --branches staging,main --enforce-admins
+```
+
+Run the dry run first and compare the emitted contexts to `artifacts/controls/required-check-map.json`. Use `--enforce-admins` for the policy-compliant live setting; applying that option to `develop` blocks direct admin pushes and should be done after evidence updates are committed.
+
 Branch protection:
 
 ```powershell

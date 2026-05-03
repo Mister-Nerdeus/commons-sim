@@ -35,3 +35,30 @@ After pushing commit `ec7e873142d4ac4c95d78ee6bc3e7b3b48120b9a`, GitHub created 
 The check annotation for `ci / build_test_smoke` reported: `The job was not started because your account is locked due to a billing issue.`
 
 This is an account-level Actions execution blocker. It does not contradict the local or Docker validation results above.
+
+## Compliance Audit Follow-Up
+
+Additional commands:
+
+```powershell
+node --check scripts/controls/apply-branch-protection.mjs
+node scripts/controls/apply-branch-protection.mjs --repo Mister-Nerdeus/commons-sim --branches staging,main --dry-run --enforce-admins
+node scripts/controls/apply-branch-protection.mjs --repo Mister-Nerdeus/commons-sim --branches staging,main --enforce-admins
+node scripts/controls/export-branch-protection.mjs --repo Mister-Nerdeus/commons-sim --branches develop,staging,main --operator codex-compliance-audit
+node scripts/controls/export-environments.mjs --repo Mister-Nerdeus/commons-sim --operator codex-compliance-audit
+pnpm env:parity:check
+pnpm test
+git diff --check
+```
+
+Results:
+
+- Branch-protection apply script syntax check: pass.
+- Branch-protection dry run: pass.
+- `staging` branch protection apply: pass.
+- `main` branch protection apply: pass.
+- Branch-protection export: `staging` and `main` exported; `develop` remains unavailable until final evidence commit lands.
+- Environment export: `dev`, `production`, and `staging` exported.
+- Environment parity check: pass; local Node warning remains because the workstation runs Node `v22.16.0`.
+- `pnpm test`: pass; local Node warning remains, and the server Postgres integration test remains skipped because `COMMONS_SIM_TEST_DATABASE_URL` is not set.
+- `git diff --check`: pass; line-ending warnings only.

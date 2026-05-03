@@ -13,3 +13,4 @@
 - `artifacts/batches/batch-11/validation-log.md`
 - `artifacts/batches/batch-11/changed-files-summary.md`
 - `artifacts/batches/batch-11/risk-register.md`
+- `artifacts/batches/batch-11/module-era-compliance-matrix.md`
