@@ -9,19 +9,25 @@ import {
   ChallengeResultSchema,
   migrateProjectManifest,
   scorePrototypeChallenge,
+  validateGraphLinks,
   validateChallengeSubmission,
   type ChallengeBenchmark,
   type ChallengeReadinessGate,
   type ChallengeResult,
   type ChallengeSubmission,
+  type GenericModuleTemplate,
   type ModuleRegistry,
   type ProjectManifest,
+  type ResourceCompatibilityRuleSet,
 } from "@commons-sim/shared";
 import {
   loadChallengeBenchmark,
   loadChallengeSubmission,
+  loadGenericModuleTemplate,
+  loadGraphForLinkValidation,
   loadModuleRegistry,
   loadProjectManifest,
+  loadResourceCompatibilityRuleSet,
   loadScenario,
   saveProjectManifest,
   stableStringify,
@@ -44,6 +50,7 @@ type CliErrorCode =
   | "SCENARIO_VALIDATION_ERROR"
   | "CHALLENGE_BENCHMARK_ERROR"
   | "CHALLENGE_SUBMISSION_ERROR"
+  | "GRAPH_LINK_VALIDATION_INPUT_ERROR"
   | "MODULE_REGISTRY_VALIDATION_ERROR"
   | "RUNTIME_ERROR";
 
@@ -71,6 +78,7 @@ Commands:
   project-save <scenario.json> <manifest.json>
   project-load <manifest.json>
   registry-validate <registry.json>
+  graph-link-validate <graph.json> <compatibility-rules.json> <template.json...>
 `);
   process.exit(EXIT_USAGE);
 }
@@ -296,6 +304,20 @@ try {
     process.exit(EXIT_OK);
   }
 
+  if (cmd === "graph-link-validate") {
+    const graphFile = args[0];
+    const ruleSetFile = args[1];
+    const templateFiles = args.slice(2);
+    if (!graphFile || !ruleSetFile || templateFiles.length === 0) usage();
+
+    const graph = loadGraphForLinkValidationStrict(graphFile);
+    const rules = loadResourceCompatibilityRuleSetStrict(ruleSetFile);
+    const templates = templateFiles.map(loadGenericModuleTemplateStrict);
+    const result = validateGraphLinks(graph, templates, rules);
+    console.log(stableStringify(result));
+    process.exit(result.ok ? EXIT_OK : EXIT_VALIDATION);
+  }
+
   throw new CliError("USAGE_ERROR", `Unknown command: ${cmd}`, EXIT_USAGE);
 } catch (error) {
   writeError(error);
@@ -325,6 +347,45 @@ function loadModuleRegistryStrict(filePath: string): ModuleRegistry {
     throw new CliError(
       "MODULE_REGISTRY_VALIDATION_ERROR",
       `Module registry validation failed: ${filePath}: ${message}`,
+      EXIT_VALIDATION,
+    );
+  }
+}
+
+function loadGraphForLinkValidationStrict(filePath: string) {
+  try {
+    return loadGraphForLinkValidation(filePath);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new CliError(
+      "GRAPH_LINK_VALIDATION_INPUT_ERROR",
+      `Graph link validation graph load failed: ${filePath}: ${message}`,
+      EXIT_VALIDATION,
+    );
+  }
+}
+
+function loadResourceCompatibilityRuleSetStrict(filePath: string): ResourceCompatibilityRuleSet {
+  try {
+    return loadResourceCompatibilityRuleSet(filePath);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new CliError(
+      "GRAPH_LINK_VALIDATION_INPUT_ERROR",
+      `Graph link validation rule set load failed: ${filePath}: ${message}`,
+      EXIT_VALIDATION,
+    );
+  }
+}
+
+function loadGenericModuleTemplateStrict(filePath: string): GenericModuleTemplate {
+  try {
+    return loadGenericModuleTemplate(filePath);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new CliError(
+      "GRAPH_LINK_VALIDATION_INPUT_ERROR",
+      `Graph link validation template load failed: ${filePath}: ${message}`,
       EXIT_VALIDATION,
     );
   }

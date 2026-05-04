@@ -3,14 +3,24 @@ import path from "node:path";
 import {
   ChallengeBenchmarkSchema,
   ChallengeSubmissionSchema,
+  GenericModuleTemplateSchema,
   ModuleRegistrySchema,
+  ProblemGraphSchema,
   ProjectManifestSchema,
+  ResourceCompatibilityRuleSetSchema,
   ScenarioSchema,
+  SolutionGraphSchema,
+  WorldGraphSchema,
   type ChallengeBenchmark,
   type ChallengeSubmission,
+  type GenericModuleTemplate,
   type ModuleRegistry,
+  type ProblemGraph,
   type ProjectManifest,
+  type ResourceCompatibilityRuleSet,
   type Scenario,
+  type SolutionGraph,
+  type WorldGraph,
 } from "@commons-sim/shared";
 
 export function loadScenario(filePath: string): Scenario {
@@ -27,6 +37,23 @@ export function loadChallengeSubmission(filePath: string): ChallengeSubmission {
 
 export function loadModuleRegistry(filePath: string): ModuleRegistry {
   return ModuleRegistrySchema.parse(loadJson(filePath));
+}
+
+export function loadGenericModuleTemplate(filePath: string): GenericModuleTemplate {
+  return GenericModuleTemplateSchema.parse(loadJson(filePath));
+}
+
+export function loadResourceCompatibilityRuleSet(filePath: string): ResourceCompatibilityRuleSet {
+  return ResourceCompatibilityRuleSetSchema.parse(loadJson(filePath));
+}
+
+export function loadGraphForLinkValidation(filePath: string): ProblemGraph | SolutionGraph | WorldGraph {
+  const graph = loadJson(filePath);
+  const solution = SolutionGraphSchema.safeParse(graph);
+  if (solution.success) return solution.data;
+  const problem = ProblemGraphSchema.safeParse(graph);
+  if (problem.success) return problem.data;
+  return WorldGraphSchema.parse(graph);
 }
 
 export function stableStringify(obj: unknown): string {

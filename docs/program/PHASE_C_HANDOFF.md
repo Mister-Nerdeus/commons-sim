@@ -53,6 +53,7 @@ Phase C must not claim any of the following until implemented and audited:
 - Resource interface and compatibility rule contracts exist in `packages/shared/src/resourceInterface.ts`.
 - Module dependency graph contract exists in `packages/shared/src/moduleDependencyGraph.ts`.
 - Static graph link validation exists in `packages/shared/src/graphLinkValidation.ts`.
+- CLI graph link validation exists via `node packages/cli/dist/main.js graph-link-validate`.
 - Batch 15 audit evidence exists in `docs/audits/BATCH_15_RESOURCE_COMPATIBILITY_AUDIT.md`.
 
 ## Batch 15 Corrections Carried Forward

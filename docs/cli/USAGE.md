@@ -45,6 +45,18 @@ node packages/cli/dist/main.js project-load <manifest.json>
 ```
 Saves and loads v1 project manifests with schema validation.
 
+### Registry Validate
+```bash
+node packages/cli/dist/main.js registry-validate <registry.json>
+```
+Validates a module registry and emits a machine-readable result envelope.
+
+### Graph Link Validate
+```bash
+node packages/cli/dist/main.js graph-link-validate <graph.json> <compatibility-rules.json> <template.json...>
+```
+Runs static graph link validation against supplied generic templates and compatibility rules. The command emits the shared `GraphLinkValidationResult` shape and exits nonzero only for error-level issues. Adapter-required links are warning-level results.
+
 ## Exit Codes
 - `0`: success
 - `2`: usage error (unknown command, invalid flags)
@@ -56,6 +68,7 @@ Saves and loads v1 project manifests with schema validation.
 2. `node packages/cli/dist/main.js run examples/scenarios/basic.json`
 3. `node packages/cli/dist/main.js compare examples/scenarios/basic.json examples/scenarios/high-service.json`
 4. `node packages/cli/dist/main.js challenge-score examples/challenges/benchmarks/balanced-48.benchmark.json examples/challenges/submissions/balanced-48-baseline.submission.json`
+5. `node packages/cli/dist/main.js graph-link-validate examples/graphs/link-validation.valid.json examples/interfaces/compatibility-rules.valid.json examples/modules/generic/community-meals.template.json examples/modules/generic/laundry.template.json`
 
 ## Smoke Test List
 - Validate baseline fixture.
@@ -65,4 +78,5 @@ Saves and loads v1 project manifests with schema validation.
 - Save and load manifest round-trip for baseline fixture.
 - Score baseline challenge submission against the balanced-48 benchmark.
 - Batch score challenge submissions in a directory.
+- Validate graph links statically.
 - Run with invalid path and verify non-zero exit + machine-readable error.

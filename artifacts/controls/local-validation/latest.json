@@ -1,109 +1,109 @@
 {
   "schemaVersion": 1,
   "evidenceType": "local-validation",
-  "generatedAtUtc": "2026-05-04T00:48:54.372Z",
-  "generatedBy": "codex-batch-15",
+  "generatedAtUtc": "2026-05-04T02:00:17.011Z",
+  "generatedBy": "codex-batch-16-issue-50",
   "includeDocker": true,
-  "gitSha": "467a019157bc78a651daf4725c7d55ceb96e8a16",
+  "gitSha": "080b73e9829dc6b5d1878864a204bb2fa948dd2a",
   "commands": [
     {
       "command": "node --version",
       "exitCode": 0,
-      "durationMs": 50,
-      "startedAtUtc": "2026-05-04T00:48:54.445Z",
-      "finishedAtUtc": "2026-05-04T00:48:54.495Z",
+      "durationMs": 49,
+      "startedAtUtc": "2026-05-04T02:00:17.092Z",
+      "finishedAtUtc": "2026-05-04T02:00:17.141Z",
       "stdoutTail": "v22.16.0",
       "stderrTail": ""
     },
     {
       "command": "pnpm --version",
       "exitCode": 0,
-      "durationMs": 151,
-      "startedAtUtc": "2026-05-04T00:48:54.495Z",
-      "finishedAtUtc": "2026-05-04T00:48:54.647Z",
+      "durationMs": 260,
+      "startedAtUtc": "2026-05-04T02:00:17.142Z",
+      "finishedAtUtc": "2026-05-04T02:00:17.402Z",
       "stdoutTail": "9.0.0",
       "stderrTail": ""
     },
     {
       "command": "pnpm install --frozen-lockfile",
       "exitCode": 0,
-      "durationMs": 728,
-      "startedAtUtc": "2026-05-04T00:48:54.647Z",
-      "finishedAtUtc": "2026-05-04T00:48:55.375Z",
-      "stdoutTail": "WARN  Unsupported engine: wanted: {\"node\":\"20.x\"} (current: {\"node\":\"v22.16.0\",\"pnpm\":\"9.0.0\"})\nScope: all 6 workspace projects\nLockfile is up to date, resolution step is skipped\nAlready up to date\n\ndevDependencies:\n+ @types/node 20.19.39\n+ c8 10.1.3\n+ prettier 3.8.3\n+ typescript 5.9.3\n\nDone in 612ms",
+      "durationMs": 982,
+      "startedAtUtc": "2026-05-04T02:00:17.402Z",
+      "finishedAtUtc": "2026-05-04T02:00:18.384Z",
+      "stdoutTail": "WARN  Unsupported engine: wanted: {\"node\":\"20.x\"} (current: {\"node\":\"v22.16.0\",\"pnpm\":\"9.0.0\"})\nScope: all 6 workspace projects\nLockfile is up to date, resolution step is skipped\nAlready up to date\n\ndevDependencies:\n+ @types/node 20.19.39\n+ c8 10.1.3\n+ prettier 3.8.3\n+ typescript 5.9.3\n\nDone in 778ms",
       "stderrTail": ""
     },
     {
       "command": "pnpm build",
       "exitCode": 0,
-      "durationMs": 7719,
-      "startedAtUtc": "2026-05-04T00:48:55.375Z",
-      "finishedAtUtc": "2026-05-04T00:49:03.093Z",
-      "stdoutTail": "WARN  Unsupported engine: wanted: {\"node\":\"20.x\"} (current: {\"node\":\"v22.16.0\",\"pnpm\":\"9.0.0\"})\n\n> commons-sim@ build C:\\Users\\Mister Nerdeus\\Documents\\GitHub\\commons-sim\n> pnpm -r build\n\n.                                        |  WARN  Unsupported engine: wanted: {\"node\":\"20.x\"} (current: {\"node\":\"v22.16.0\",\"pnpm\":\"9.0.0\"})\nScope: 5 of 6 workspace projects\npackages/shared build$ tsc -p tsconfig.json\npackages/shared build: Done\npackages/engine build$ tsc -p tsconfig.json\npackages/engine build: Done\napps/web build$ tsc -p tsconfig.json && vite build\npackages/cli build$ tsc -p tsconfig.json\npackages/server build$ tsc -p tsconfig.json\npackages/cli build: Done\npackages/server build: Done\napps/web build: \u001b[36mvite v5.4.21 \u001b[32mbuilding for production...\u001b[36m\u001b[39m\napps/web build: transforming...\napps/web build: \u001b[32m✓\u001b[39m 120 modules transformed.\napps/web build: rendering chunks...\napps/web build: computing gzip size...\napps/web build: \u001b[2mdist/\u001b[22m\u001b[32mindex.html                 \u001b[39m\u001b[1m\u001b[2m  0.41 kB\u001b[22m\u001b[1m\u001b[22m\u001b[2m │ gzip:  0.26 kB\u001b[22m\napps/web build: \u001b[2mdist/\u001b[22m\u001b[35massets/index-D9Eawnxl.css  \u001b[39m\u001b[1m\u001b[2m  4.98 kB\u001b[22m\u001b[1m\u001b[22m\u001b[2m │ gzip:  1.59 kB\u001b[22m\napps/web build: \u001b[2mdist/\u001b[22m\u001b[36massets/index-CZ3BmgmS.js   \u001b[39m\u001b[1m\u001b[2m241.00 kB\u001b[22m\u001b[1m\u001b[22m\u001b[2m │ gzip: 70.63 kB\u001b[22m\napps/web build: \u001b[32m✓ built in 981ms\u001b[39m\napps/web build: Done",
+      "durationMs": 8635,
+      "startedAtUtc": "2026-05-04T02:00:18.384Z",
+      "finishedAtUtc": "2026-05-04T02:00:27.019Z",
+      "stdoutTail": "WARN  Unsupported engine: wanted: {\"node\":\"20.x\"} (current: {\"node\":\"v22.16.0\",\"pnpm\":\"9.0.0\"})\n\n> commons-sim@ build C:\\Users\\Mister Nerdeus\\Documents\\GitHub\\commons-sim\n> pnpm -r build\n\n.                                        |  WARN  Unsupported engine: wanted: {\"node\":\"20.x\"} (current: {\"node\":\"v22.16.0\",\"pnpm\":\"9.0.0\"})\nScope: 5 of 6 workspace projects\npackages/shared build$ tsc -p tsconfig.json\npackages/shared build: Done\npackages/engine build$ tsc -p tsconfig.json\npackages/engine build: Done\npackages/server build$ tsc -p tsconfig.json\npackages/cli build$ tsc -p tsconfig.json\napps/web build$ tsc -p tsconfig.json && vite build\npackages/cli build: Done\npackages/server build: Done\napps/web build: \u001b[36mvite v5.4.21 \u001b[32mbuilding for production...\u001b[36m\u001b[39m\napps/web build: transforming...\napps/web build: \u001b[32m✓\u001b[39m 120 modules transformed.\napps/web build: rendering chunks...\napps/web build: computing gzip size...\napps/web build: \u001b[2mdist/\u001b[22m\u001b[32mindex.html                 \u001b[39m\u001b[1m\u001b[2m  0.41 kB\u001b[22m\u001b[1m\u001b[22m\u001b[2m │ gzip:  0.26 kB\u001b[22m\napps/web build: \u001b[2mdist/\u001b[22m\u001b[35massets/index-D9Eawnxl.css  \u001b[39m\u001b[1m\u001b[2m  4.98 kB\u001b[22m\u001b[1m\u001b[22m\u001b[2m │ gzip:  1.59 kB\u001b[22m\napps/web build: \u001b[2mdist/\u001b[22m\u001b[36massets/index-CZ3BmgmS.js   \u001b[39m\u001b[1m\u001b[2m241.00 kB\u001b[22m\u001b[1m\u001b[22m\u001b[2m │ gzip: 70.63 kB\u001b[22m\napps/web build: \u001b[32m✓ built in 1.09s\u001b[39m\napps/web build: Done",
       "stderrTail": ""
     },
     {
       "command": "pnpm test",
       "exitCode": 0,
-      "durationMs": 5115,
-      "startedAtUtc": "2026-05-04T00:49:03.094Z",
-      "finishedAtUtc": "2026-05-04T00:49:08.209Z",
-      "stdoutTail": "packages/cli test:   ---\npackages/cli test:   duration_ms: 244.9285\npackages/cli test:   type: 'test'\npackages/cli test:   ...\npackages/cli test: # Subtest: registry-validate returns machine-readable success JSON\npackages/cli test: ok 10 - registry-validate returns machine-readable success JSON\npackages/cli test:   ---\npackages/cli test:   duration_ms: 254.6686\npackages/cli test:   type: 'test'\npackages/cli test:   ...\npackages/cli test: # Subtest: registry-validate returns machine-readable failure JSON\npackages/cli test: ok 11 - registry-validate returns machine-readable failure JSON\npackages/cli test:   ---\npackages/cli test:   duration_ms: 251.4842\npackages/cli test:   type: 'test'\npackages/cli test:   ...\npackages/cli test: # Subtest: stableStringify sorts keys\npackages/cli test: ok 12 - stableStringify sorts keys\npackages/cli test:   ---\npackages/cli test:   duration_ms: 1.2108\npackages/cli test:   type: 'test'\npackages/cli test:   ...\npackages/cli test: 1..12\npackages/cli test: # tests 12\npackages/cli test: # suites 0\npackages/cli test: # pass 12\npackages/cli test: # fail 0\npackages/cli test: # cancelled 0\npackages/cli test: # skipped 0\npackages/cli test: # todo 0\npackages/cli test: # duration_ms 1908.898\npackages/cli test: =============================== Coverage summary ===============================\npackages/cli test: Statements   : 83.53% ( 482/577 )\npackages/cli test: Branches     : 63.85% ( 53/83 )\npackages/cli test: Functions    : 73.33% ( 22/30 )\npackages/cli test: Lines        : 83.53% ( 482/577 )\npackages/cli test: ================================================================================\npackages/cli test: Done\napps/web test: Done",
+      "durationMs": 5345,
+      "startedAtUtc": "2026-05-04T02:00:27.019Z",
+      "finishedAtUtc": "2026-05-04T02:00:32.365Z",
+      "stdoutTail": "packages/cli test:   ---\npackages/cli test:   duration_ms: 228.7892\npackages/cli test:   type: 'test'\npackages/cli test:   ...\npackages/cli test: # Subtest: registry-validate returns machine-readable success JSON\npackages/cli test: ok 14 - registry-validate returns machine-readable success JSON\npackages/cli test:   ---\npackages/cli test:   duration_ms: 287.4416\npackages/cli test:   type: 'test'\npackages/cli test:   ...\npackages/cli test: # Subtest: registry-validate returns machine-readable failure JSON\npackages/cli test: ok 15 - registry-validate returns machine-readable failure JSON\npackages/cli test:   ---\npackages/cli test:   duration_ms: 289.3914\npackages/cli test:   type: 'test'\npackages/cli test:   ...\npackages/cli test: # Subtest: stableStringify sorts keys\npackages/cli test: ok 16 - stableStringify sorts keys\npackages/cli test:   ---\npackages/cli test:   duration_ms: 3.0955\npackages/cli test:   type: 'test'\npackages/cli test:   ...\npackages/cli test: 1..16\npackages/cli test: # tests 16\npackages/cli test: # suites 0\npackages/cli test: # pass 16\npackages/cli test: # fail 0\npackages/cli test: # cancelled 0\npackages/cli test: # skipped 0\npackages/cli test: # todo 0\npackages/cli test: # duration_ms 2207.0305\npackages/cli test: =============================== Coverage summary ===============================\npackages/cli test: Statements   : 82.85% ( 551/665 )\npackages/cli test: Branches     : 65% ( 65/100 )\npackages/cli test: Functions    : 77.77% ( 28/36 )\npackages/cli test: Lines        : 82.85% ( 551/665 )\npackages/cli test: ================================================================================\npackages/cli test: Done\napps/web test: Done",
       "stderrTail": ""
     },
     {
       "command": "pnpm smoke:cli",
       "exitCode": 0,
-      "durationMs": 5547,
-      "startedAtUtc": "2026-05-04T00:49:08.209Z",
-      "finishedAtUtc": "2026-05-04T00:49:13.756Z",
+      "durationMs": 6198,
+      "startedAtUtc": "2026-05-04T02:00:32.365Z",
+      "finishedAtUtc": "2026-05-04T02:00:38.562Z",
       "stdoutTail": "\"burnoutIndex\": 0.053124995322353916,\n      \"costPerHouseholdUsd\": 229.49757296164424,\n      \"laborHours\": 318.59999730567586,\n      \"monthIndex\": 56,\n      \"reserveUsd\": 34184.46575372142,\n      \"totalOpexUsd\": 11015.883502158924\n    },\n    {\n      \"burnoutIndex\": 0.055451926247723354,\n      \"costPerHouseholdUsd\": 230.2794217525684,\n      \"laborHours\": 319.94030951868865,\n      \"monthIndex\": 57,\n      \"reserveUsd\": 34184.46575372142,\n      \"totalOpexUsd\": 11053.412244123283\n    },\n    {\n      \"burnoutIndex\": 0.05209243979614639,\n      \"costPerHouseholdUsd\": 229.15063430483852,\n      \"laborHours\": 318.0052453225803,\n      \"monthIndex\": 58,\n      \"reserveUsd\": 34184.46575372142,\n      \"totalOpexUsd\": 10999.23044663225\n    },\n    {\n      \"burnoutIndex\": 0.04965050805991172,\n      \"costPerHouseholdUsd\": 228.33014524146367,\n      \"laborHours\": 316.59869264250915,\n      \"monthIndex\": 59,\n      \"reserveUsd\": 34184.46575372142,\n      \"totalOpexUsd\": 10959.846971590256\n    }\n  ],\n  \"summary\": {\n    \"avgBurnoutIndex\": 0.058203977661625876,\n    \"avgCostPerHouseholdUsd\": 231.20411102763958,\n    \"avgLaborHoursPerMonth\": 321.52549113309647,\n    \"reserveEndUsd\": 34184.46575372142\n  }\n}",
       "stderrTail": "hash=8c9372a7e9a23f95a20ae0fa5bd4d5dab6e0856e2e08c61af3c50428f920c08e"
     },
     {
       "command": "pnpm determinism:check",
       "exitCode": 0,
-      "durationMs": 5404,
-      "startedAtUtc": "2026-05-04T00:49:13.756Z",
-      "finishedAtUtc": "2026-05-04T00:49:19.160Z",
+      "durationMs": 5811,
+      "startedAtUtc": "2026-05-04T02:00:38.562Z",
+      "finishedAtUtc": "2026-05-04T02:00:44.373Z",
       "stdoutTail": "WARN  Unsupported engine: wanted: {\"node\":\"20.x\"} (current: {\"node\":\"v22.16.0\",\"pnpm\":\"9.0.0\"})\n\n> commons-sim@ determinism:check C:\\Users\\Mister Nerdeus\\Documents\\GitHub\\commons-sim\n> pnpm --filter @commons-sim/cli... build && node packages/cli/dist/determinismCheck.js\n\n.                                        |  WARN  Unsupported engine: wanted: {\"node\":\"20.x\"} (current: {\"node\":\"v22.16.0\",\"pnpm\":\"9.0.0\"})\nScope: 3 of 6 workspace projects\npackages/shared build$ tsc -p tsconfig.json\npackages/shared build: Done\npackages/engine build$ tsc -p tsconfig.json\npackages/engine build: Done\npackages/cli build$ tsc -p tsconfig.json\npackages/cli build: Done\nDeterminism OK [baseline-48] hash=8c9372a7e9a23f95a20ae0fa5bd4d5dab6e0856e2e08c61af3c50428f920c08e",
       "stderrTail": ""
     },
     {
       "command": "pnpm env:parity:check",
       "exitCode": 0,
-      "durationMs": 532,
-      "startedAtUtc": "2026-05-04T00:49:19.160Z",
-      "finishedAtUtc": "2026-05-04T00:49:19.692Z",
+      "durationMs": 554,
+      "startedAtUtc": "2026-05-04T02:00:44.373Z",
+      "finishedAtUtc": "2026-05-04T02:00:44.927Z",
       "stdoutTail": "WARN  Unsupported engine: wanted: {\"node\":\"20.x\"} (current: {\"node\":\"v22.16.0\",\"pnpm\":\"9.0.0\"})\n\n> commons-sim@ env:parity:check C:\\Users\\Mister Nerdeus\\Documents\\GitHub\\commons-sim\n> node scripts/parity/verify-env-parity.mjs && node scripts/parity/verify-seed-contract.mjs\n\n{\n  \"ok\": true,\n  \"checks\": [\n    {\n      \"path\": \".github/workflows/deploy-dev.yml\",\n      \"branch\": \"develop\",\n      \"environment\": \"dev\",\n      \"ok\": true,\n      \"hasBranch\": true,\n      \"hasEnvironment\": true\n    },\n    {\n      \"path\": \".github/workflows/deploy-staging.yml\",\n      \"branch\": \"staging\",\n      \"environment\": \"staging\",\n      \"ok\": true,\n      \"hasBranch\": true,\n      \"hasEnvironment\": true\n    },\n    {\n      \"path\": \".github/workflows/deploy-prod.yml\",\n      \"branch\": \"main\",\n      \"environment\": \"production\",\n      \"ok\": true,\n      \"hasBranch\": true,\n      \"hasEnvironment\": true\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"baselinePath\": \"C:\\\\Users\\\\Mister Nerdeus\\\\Documents\\\\GitHub\\\\commons-sim\\\\artifacts\\\\data\\\\staging-baseline\\\\baseline-record.json\",\n  \"sourceSha\": \"ed51496b3a37d9a8094d6ad2a7c4f13d3bb21488\"\n}",
       "stderrTail": ""
     },
     {
       "command": "docker build -f Dockerfile.local-validation -t commons-sim:local-validation .",
       "exitCode": 0,
-      "durationMs": 38982,
-      "startedAtUtc": "2026-05-04T00:49:19.692Z",
-      "finishedAtUtc": "2026-05-04T00:49:58.673Z",
+      "durationMs": 75534,
+      "startedAtUtc": "2026-05-04T02:00:44.927Z",
+      "finishedAtUtc": "2026-05-04T02:02:00.462Z",
       "stdoutTail": "",
-      "stderrTail": "#17 33.16     {\n#17 33.16       \"path\": \".github/workflows/deploy-staging.yml\",\n#17 33.16       \"branch\": \"staging\",\n#17 33.16       \"environment\": \"staging\",\n#17 33.16       \"ok\": true,\n#17 33.16       \"hasBranch\": true,\n#17 33.16       \"hasEnvironment\": true\n#17 33.16     },\n#17 33.16     {\n#17 33.16       \"path\": \".github/workflows/deploy-prod.yml\",\n#17 33.16       \"branch\": \"main\",\n#17 33.16       \"environment\": \"production\",\n#17 33.16       \"ok\": true,\n#17 33.16       \"hasBranch\": true,\n#17 33.16       \"hasEnvironment\": true\n#17 33.16     }\n#17 33.16   ]\n#17 33.16 }\n#17 33.20 {\n#17 33.20   \"ok\": true,\n#17 33.20   \"baselinePath\": \"/app/artifacts/data/staging-baseline/baseline-record.json\",\n#17 33.20   \"sourceSha\": \"ed51496b3a37d9a8094d6ad2a7c4f13d3bb21488\"\n#17 33.20 }\n#17 DONE 33.3s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 0.6s done\n#18 exporting manifest sha256:98842a94c116e2b680c124ccbbb9a6edf9aaecca1bc386a4b6a2ae03f6869a67 0.0s done\n#18 exporting config sha256:0312d0f9e5f939a89a813349b3e4b49737ef8e48212edac67249630056a0bebf 0.0s done\n#18 exporting attestation manifest sha256:f2a8d25454018d0ffd47837f8ca3a7fbf809cb5ecf9bb4d6b1cfe7c14c8661ee 0.1s done\n#18 exporting manifest list sha256:fa2854c2ded25aeeabcb5eac624b2fe8098763bbe12bb60ba47db520a5666eb2\n#18 exporting manifest list sha256:fa2854c2ded25aeeabcb5eac624b2fe8098763bbe12bb60ba47db520a5666eb2 0.0s done\n#18 naming to docker.io/library/commons-sim:local-validation done\n#18 unpacking to docker.io/library/commons-sim:local-validation\n#18 unpacking to docker.io/library/commons-sim:local-validation 2.5s done\n#18 DONE 3.3s\n\nView build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/mn3tmy6gr5rx0ys34c5eu8yav"
+      "stderrTail": "#17 34.90     {\n#17 34.90       \"path\": \".github/workflows/deploy-staging.yml\",\n#17 34.90       \"branch\": \"staging\",\n#17 34.90       \"environment\": \"staging\",\n#17 34.90       \"ok\": true,\n#17 34.90       \"hasBranch\": true,\n#17 34.90       \"hasEnvironment\": true\n#17 34.90     },\n#17 34.90     {\n#17 34.90       \"path\": \".github/workflows/deploy-prod.yml\",\n#17 34.90       \"branch\": \"main\",\n#17 34.90       \"environment\": \"production\",\n#17 34.90       \"ok\": true,\n#17 34.90       \"hasBranch\": true,\n#17 34.90       \"hasEnvironment\": true\n#17 34.90     }\n#17 34.90   ]\n#17 34.90 }\n#17 34.94 {\n#17 34.94   \"ok\": true,\n#17 34.94   \"baselinePath\": \"/app/artifacts/data/staging-baseline/baseline-record.json\",\n#17 34.94   \"sourceSha\": \"ed51496b3a37d9a8094d6ad2a7c4f13d3bb21488\"\n#17 34.94 }\n#17 DONE 35.0s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 3.5s done\n#18 exporting manifest sha256:58e8da8c2dfe5ed9f4f06c5c2d21c8de2c90e45261f52565ea7424c668be07c2 0.0s done\n#18 exporting config sha256:95b8f0adf58d696a3388ff61e92eafb88dea7941ce86f906ac7cf7a73a79e401 0.0s done\n#18 exporting attestation manifest sha256:39cb2befb736b60cd0fd2cbe9dfc837eca9c79fdd5989f047196f5e4a685e953 0.1s done\n#18 exporting manifest list sha256:f0acc73d8cb40c8b7e981d3c8bd5cba5c01a8cd1cb1d5a3374db2ddbc986e7ee\n#18 exporting manifest list sha256:f0acc73d8cb40c8b7e981d3c8bd5cba5c01a8cd1cb1d5a3374db2ddbc986e7ee 0.0s done\n#18 naming to docker.io/library/commons-sim:local-validation done\n#18 unpacking to docker.io/library/commons-sim:local-validation\n#18 unpacking to docker.io/library/commons-sim:local-validation 2.0s done\n#18 DONE 5.7s\n\nView build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/h198tzhlldcxc3j4mf8d7mtfw"
     },
     {
       "command": "docker build -f Dockerfile -t commons-sim:web-local-validation .",
       "exitCode": 0,
-      "durationMs": 19141,
-      "startedAtUtc": "2026-05-04T00:49:58.673Z",
-      "finishedAtUtc": "2026-05-04T00:50:17.814Z",
+      "durationMs": 17034,
+      "startedAtUtc": "2026-05-04T02:02:00.462Z",
+      "finishedAtUtc": "2026-05-04T02:02:17.496Z",
       "stdoutTail": "",
-      "stderrTail": "#19 12.00 apps/web build: computing gzip size...\n#19 12.01 apps/web build: dist/index.html                   0.41 kB │ gzip:  0.26 kB\n#19 12.01 apps/web build: dist/assets/index-D9Eawnxl.css    4.98 kB │ gzip:  1.59 kB\n#19 12.01 apps/web build: dist/assets/index-CZ3BmgmS.js   241.00 kB │ gzip: 70.63 kB\n#19 12.01 apps/web build: ✓ built in 1.70s\n#19 12.04 apps/web build: Done\n#19 12.61 \n#19 12.61 > @commons-sim/web@0.1.0 build /app/apps/web\n#19 12.61 > tsc -p tsconfig.json && vite build\n#19 12.61 \n#19 15.47 vite v5.4.21 building for production...\n#19 15.54 transforming...\n#19 16.89 ✓ 120 modules transformed.\n#19 17.06 rendering chunks...\n#19 17.07 computing gzip size...\n#19 17.08 dist/index.html                   0.41 kB │ gzip:  0.26 kB\n#19 17.08 dist/assets/index-D9Eawnxl.css    4.98 kB │ gzip:  1.59 kB\n#19 17.08 dist/assets/index-CZ3BmgmS.js   241.00 kB │ gzip: 70.63 kB\n#19 17.08 ✓ built in 1.58s\n#19 DONE 17.1s\n\n#20 [runtime 2/3] COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf\n#20 CACHED\n\n#21 [runtime 3/3] COPY --from=build /app/apps/web/dist /usr/share/nginx/html/commons-sim\n#21 CACHED\n\n#22 exporting to image\n#22 exporting layers done\n#22 exporting manifest sha256:89eb65ad55cdd70e04e82d2e5ed724109c16984c292fabde7383a2d27dac2e16 done\n#22 exporting config sha256:fae1736504defeb14f45049a41a8a6482878dbd6cf297b4c8a1d423157052fd7 done\n#22 exporting attestation manifest sha256:d383300be39f5369b7444e726edd9abaa822fd6cedc6ce706792e6d45a8e8d2b 0.1s done\n#22 exporting manifest list sha256:d611261c31d0a8d2e6a7ee632b9ec51983627d20dc831ef87d0703a75169e43f\n#22 exporting manifest list sha256:d611261c31d0a8d2e6a7ee632b9ec51983627d20dc831ef87d0703a75169e43f 0.0s done\n#22 naming to docker.io/library/commons-sim:web-local-validation done\n#22 unpacking to docker.io/library/commons-sim:web-local-validation 0.0s done\n#22 DONE 0.2s\n\nView build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/9idmr1567q6ghxjhecbc6ho4y"
+      "stderrTail": "#19 10.39 apps/web build: computing gzip size...\n#19 10.40 apps/web build: dist/index.html                   0.41 kB │ gzip:  0.26 kB\n#19 10.40 apps/web build: dist/assets/index-D9Eawnxl.css    4.98 kB │ gzip:  1.59 kB\n#19 10.40 apps/web build: dist/assets/index-CZ3BmgmS.js   241.00 kB │ gzip: 70.63 kB\n#19 10.40 apps/web build: ✓ built in 1.34s\n#19 10.42 apps/web build: Done\n#19 10.86 \n#19 10.86 > @commons-sim/web@0.1.0 build /app/apps/web\n#19 10.86 > tsc -p tsconfig.json && vite build\n#19 10.86 \n#19 13.11 vite v5.4.21 building for production...\n#19 13.16 transforming...\n#19 14.47 ✓ 120 modules transformed.\n#19 14.63 rendering chunks...\n#19 14.64 computing gzip size...\n#19 14.65 dist/index.html                   0.41 kB │ gzip:  0.26 kB\n#19 14.65 dist/assets/index-D9Eawnxl.css    4.98 kB │ gzip:  1.59 kB\n#19 14.65 dist/assets/index-CZ3BmgmS.js   241.00 kB │ gzip: 70.63 kB\n#19 14.65 ✓ built in 1.52s\n#19 DONE 14.8s\n\n#20 [runtime 2/3] COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf\n#20 CACHED\n\n#21 [runtime 3/3] COPY --from=build /app/apps/web/dist /usr/share/nginx/html/commons-sim\n#21 CACHED\n\n#22 exporting to image\n#22 exporting layers done\n#22 exporting manifest sha256:89eb65ad55cdd70e04e82d2e5ed724109c16984c292fabde7383a2d27dac2e16 done\n#22 exporting config sha256:fae1736504defeb14f45049a41a8a6482878dbd6cf297b4c8a1d423157052fd7 done\n#22 exporting attestation manifest sha256:748da788f2c10c8161c2a33a1f113668158bd9c89b31746ae178fcbad569d159 0.1s done\n#22 exporting manifest list sha256:3327d5391765ac0767aeea65aa04a200723c8cc11271fbe92805c5ece8057f40\n#22 exporting manifest list sha256:3327d5391765ac0767aeea65aa04a200723c8cc11271fbe92805c5ece8057f40 0.0s done\n#22 naming to docker.io/library/commons-sim:web-local-validation done\n#22 unpacking to docker.io/library/commons-sim:web-local-validation 0.0s done\n#22 DONE 0.2s\n\nView build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/i4q3ign2ht44ulxfuaa1sccr0"
     },
     {
       "command": "docker build -f Dockerfile.api -t commons-sim:api-local-validation .",
       "exitCode": 0,
-      "durationMs": 15095,
-      "startedAtUtc": "2026-05-04T00:50:17.814Z",
-      "finishedAtUtc": "2026-05-04T00:50:32.909Z",
+      "durationMs": 13426,
+      "startedAtUtc": "2026-05-04T02:02:17.496Z",
+      "finishedAtUtc": "2026-05-04T02:02:30.922Z",
       "stdoutTail": "",
-      "stderrTail": "#25 [runtime  9/16] COPY --from=build /app/packages/server/dist packages/server/dist\n#25 DONE 0.1s\n\n#26 [runtime 10/16] COPY --from=build /app/packages/server/package.json packages/server/package.json\n#26 DONE 0.1s\n\n#27 [runtime 11/16] COPY --from=build /app/packages/server/migrations packages/server/migrations\n#27 DONE 0.1s\n\n#28 [runtime 12/16] COPY --from=build /app/packages/server/scripts packages/server/scripts\n#28 DONE 0.1s\n\n#29 [runtime 13/16] COPY --from=build /app/node_modules node_modules\n#29 DONE 0.2s\n\n#30 [runtime 14/16] COPY --from=build /app/packages/server/node_modules packages/server/node_modules\n#30 DONE 0.1s\n\n#31 [runtime 15/16] COPY --from=build /app/examples/challenges examples/challenges\n#31 DONE 0.1s\n\n#32 [runtime 16/16] RUN mkdir -p node_modules/@commons-sim   && ln -sfn ../../packages/shared node_modules/@commons-sim/shared   && ln -sfn ../../packages/engine node_modules/@commons-sim/engine\n#32 DONE 0.2s\n\n#33 exporting to image\n#33 exporting layers\n#33 exporting layers 1.0s done\n#33 exporting manifest sha256:bd8f2264d2b0104baf5777d7a3889a4cd370147f1471e0098477fc2c38293bc3 0.0s done\n#33 exporting config sha256:cf209790e20a828f7c8866ae0cc67c906956a7d73e5c57f71f4a577251b5449b 0.0s done\n#33 exporting attestation manifest sha256:6a56f204f65fa1c829467d2b5e95897fcbd1c4c6015d8061ad269da046f826d2 0.0s done\n#33 exporting manifest list sha256:158d1c69e0b0c252a3ee10da2eb107c9cf7720e3d523371b9066334e98c65359\n#33 exporting manifest list sha256:158d1c69e0b0c252a3ee10da2eb107c9cf7720e3d523371b9066334e98c65359 0.0s done\n#33 naming to docker.io/library/commons-sim:api-local-validation done\n#33 unpacking to docker.io/library/commons-sim:api-local-validation\n#33 unpacking to docker.io/library/commons-sim:api-local-validation 0.5s done\n#33 DONE 1.8s\n\nView build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/23znour7dg0zlgqe1niiyjxs0"
+      "stderrTail": "#25 [runtime  6/16] COPY --from=build /app/packages/engine/dist packages/engine/dist\n#25 CACHED\n\n#26 [runtime  7/16] COPY --from=build /app/packages/engine/package.json packages/engine/package.json\n#26 CACHED\n\n#27 [runtime  3/16] COPY --from=build /app/packages/shared/dist packages/shared/dist\n#27 CACHED\n\n#28 [runtime 12/16] COPY --from=build /app/packages/server/scripts packages/server/scripts\n#28 CACHED\n\n#29 [runtime 13/16] COPY --from=build /app/node_modules node_modules\n#29 DONE 0.2s\n\n#30 [runtime 14/16] COPY --from=build /app/packages/server/node_modules packages/server/node_modules\n#30 DONE 0.1s\n\n#31 [runtime 15/16] COPY --from=build /app/examples/challenges examples/challenges\n#31 DONE 0.1s\n\n#32 [runtime 16/16] RUN mkdir -p node_modules/@commons-sim   && ln -sfn ../../packages/shared node_modules/@commons-sim/shared   && ln -sfn ../../packages/engine node_modules/@commons-sim/engine\n#32 DONE 0.3s\n\n#33 exporting to image\n#33 exporting layers\n#33 exporting layers 0.3s done\n#33 exporting manifest sha256:1af47b8250e1d6756cd26bcca97fb3e8ce0ed255eae061dd475e299432bafba6 0.0s done\n#33 exporting config sha256:a8753bc8a1ce0ee19676a8e9ce08ae74a7eb25947eee43d8dce7681893b81bab 0.0s done\n#33 exporting attestation manifest sha256:bf5d126995539a5e45e0da0f8f586eff6de298a251a9485d93d45abf15476568 0.1s done\n#33 exporting manifest list sha256:05a7b885cbd5d6334c3be7ab919a5c46e4ac89d84222f26bebb746c911a5c37c\n#33 exporting manifest list sha256:05a7b885cbd5d6334c3be7ab919a5c46e4ac89d84222f26bebb746c911a5c37c 0.0s done\n#33 naming to docker.io/library/commons-sim:api-local-validation done\n#33 unpacking to docker.io/library/commons-sim:api-local-validation\n#33 unpacking to docker.io/library/commons-sim:api-local-validation 0.6s done\n#33 DONE 1.2s\n\nView build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/pp8f6ppchi8buhd18rqimknk7"
     }
   ],
   "ok": true
