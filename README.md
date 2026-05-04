@@ -113,6 +113,8 @@ Docker Compose runs the API with Postgres storage by default. Local non-Docker d
 - [Batch 6 promotion and staging-data audit](docs/audits/BATCH_06_AUDIT.md)
 - [Batch 7 parity/scenario/sensitivity audit](docs/audits/BATCH_07_AUDIT.md)
 - [Batch 8 persistence/onboarding audit](docs/audits/BATCH_08_AUDIT.md)
+- [Batch 15 resource compatibility audit](docs/audits/BATCH_15_RESOURCE_COMPATIBILITY_AUDIT.md)
+- [Batch 16 graph link CLI audit](docs/audits/BATCH_16_GRAPH_LINK_CLI_AUDIT.md)
 - [Prototype challenge project audit](docs/audits/PROJECT_AUDIT_PROTOTYPE_CHALLENGE.md)
 - [Gamer input and usage audit](docs/audits/GAMER_INPUT_USAGE_AUDIT.md)
 - [Next 15 backlog](docs/program/NEXT_15_BACKLOG.md)

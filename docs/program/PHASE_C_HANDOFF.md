@@ -16,7 +16,7 @@ Phase B delivered the semantic foundation:
 
 ## Allowed Next Work
 
-After Batch 15 audit, the next Phase C issue may begin. Phase C should consume the static resource compatibility, dependency graph, and graph link validation contracts without claiming graph compilation or module execution.
+After Batch 16 audit, the next Phase C issue may begin. Phase C should consume the static resource compatibility, dependency graph, and graph link validation contracts without claiming graph compilation or module execution.
 
 ## Guardrails
 
@@ -55,6 +55,7 @@ Phase C must not claim any of the following until implemented and audited:
 - Static graph link validation exists in `packages/shared/src/graphLinkValidation.ts`.
 - CLI graph link validation exists via `node packages/cli/dist/main.js graph-link-validate`.
 - Batch 15 audit evidence exists in `docs/audits/BATCH_15_RESOURCE_COMPATIBILITY_AUDIT.md`.
+- Batch 16 audit evidence exists in `docs/audits/BATCH_16_GRAPH_LINK_CLI_AUDIT.md`.
 
 ## Batch 15 Corrections Carried Forward
 
@@ -62,6 +63,13 @@ Phase C must not claim any of the following until implemented and audited:
 - Adapter-required graph links are warnings, not graph compiler behavior.
 - Required dependency edges may not target unresolved dependency nodes.
 - Graph link validation remains pure and side-effect-free.
+
+## Batch 16 Corrections Carried Forward
+
+- `graph-link-validate` is a CLI entry point for static validation only.
+- Adapter-required CLI results remain warning-level when explicitly allowed by compatibility rules.
+- Graph link validation inputs are explicit file paths; no registry discovery or manifest graph validation is claimed.
+- Input load failures use `GRAPH_LINK_VALIDATION_INPUT_ERROR`.
 
 ## Validation Gate
 

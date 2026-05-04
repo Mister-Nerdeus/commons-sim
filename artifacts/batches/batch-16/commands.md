@@ -1,0 +1,16 @@
+# Batch 16 Commands
+
+- `git diff --check` - PASS
+- `pnpm --filter @commons-sim/cli... build` - PASS
+- `pnpm --filter @commons-sim/cli test` - PASS, 16 CLI tests passed
+- `pnpm build` - PASS
+- `pnpm test` - PASS
+- `pnpm determinism:check` - PASS, hash `8c9372a7e9a23f95a20ae0fa5bd4d5dab6e0856e2e08c61af3c50428f920c08e`
+- `pnpm env:parity:check` - PASS
+- `node packages/cli/dist/main.js registry-validate examples/modules/registry.valid.json` - PASS
+- `node packages/cli/dist/main.js graph-link-validate examples/graphs/link-validation.valid.json examples/interfaces/compatibility-rules.valid.json examples/modules/generic/community-meals.template.json examples/modules/generic/laundry.template.json` - PASS, `ok: true`, `issueCount: 0`
+- `node packages/cli/dist/main.js graph-link-validate examples/graphs/link-validation.invalid-direction.json examples/interfaces/compatibility-rules.valid.json examples/modules/generic/community-meals.template.json examples/modules/generic/laundry.template.json` - PASS, exited `3`, `ok: false`
+- `node packages/cli/dist/main.js graph-link-validate examples/graphs/link-validation.requires-adapter.json examples/interfaces/compatibility-rules.valid.json examples/modules/generic/community-meals.template.json examples/modules/generic/laundry.template.json` - PASS, exited `0`, emitted `ADAPTER_REQUIRED` warning
+- `node scripts/controls/run-local-validation.mjs --operator codex-batch-16 --include-docker` - PASS, 11 commands including three Docker builds
+
+Host note: local host Node is `v22.16.0`; repo policy wants Node `20.x`. Docker-inclusive validation covers the canonical container path.
