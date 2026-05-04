@@ -19,7 +19,7 @@
 - `examples/interfaces/compatibility-rules.invalid.json`
 - `examples/dependencies/module-dependency-graph.valid.json`
 - `examples/dependencies/module-dependency-graph.invalid.json`
-- `examples/dependencies/unresolved-dependencies.invalid.json`
+- `examples/dependencies/unresolved-required-dependency.invalid.json`
 - `examples/graphs/link-validation.valid.json`
 - `examples/graphs/link-validation.invalid-direction.json`
 - `examples/graphs/link-validation.invalid-resource.json`

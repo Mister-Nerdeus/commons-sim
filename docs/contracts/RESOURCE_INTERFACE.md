@@ -15,6 +15,7 @@ A resource interface declares:
 - `timingModels`
 - `qualityAttributes`
 - `allowedDirections`
+- `capacityBasis`
 - `notes`
 - `provenance`
 - `validationStatus`

@@ -23,6 +23,8 @@ export const CapacityRelationSchema = z.enum([
   "source_peak_gte_target_nominal",
 ]);
 
+export const ResourceCapacityBasisSchema = z.enum(["nominal", "peak", "nominal_and_peak", "not_applicable"]);
+
 export const CriticalityRelationSchema = z.enum([
   "not_checked",
   "source_gte_target",
@@ -39,6 +41,7 @@ export const ResourceInterfaceSchema = z
     timingModels: z.array(ResourceTimingModelSchema).min(1),
     qualityAttributes: z.array(z.string().min(1)).default([]),
     allowedDirections: z.array(TerminalDirectionSchema).min(1),
+    capacityBasis: ResourceCapacityBasisSchema,
     notes: z.string().min(1),
     provenance: ProvenanceStateSchema,
     validationStatus: ValidationStatusSchema,
@@ -110,7 +113,7 @@ export const ResourceCompatibilityRuleSchema = z
     decision: CompatibilityDecisionSchema,
     rationale: z.string().min(1),
     requiresAdapter: z.boolean(),
-    adapterNotes: z.string().min(1),
+    adapterNotes: z.string(),
     qualityRequirements: z.array(z.string().min(1)).default([]),
   })
   .strict()
@@ -120,6 +123,14 @@ export const ResourceCompatibilityRuleSchema = z
         code: z.ZodIssueCode.custom,
         path: ["requiresAdapter"],
         message: "requiresAdapter must be true when decision is requires_adapter",
+      });
+    }
+
+    if (rule.decision === "requires_adapter" && rule.adapterNotes.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["adapterNotes"],
+        message: "adapterNotes must describe the required adapter",
       });
     }
 
@@ -171,6 +182,7 @@ export const ResourceCompatibilityRuleSetSchema = z
   });
 
 export type ResourceTimingModel = z.infer<typeof ResourceTimingModelSchema>;
+export type ResourceCapacityBasis = z.infer<typeof ResourceCapacityBasisSchema>;
 export type ResourceInterface = z.infer<typeof ResourceInterfaceSchema>;
 export type ResourceInterfaceRegistry = z.infer<typeof ResourceInterfaceRegistrySchema>;
 export type CompatibilityDecision = z.infer<typeof CompatibilityDecisionSchema>;

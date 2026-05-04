@@ -26,6 +26,15 @@ test("valid compatibility rule fixture validates", () => {
   assert.equal(parsed.success, true);
 });
 
+test("compatible rules may omit adapter notes", () => {
+  const fixture = loadJson("examples/interfaces/compatibility-rules.valid.json") as {
+    rules: Array<Record<string, unknown>>;
+  };
+  fixture.rules[0].adapterNotes = "";
+  const parsed = ResourceCompatibilityRuleSetSchema.safeParse(fixture);
+  assert.equal(parsed.success, true);
+});
+
 test("invalid compatibility rule fixture fails", () => {
   const parsed = ResourceCompatibilityRuleSetSchema.safeParse(loadJson("examples/interfaces/compatibility-rules.invalid.json"));
   assert.equal(parsed.success, false);

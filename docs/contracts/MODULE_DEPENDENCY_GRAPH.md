@@ -62,7 +62,7 @@ The graph schema rejects duplicate dependency node ids, duplicate edge ids, edge
 
 - `examples/dependencies/module-dependency-graph.valid.json`
 - `examples/dependencies/module-dependency-graph.invalid.json`
-- `examples/dependencies/unresolved-dependencies.invalid.json`
+- `examples/dependencies/unresolved-required-dependency.invalid.json`
 
 ## Non-Claims
 

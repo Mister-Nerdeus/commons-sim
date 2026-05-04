@@ -19,7 +19,7 @@ test("invalid module dependency graph fixture fails", () => {
 });
 
 test("unresolved required dependency fixture fails", () => {
-  const parsed = ModuleDependencyGraphSchema.safeParse(loadJson("examples/dependencies/unresolved-dependencies.invalid.json"));
+  const parsed = ModuleDependencyGraphSchema.safeParse(loadJson("examples/dependencies/unresolved-required-dependency.invalid.json"));
   assert.equal(parsed.success, false);
   assert.match(parsed.error.message, /required dependency edge/);
 });

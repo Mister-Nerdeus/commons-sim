@@ -12,7 +12,7 @@
 - Schema: `packages/shared/src/moduleDependencyGraph.ts`
 - Tests: `packages/shared/src/moduleDependencyGraph.test.ts`
 - Docs: `docs/contracts/MODULE_DEPENDENCY_GRAPH.md`
-- Fixtures: `examples/dependencies/module-dependency-graph.valid.json`, `examples/dependencies/module-dependency-graph.invalid.json`, `examples/dependencies/unresolved-dependencies.invalid.json`
+- Fixtures: `examples/dependencies/module-dependency-graph.valid.json`, `examples/dependencies/module-dependency-graph.invalid.json`, `examples/dependencies/unresolved-required-dependency.invalid.json`
 
 ## Static Graph Link Validation
 

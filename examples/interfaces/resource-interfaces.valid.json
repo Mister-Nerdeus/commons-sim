@@ -10,6 +10,7 @@
       "timingModels": ["daily"],
       "qualityAttributes": ["ready-to-serve"],
       "allowedDirections": ["output", "input"],
+      "capacityBasis": "nominal_and_peak",
       "notes": "Prepared meal flow measured as daily meal count.",
       "provenance": {
         "sourceType": "assumption",
@@ -25,6 +26,7 @@
       "timingModels": ["daily"],
       "qualityAttributes": ["soiled", "clean"],
       "allowedDirections": ["input", "output"],
+      "capacityBasis": "nominal_and_peak",
       "notes": "Laundry load flow measured as daily load count.",
       "provenance": {
         "sourceType": "assumption",
@@ -40,6 +42,7 @@
       "timingModels": ["daily"],
       "qualityAttributes": ["potable"],
       "allowedDirections": ["input", "output"],
+      "capacityBasis": "nominal_and_peak",
       "notes": "Daily potable water flow contract.",
       "provenance": {
         "sourceType": "assumption",
