@@ -1,0 +1,124 @@
+{
+  "templateId": "laundry-generic",
+  "moduleId": "laundry",
+  "version": "1.0.0",
+  "lifecycleStage": "Generic Template",
+  "taxonomyPath": {
+    "domain": "human-settlement",
+    "category": "shared-services",
+    "family": "laundry",
+    "tags": ["laundry"]
+  },
+  "roles": ["Transform", "Demand"],
+  "name": "Laundry Generic Template",
+  "summary": "Product-agnostic shared laundry service template for settlement scenarios.",
+  "problemBriefRef": "examples/modules/laundry/problem-brief.json",
+  "solutionBriefRef": "examples/modules/laundry/solution-brief.generic.json",
+  "footprint": {
+    "landArea": { "value": 500, "unit": "m2" },
+    "indoorArea": { "value": 90, "unit": "m2" },
+    "spatialNotes": "Requires indoor wet-service space with water, drainage, and electrical access."
+  },
+  "capacity": {
+    "nominal": 40,
+    "peak": 60,
+    "unit": "loads/day",
+    "sizingBasis": "Daily processed laundry loads."
+  },
+  "requiredInputs": [
+    {
+      "id": "laundry.loads_in",
+      "resourceType": "laundry-loads",
+      "unit": "loads/day",
+      "timingModel": "daily",
+      "nominalCapacity": 40,
+      "peakCapacity": 60,
+      "qualityAttributes": ["soiled"],
+      "direction": "input",
+      "allocationMode": "priority",
+      "spatialScope": "site",
+      "criticality": "medium",
+      "failureSemantics": {
+        "behavior": "buffer",
+        "description": "Incoming loads become backlog when processing is constrained."
+      }
+    },
+    {
+      "id": "water.potable_in",
+      "resourceType": "water",
+      "unit": "gal/day",
+      "timingModel": "daily",
+      "nominalCapacity": 600,
+      "peakCapacity": 900,
+      "qualityAttributes": ["potable"],
+      "direction": "input",
+      "allocationMode": "priority",
+      "spatialScope": "site",
+      "criticality": "high",
+      "failureSemantics": {
+        "behavior": "shed_load",
+        "description": "Laundry loads are deferred when water is constrained."
+      }
+    },
+    {
+      "id": "power.electricity_in",
+      "resourceType": "electricity",
+      "unit": "kwh/day",
+      "timingModel": "daily",
+      "nominalCapacity": 75,
+      "peakCapacity": 120,
+      "qualityAttributes": ["site-electric"],
+      "direction": "input",
+      "allocationMode": "priority",
+      "spatialScope": "site",
+      "criticality": "high",
+      "failureSemantics": {
+        "behavior": "shed_load",
+        "description": "Laundry processing is deferred when electricity is constrained."
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "laundry.clean_loads_out",
+      "resourceType": "laundry-loads",
+      "unit": "loads/day",
+      "timingModel": "daily",
+      "nominalCapacity": 40,
+      "peakCapacity": 60,
+      "qualityAttributes": ["clean"],
+      "direction": "output",
+      "allocationMode": "proportional",
+      "spatialScope": "site",
+      "criticality": "medium",
+      "failureSemantics": {
+        "behavior": "buffer",
+        "description": "Unserved loads become backlog."
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "wet-utility-service",
+      "description": "Requires water, drainage, and electricity assumptions before execution in later phases.",
+      "required": true,
+      "dependencyType": "resource"
+    }
+  ],
+  "baselineCosts": {
+    "capitalCost": { "value": 45000, "unit": "usd" },
+    "monthlyOperatingCost": { "value": 4500, "unit": "usd/month" },
+    "laborHoursPerMonth": { "value": 120, "unit": "hours/month" },
+    "costBasis": "Generic planning assumption; not vendor or product backed."
+  },
+  "fairness": {
+    "challengeRelevant": true,
+    "fairnessNotes": "Template exposes utility demand and service capacity for challenge comparison.",
+    "tunableParameters": ["capacity.nominal", "requiredInputs.water.potable_in.nominalCapacity"]
+  },
+  "provenance": {
+    "sourceType": "assumption",
+    "sourceRef": "Phase C generic module template seed"
+  },
+  "validationStatus": "schema_valid"
+}

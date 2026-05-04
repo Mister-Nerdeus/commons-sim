@@ -13,3 +13,4 @@ export * from "./moduleBriefs.js";
 export * from "./moduleTerminals.js";
 export * from "./graphContracts.js";
 export * from "./moduleRegistry.js";
+export * from "./genericModuleTemplate.js";

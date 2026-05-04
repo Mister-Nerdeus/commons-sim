@@ -24,4 +24,5 @@
 - contracts/MODULE_TERMINALS.md — typed module terminal contract
 - contracts/GRAPH_CONTRACTS.md — problem/solution/world graph skeleton contracts
 - contracts/MODULE_REGISTRY.md — module registry contract
+- contracts/GENERIC_MODULE_TEMPLATE.md — product-agnostic generic module template contract
 - cli/REGISTRY_VALIDATION.md — registry validation CLI

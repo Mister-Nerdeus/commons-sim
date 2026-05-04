@@ -1,0 +1,130 @@
+{
+  "templateId": "community-meals-generic",
+  "moduleId": "community-meals",
+  "version": "1.0.0",
+  "lifecycleStage": "Generic Template",
+  "taxonomyPath": {
+    "domain": "human-settlement",
+    "category": "shared-services",
+    "family": "food-preparation",
+    "tags": ["meals"]
+  },
+  "roles": ["Transform", "Demand", "Coordinate"],
+  "name": "Community Meals Generic Template",
+  "summary": "Product-agnostic shared meal preparation template for settlement scenarios.",
+  "problemBriefRef": "examples/modules/community-meals/problem-brief.json",
+  "solutionBriefRef": "examples/modules/community-meals/solution-brief.generic.json",
+  "footprint": {
+    "landArea": { "value": 1500, "unit": "m2" },
+    "indoorArea": { "value": 220, "unit": "m2" },
+    "spatialNotes": "Requires food-safe indoor preparation and service space."
+  },
+  "capacity": {
+    "nominal": 144,
+    "peak": 216,
+    "unit": "meals/day",
+    "sizingBasis": "Daily prepared meal count."
+  },
+  "requiredInputs": [
+    {
+      "id": "food.ingredients_in",
+      "resourceType": "food",
+      "unit": "kg/day",
+      "timingModel": "daily",
+      "nominalCapacity": 120,
+      "peakCapacity": 180,
+      "qualityAttributes": ["perishable", "food-safe"],
+      "direction": "input",
+      "allocationMode": "priority",
+      "spatialScope": "site",
+      "criticality": "high",
+      "failureSemantics": {
+        "behavior": "degrade",
+        "description": "Meal service quality and coverage degrade when food input is constrained."
+      }
+    },
+    {
+      "id": "labor.staff_hours_in",
+      "resourceType": "labor",
+      "unit": "hours/month",
+      "timingModel": "daily",
+      "nominalCapacity": 16,
+      "peakCapacity": 24,
+      "qualityAttributes": ["trained", "food-safe"],
+      "direction": "input",
+      "allocationMode": "priority",
+      "spatialScope": "site",
+      "criticality": "medium",
+      "failureSemantics": {
+        "behavior": "degrade",
+        "description": "Meal throughput degrades when staffing is constrained."
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "food.meals_out",
+      "resourceType": "prepared-meals",
+      "unit": "meals/day",
+      "timingModel": "daily",
+      "nominalCapacity": 144,
+      "peakCapacity": 216,
+      "qualityAttributes": ["ready-to-serve"],
+      "direction": "output",
+      "allocationMode": "proportional",
+      "spatialScope": "site",
+      "criticality": "high",
+      "failureSemantics": {
+        "behavior": "shed_load",
+        "description": "Unserved meal demand is exposed rather than hidden."
+      }
+    },
+    {
+      "id": "waste.organic_out",
+      "resourceType": "organic-waste",
+      "unit": "kg/day",
+      "timingModel": "daily",
+      "nominalCapacity": 20,
+      "peakCapacity": 35,
+      "qualityAttributes": ["compostable"],
+      "direction": "output",
+      "allocationMode": "proportional",
+      "spatialScope": "site",
+      "criticality": "low",
+      "failureSemantics": {
+        "behavior": "buffer",
+        "description": "Organic waste can be buffered for later handling."
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "food-supply",
+      "description": "Requires an upstream food supply assumption before execution in later phases.",
+      "required": true,
+      "dependencyType": "resource"
+    },
+    {
+      "id": "staffing",
+      "description": "Requires labor assumptions for staffing and service coverage.",
+      "required": true,
+      "dependencyType": "labor"
+    }
+  ],
+  "baselineCosts": {
+    "capitalCost": { "value": 85000, "unit": "usd" },
+    "monthlyOperatingCost": { "value": 12000, "unit": "usd/month" },
+    "laborHoursPerMonth": { "value": 480, "unit": "hours/month" },
+    "costBasis": "Generic planning assumption; not vendor or product backed."
+  },
+  "fairness": {
+    "challengeRelevant": true,
+    "fairnessNotes": "Template exposes capacity, labor, and cost assumptions for challenge review.",
+    "tunableParameters": ["capacity.nominal", "baselineCosts.monthlyOperatingCost"]
+  },
+  "provenance": {
+    "sourceType": "assumption",
+    "sourceRef": "Phase C generic module template seed"
+  },
+  "validationStatus": "schema_valid"
+}

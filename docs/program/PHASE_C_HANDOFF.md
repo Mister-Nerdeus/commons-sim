@@ -45,6 +45,12 @@ Phase C must not claim any of the following until implemented and audited:
 - `registry-validate` success and failure outputs use a consistent `ok` envelope.
 - Module terminal ids must be semantic and namespaced, for example `food.meals_out`.
 
+## Phase C Progress
+
+- Generic module template contract exists in `packages/shared/src/genericModuleTemplate.ts`.
+- Product-agnostic generic template examples exist under `examples/modules/generic/`.
+- `docs/contracts/GENERIC_MODULE_TEMPLATE.md` documents the contract and explicit non-claims.
+
 ## Validation Gate
 
 Run local validation after Phase C changes:

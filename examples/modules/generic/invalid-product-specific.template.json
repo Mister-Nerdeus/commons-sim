@@ -1,0 +1,66 @@
+{
+  "templateId": "vendor-kitchen-generic",
+  "moduleId": "community-meals",
+  "version": "1.0.0",
+  "lifecycleStage": "Generic Template",
+  "taxonomyPath": {
+    "domain": "human-settlement",
+    "category": "shared-services",
+    "family": "food-preparation"
+  },
+  "roles": ["Transform"],
+  "name": "Vendor Kitchen Template",
+  "summary": "Invalid generic template that includes product-specific data.",
+  "problemBriefRef": "examples/modules/community-meals/problem-brief.json",
+  "solutionBriefRef": "examples/modules/community-meals/solution-brief.generic.json",
+  "footprint": {
+    "landArea": { "value": 100, "unit": "m2" },
+    "indoorArea": { "value": 100, "unit": "m2" },
+    "spatialNotes": "Invalid fixture."
+  },
+  "capacity": {
+    "nominal": 100,
+    "peak": 90,
+    "unit": "meals/day",
+    "sizingBasis": "Invalid peak capacity."
+  },
+  "requiredInputs": [],
+  "outputs": [
+    {
+      "id": "food.meals_out",
+      "resourceType": "prepared-meals",
+      "unit": "meals/day",
+      "timingModel": "daily",
+      "nominalCapacity": 100,
+      "peakCapacity": 100,
+      "qualityAttributes": ["ready-to-serve"],
+      "direction": "output",
+      "allocationMode": "fixed",
+      "spatialScope": "site",
+      "criticality": "high",
+      "failureSemantics": {
+        "behavior": "shed_load",
+        "description": "Invalid fixture."
+      }
+    }
+  ],
+  "dependencies": [],
+  "baselineCosts": {
+    "capitalCost": { "value": 1000, "unit": "usd" },
+    "monthlyOperatingCost": { "value": 100, "unit": "usd/month" },
+    "laborHoursPerMonth": { "value": 1, "unit": "hours/month" },
+    "costBasis": "Invalid fixture."
+  },
+  "fairness": {
+    "challengeRelevant": true,
+    "fairnessNotes": "Invalid fixture.",
+    "tunableParameters": []
+  },
+  "provenance": {
+    "sourceType": "assumption",
+    "sourceRef": "invalid fixture"
+  },
+  "validationStatus": "schema_valid",
+  "manufacturer": "Specific Vendor Inc.",
+  "modelNumber": "VK-100"
+}

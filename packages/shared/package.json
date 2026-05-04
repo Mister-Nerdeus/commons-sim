@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "c8 --reporter=text-summary --check-coverage --lines 60 --functions 60 --branches 50 --statements 60 node --test dist/test.js dist/contracts.test.js dist/projectMigrations.test.js dist/planningWizard.test.js dist/explainability.test.js dist/prototypeChallenge.test.js dist/challengeSchema.test.js dist/semanticPrimitives.test.js dist/variableRegistry.test.js dist/moduleTaxonomy.test.js dist/moduleBriefs.test.js dist/moduleTerminals.test.js dist/graphContracts.test.js dist/moduleRegistry.test.js",
+    "test": "c8 --reporter=text-summary --check-coverage --lines 60 --functions 60 --branches 50 --statements 60 node --test dist/test.js dist/contracts.test.js dist/projectMigrations.test.js dist/planningWizard.test.js dist/explainability.test.js dist/prototypeChallenge.test.js dist/challengeSchema.test.js dist/semanticPrimitives.test.js dist/variableRegistry.test.js dist/moduleTaxonomy.test.js dist/moduleBriefs.test.js dist/moduleTerminals.test.js dist/graphContracts.test.js dist/moduleRegistry.test.js dist/genericModuleTemplate.test.js",
     "lint": "echo \"(add eslint later)\"",
     "format": "prettier -w .",
     "typecheck": "tsc -p tsconfig.json --noEmit"
