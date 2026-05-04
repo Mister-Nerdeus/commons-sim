@@ -1,0 +1,31 @@
+{
+  "ruleSetId": "core-resource-compatibility-invalid",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "bad-adapter-rule",
+      "fromResourceType": "prepared-meals",
+      "toResourceType": "laundry-loads",
+      "fromUnit": "meals/day",
+      "toUnit": "loads/day",
+      "fromUnitFamily": "count",
+      "toUnitFamily": "count",
+      "fromDirection": "input",
+      "toDirection": "input",
+      "fromTimingModel": "daily",
+      "toTimingModel": "daily",
+      "capacityRelation": "not_checked",
+      "allocationModeCompatibility": {
+        "from": "priority",
+        "to": "priority"
+      },
+      "criticalityRelation": "not_checked",
+      "decision": "requires_adapter",
+      "rationale": "Invalid fixture: requires_adapter decision without requiresAdapter and input-input direction.",
+      "requiresAdapter": false,
+      "adapterNotes": "Invalid fixture should fail.",
+      "qualityRequirements": []
+    }
+  ],
+  "validationStatus": "schema_valid"
+}

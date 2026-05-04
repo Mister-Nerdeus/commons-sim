@@ -1,0 +1,37 @@
+{
+  "registryId": "core-resource-interfaces-invalid",
+  "version": "1.0.0",
+  "interfaces": [
+    {
+      "id": "prepared-meals-daily",
+      "resourceType": "prepared-meals",
+      "unit": "meals/day",
+      "unitFamily": "count",
+      "timingModels": ["daily"],
+      "qualityAttributes": ["ready-to-serve"],
+      "allowedDirections": ["output"],
+      "notes": "Prepared meal flow measured as daily meal count.",
+      "provenance": {
+        "sourceType": "assumption",
+        "sourceRef": "Batch 15 invalid resource interface fixture"
+      },
+      "validationStatus": "schema_valid"
+    },
+    {
+      "id": "prepared-meals-daily",
+      "resourceType": "prepared-meals",
+      "unit": "Meals/Day",
+      "unitFamily": "count",
+      "timingModels": ["daily"],
+      "qualityAttributes": ["ready-to-serve"],
+      "allowedDirections": ["output"],
+      "notes": "Duplicate id and invalid unit casing should fail.",
+      "provenance": {
+        "sourceType": "assumption",
+        "sourceRef": "Batch 15 invalid resource interface fixture"
+      },
+      "validationStatus": "schema_valid"
+    }
+  ],
+  "validationStatus": "schema_valid"
+}

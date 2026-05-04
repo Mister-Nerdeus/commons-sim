@@ -1,0 +1,52 @@
+{
+  "registryId": "core-resource-interfaces",
+  "version": "1.0.0",
+  "interfaces": [
+    {
+      "id": "prepared-meals-daily",
+      "resourceType": "prepared-meals",
+      "unit": "meals/day",
+      "unitFamily": "count",
+      "timingModels": ["daily"],
+      "qualityAttributes": ["ready-to-serve"],
+      "allowedDirections": ["output", "input"],
+      "notes": "Prepared meal flow measured as daily meal count.",
+      "provenance": {
+        "sourceType": "assumption",
+        "sourceRef": "Batch 15 resource interface seed"
+      },
+      "validationStatus": "schema_valid"
+    },
+    {
+      "id": "laundry-loads-daily",
+      "resourceType": "laundry-loads",
+      "unit": "loads/day",
+      "unitFamily": "count",
+      "timingModels": ["daily"],
+      "qualityAttributes": ["soiled", "clean"],
+      "allowedDirections": ["input", "output"],
+      "notes": "Laundry load flow measured as daily load count.",
+      "provenance": {
+        "sourceType": "assumption",
+        "sourceRef": "Batch 15 resource interface seed"
+      },
+      "validationStatus": "schema_valid"
+    },
+    {
+      "id": "water-daily",
+      "resourceType": "water",
+      "unit": "gal/day",
+      "unitFamily": "volume",
+      "timingModels": ["daily"],
+      "qualityAttributes": ["potable"],
+      "allowedDirections": ["input", "output"],
+      "notes": "Daily potable water flow contract.",
+      "provenance": {
+        "sourceType": "assumption",
+        "sourceRef": "Batch 15 resource interface seed"
+      },
+      "validationStatus": "schema_valid"
+    }
+  ],
+  "validationStatus": "schema_valid"
+}

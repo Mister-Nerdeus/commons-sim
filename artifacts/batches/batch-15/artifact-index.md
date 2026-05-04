@@ -1,0 +1,20 @@
+# Batch 15 Artifact Index
+
+- `docs/audits/BATCH_15_RESOURCE_COMPATIBILITY_AUDIT.md`
+- `docs/program/PHASE_C_HANDOFF.md`
+- `docs/contracts/RESOURCE_INTERFACE.md`
+- `docs/contracts/MODULE_DEPENDENCY_GRAPH.md`
+- `docs/contracts/GRAPH_LINK_VALIDATION.md`
+- `artifacts/batches/batch-15/commands.md`
+- `artifacts/batches/batch-15/files-changed.md`
+- `artifacts/batches/batch-15/contract-index.md`
+- `artifacts/batches/batch-15/known-gaps.md`
+- `artifacts/batches/batch-15/go-no-go.md`
+- `artifacts/batches/batch-15/risk-register.md`
+- `artifacts/batches/batch-15/issue-46-commands.md`
+- `artifacts/batches/batch-15/issue-46-files-changed.md`
+- `artifacts/batches/batch-15/issue-47-commands.md`
+- `artifacts/batches/batch-15/issue-47-files-changed.md`
+- `artifacts/batches/batch-15/issue-48-commands.md`
+- `artifacts/batches/batch-15/issue-48-files-changed.md`
+- `artifacts/controls/local-validation/latest.json`

@@ -1,0 +1,79 @@
+{
+  "ruleSetId": "core-resource-compatibility",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "laundry-loads-daily-direct",
+      "fromResourceType": "laundry-loads",
+      "toResourceType": "laundry-loads",
+      "fromUnit": "loads/day",
+      "toUnit": "loads/day",
+      "fromUnitFamily": "count",
+      "toUnitFamily": "count",
+      "fromDirection": "output",
+      "toDirection": "input",
+      "fromTimingModel": "daily",
+      "toTimingModel": "daily",
+      "capacityRelation": "source_peak_gte_target_nominal",
+      "allocationModeCompatibility": {
+        "from": "proportional",
+        "to": "priority"
+      },
+      "criticalityRelation": "target_may_exceed_source",
+      "decision": "compatible",
+      "rationale": "Daily laundry-load output can satisfy a daily laundry-load input without unit or timing conversion.",
+      "requiresAdapter": false,
+      "adapterNotes": "No adapter required.",
+      "qualityRequirements": ["clean"]
+    },
+    {
+      "id": "prepared-meals-to-laundry-adapter",
+      "fromResourceType": "prepared-meals",
+      "toResourceType": "laundry-loads",
+      "fromUnit": "meals/day",
+      "toUnit": "loads/day",
+      "fromUnitFamily": "count",
+      "toUnitFamily": "count",
+      "fromDirection": "output",
+      "toDirection": "input",
+      "fromTimingModel": "daily",
+      "toTimingModel": "daily",
+      "capacityRelation": "not_checked",
+      "allocationModeCompatibility": {
+        "from": "proportional",
+        "to": "priority"
+      },
+      "criticalityRelation": "not_checked",
+      "decision": "requires_adapter",
+      "rationale": "Different resource meanings require an explicit adapter contract before static validation can accept the link as non-fatal.",
+      "requiresAdapter": true,
+      "adapterNotes": "Adapter is a future explicit mapping contract; this batch only warns.",
+      "qualityRequirements": []
+    },
+    {
+      "id": "prepared-meals-to-water-incompatible",
+      "fromResourceType": "prepared-meals",
+      "toResourceType": "water",
+      "fromUnit": "meals/day",
+      "toUnit": "gal/day",
+      "fromUnitFamily": "count",
+      "toUnitFamily": "volume",
+      "fromDirection": "output",
+      "toDirection": "input",
+      "fromTimingModel": "daily",
+      "toTimingModel": "daily",
+      "capacityRelation": "not_checked",
+      "allocationModeCompatibility": {
+        "from": "proportional",
+        "to": "priority"
+      },
+      "criticalityRelation": "not_checked",
+      "decision": "incompatible",
+      "rationale": "Prepared meals are not potable water and must not be silently coerced.",
+      "requiresAdapter": false,
+      "adapterNotes": "No adapter rule is permitted by this fixture.",
+      "qualityRequirements": []
+    }
+  ],
+  "validationStatus": "schema_valid"
+}

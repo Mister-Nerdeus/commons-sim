@@ -1,0 +1,35 @@
+{
+  "graphId": "community-services-unresolved-dependencies",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "id": "community-meals",
+      "moduleId": "community-meals",
+      "templateId": "community-meals-generic",
+      "dependencyType": "service",
+      "state": "required",
+      "description": "Community meals module dependency root.",
+      "sourceRef": "examples/modules/generic/community-meals.template.json"
+    },
+    {
+      "id": "food-supply-unresolved",
+      "moduleId": "community-meals",
+      "templateId": "community-meals-generic",
+      "dependencyType": "resource",
+      "state": "unresolved",
+      "description": "Required food supply dependency is unresolved.",
+      "sourceRef": "examples/modules/generic/community-meals.template.json"
+    }
+  ],
+  "edges": [
+    {
+      "id": "meals-requires-unresolved-food",
+      "fromNodeId": "community-meals",
+      "toNodeId": "food-supply-unresolved",
+      "dependencyType": "resource",
+      "required": true,
+      "rationale": "Required dependencies may not point at unresolved nodes."
+    }
+  ],
+  "validationStatus": "schema_valid"
+}

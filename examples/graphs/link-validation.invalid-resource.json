@@ -1,0 +1,20 @@
+{
+  "graphId": "link-validation-invalid-resource",
+  "graphKind": "solution",
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "community-meals", "moduleId": "community-meals", "label": "Community Meals" },
+    { "id": "laundry", "moduleId": "laundry", "label": "Laundry" }
+  ],
+  "edges": [
+    {
+      "id": "meals-to-water",
+      "fromNodeId": "community-meals",
+      "fromTerminalId": "food.meals_out",
+      "toNodeId": "laundry",
+      "toTerminalId": "water.potable_in",
+      "resourceType": "prepared-meals",
+      "linkPattern": "direct connection"
+    }
+  ]
+}

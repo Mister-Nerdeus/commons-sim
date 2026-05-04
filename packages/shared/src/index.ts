@@ -14,3 +14,6 @@ export * from "./moduleTerminals.js";
 export * from "./graphContracts.js";
 export * from "./moduleRegistry.js";
 export * from "./genericModuleTemplate.js";
+export * from "./resourceInterface.js";
+export * from "./moduleDependencyGraph.js";
+export * from "./graphLinkValidation.js";

@@ -16,7 +16,7 @@ Phase B delivered the semantic foundation:
 
 ## Allowed Next Work
 
-After Batch 13 corrective hardening, the next Phase C issue may begin. Phase C should create the generic module template contract on top of the Phase B contracts.
+After Batch 15 audit, the next Phase C issue may begin. Phase C should consume the static resource compatibility, dependency graph, and graph link validation contracts without claiming graph compilation or module execution.
 
 ## Guardrails
 
@@ -50,6 +50,17 @@ Phase C must not claim any of the following until implemented and audited:
 - Generic module template contract exists in `packages/shared/src/genericModuleTemplate.ts`.
 - Product-agnostic generic template examples exist under `examples/modules/generic/`.
 - `docs/contracts/GENERIC_MODULE_TEMPLATE.md` documents the contract and explicit non-claims.
+- Resource interface and compatibility rule contracts exist in `packages/shared/src/resourceInterface.ts`.
+- Module dependency graph contract exists in `packages/shared/src/moduleDependencyGraph.ts`.
+- Static graph link validation exists in `packages/shared/src/graphLinkValidation.ts`.
+- Batch 15 audit evidence exists in `docs/audits/BATCH_15_RESOURCE_COMPATIBILITY_AUDIT.md`.
+
+## Batch 15 Corrections Carried Forward
+
+- Compatibility rules distinguish `compatible`, `incompatible`, and `requires_adapter`.
+- Adapter-required graph links are warnings, not graph compiler behavior.
+- Required dependency edges may not target unresolved dependency nodes.
+- Graph link validation remains pure and side-effect-free.
 
 ## Validation Gate
 
