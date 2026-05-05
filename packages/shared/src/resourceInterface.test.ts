@@ -21,12 +21,20 @@ test("invalid resource interface fixture fails", () => {
   assert.match(parsed.error.message, /duplicate resource interface id|unit id/);
 });
 
+test("duplicate resource interface ids fail", () => {
+  const parsed = ResourceInterfaceRegistrySchema.safeParse(
+    loadJson("examples/interfaces/duplicate-resource-interface-id.invalid.json"),
+  );
+  assert.equal(parsed.success, false);
+  assert.match(parsed.error.message, /duplicate resource interface id/);
+});
+
 test("valid compatibility rule fixture validates", () => {
   const parsed = ResourceCompatibilityRuleSetSchema.safeParse(loadJson("examples/interfaces/compatibility-rules.valid.json"));
   assert.equal(parsed.success, true);
 });
 
-test("compatible rules may omit adapter notes", () => {
+test("compatible rules allow empty adapter notes", () => {
   const fixture = loadJson("examples/interfaces/compatibility-rules.valid.json") as {
     rules: Array<Record<string, unknown>>;
   };
@@ -35,10 +43,34 @@ test("compatible rules may omit adapter notes", () => {
   assert.equal(parsed.success, true);
 });
 
+test("duplicate compatibility rule ids fail", () => {
+  const parsed = ResourceCompatibilityRuleSetSchema.safeParse(
+    loadJson("examples/interfaces/duplicate-compatibility-rule-id.invalid.json"),
+  );
+  assert.equal(parsed.success, false);
+  assert.match(parsed.error.message, /duplicate compatibility rule id/);
+});
+
 test("invalid compatibility rule fixture fails", () => {
   const parsed = ResourceCompatibilityRuleSetSchema.safeParse(loadJson("examples/interfaces/compatibility-rules.invalid.json"));
   assert.equal(parsed.success, false);
   assert.match(parsed.error.message, /requiresAdapter|input-only/);
+});
+
+test("compatible decisions may not require adapters", () => {
+  const parsed = ResourceCompatibilityRuleSetSchema.safeParse(
+    loadJson("examples/interfaces/bad-compatible-requires-adapter.invalid.json"),
+  );
+  assert.equal(parsed.success, false);
+  assert.match(parsed.error.message, /requiresAdapter/);
+});
+
+test("adapter-required decisions must include notes", () => {
+  const parsed = ResourceCompatibilityRuleSetSchema.safeParse(
+    loadJson("examples/interfaces/bad-requires-adapter-no-notes.invalid.json"),
+  );
+  assert.equal(parsed.success, false);
+  assert.match(parsed.error.message, /adapterNotes/);
 });
 
 function loadJson(relativePath: string): unknown {

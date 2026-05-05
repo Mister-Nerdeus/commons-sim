@@ -1,0 +1,20 @@
+{
+  "graphId": "link-validation-missing-terminal",
+  "graphKind": "solution",
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "laundry-source", "moduleId": "laundry", "label": "Laundry Source" },
+    { "id": "laundry-sink", "moduleId": "laundry", "label": "Laundry Sink" }
+  ],
+  "edges": [
+    {
+      "id": "missing-terminal",
+      "fromNodeId": "laundry-source",
+      "fromTerminalId": "laundry.clean_loads_out",
+      "toNodeId": "laundry-sink",
+      "toTerminalId": "laundry.missing_in",
+      "resourceType": "laundry-loads",
+      "linkPattern": "direct connection"
+    }
+  ]
+}

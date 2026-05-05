@@ -22,6 +22,7 @@ export const GraphLinkValidationIssueCodeSchema = z.enum([
   "INCOMPATIBLE_TIMING",
   "ADAPTER_REQUIRED",
   "MISSING_COMPATIBILITY_RULE",
+  "DUPLICATE_MODULE_TEMPLATE",
 ]);
 
 export const GraphLinkValidationIssueSchema = z
@@ -53,7 +54,15 @@ export function validateGraphLinks(
 ): GraphLinkValidationResult {
   const issues: GraphLinkValidationIssue[] = [];
   const nodesById = new Map(graph.nodes.map((node) => [node.id, node]));
-  const templatesByModuleId = new Map(templates.map((template) => [template.moduleId, template]));
+  const templatesByModuleId = new Map<string, GenericModuleTemplate>();
+  const duplicateModuleIds = new Set<string>();
+  for (const template of templates) {
+    if (templatesByModuleId.has(template.moduleId)) {
+      duplicateModuleIds.add(template.moduleId);
+      continue;
+    }
+    templatesByModuleId.set(template.moduleId, template);
+  }
   const rules = Array.isArray(compatibilityRules) ? compatibilityRules : compatibilityRules.rules;
 
   for (const edge of graph.edges) {
@@ -70,6 +79,24 @@ export function validateGraphLinks(
       issues.push(issue("MISSING_TO_NODE", "error", edge.id, "toNodeId does not reference a graph node", {
         toNodeId: edge.toNodeId,
       }));
+    }
+
+    if (fromNode && duplicateModuleIds.has(fromNode.moduleId)) {
+      issues.push(issue("DUPLICATE_MODULE_TEMPLATE", "error", edge.id, "fromNode moduleId resolves to multiple templates", {
+        moduleId: fromNode.moduleId,
+        fromNodeId: fromNode.id,
+      }));
+    }
+
+    if (toNode && duplicateModuleIds.has(toNode.moduleId)) {
+      issues.push(issue("DUPLICATE_MODULE_TEMPLATE", "error", edge.id, "toNode moduleId resolves to multiple templates", {
+        moduleId: toNode.moduleId,
+        toNodeId: toNode.id,
+      }));
+    }
+
+    if ((fromNode && duplicateModuleIds.has(fromNode.moduleId)) || (toNode && duplicateModuleIds.has(toNode.moduleId))) {
+      continue;
     }
 
     const fromTerminal = fromNode ? findTerminal(templatesByModuleId.get(fromNode.moduleId), edge.fromTerminalId) : undefined;

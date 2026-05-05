@@ -23,7 +23,7 @@
       "decision": "compatible",
       "rationale": "Daily laundry-load output can satisfy a daily laundry-load input without unit or timing conversion.",
       "requiresAdapter": false,
-      "adapterNotes": "No adapter required.",
+      "adapterNotes": "",
       "qualityRequirements": ["clean"]
     },
     {

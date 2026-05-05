@@ -1,5 +1,5 @@
 {
-  "graphId": "community-services-dependencies",
+  "graphId": "duplicate-dependency-edge-id",
   "version": "1.0.0",
   "nodes": [
     {
@@ -9,7 +9,7 @@
       "dependencyType": "resource",
       "requiredness": "required",
       "state": "satisfied",
-      "description": "Food supply assumption is present.",
+      "description": "Food supply dependency is satisfied.",
       "sourceRef": "examples/modules/generic/community-meals.template.json"
     },
     {
@@ -19,18 +19,8 @@
       "dependencyType": "labor",
       "requiredness": "required",
       "state": "external",
-      "description": "Staffing is supplied by an external labor assumption.",
+      "description": "Staffing is supplied externally.",
       "sourceRef": "examples/modules/generic/community-meals.template.json"
-    },
-    {
-      "id": "laundry-utility-service",
-      "moduleId": "laundry",
-      "templateId": "laundry-generic",
-      "dependencyType": "service",
-      "requiredness": "required",
-      "state": "satisfied",
-      "description": "Laundry utility service assumptions are present.",
-      "sourceRef": "examples/modules/generic/laundry.template.json"
     }
   ],
   "edges": [
@@ -40,15 +30,15 @@
       "toNodeId": "community-meals-food-supply",
       "dependencyType": "resource",
       "required": true,
-      "rationale": "Meal service dependency graph includes upstream food supply."
+      "rationale": "Meal service depends on food supply."
     },
     {
-      "id": "laundry-requires-utility",
-      "fromNodeId": "laundry-utility-service",
+      "id": "meals-requires-food",
+      "fromNodeId": "community-meals-food-supply",
       "toNodeId": "community-meals-staffing",
       "dependencyType": "labor",
       "required": false,
-      "rationale": "External staffing assumptions may be shared across service modules."
+      "rationale": "Duplicate edge id should fail."
     }
   ],
   "validationStatus": "schema_valid"

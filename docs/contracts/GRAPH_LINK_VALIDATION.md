@@ -46,6 +46,7 @@ Expected issue codes include:
 - `INCOMPATIBLE_TIMING`
 - `ADAPTER_REQUIRED`
 - `MISSING_COMPATIBILITY_RULE`
+- `DUPLICATE_MODULE_TEMPLATE`
 
 ## Adapter-Required Behavior
 
@@ -55,12 +56,20 @@ Rules with `decision: "requires_adapter"` produce an `ADAPTER_REQUIRED` warning.
 
 If no explicit compatibility rule matches a link, the validator fails closed with `MISSING_COMPATIBILITY_RULE`. Resource changes, unit changes, and timing changes are also reported as diagnostic errors unless an explicit rule accounts for them.
 
+Each graph node `moduleId` must resolve to exactly one supplied generic module template. If multiple templates share a `moduleId`, the validator reports `DUPLICATE_MODULE_TEMPLATE` and does not use either duplicate as an implicit resolver.
+
 ## Fixtures
 
 - `examples/graphs/link-validation.valid.json`
-- `examples/graphs/link-validation.invalid-direction.json`
+- `examples/graphs/link-validation.invalid-direction-input-input.json`
+- `examples/graphs/link-validation.invalid-direction-output-output.json`
+- `examples/graphs/link-validation.invalid-direction-input-output.json`
 - `examples/graphs/link-validation.invalid-resource.json`
+- `examples/graphs/link-validation.incompatible-unit.json`
 - `examples/graphs/link-validation.requires-adapter.json`
+- `examples/graphs/link-validation.missing-rule.json`
+- `examples/graphs/link-validation.missing-terminal.json`
+- `examples/graphs/link-validation.duplicate-template.json`
 
 ## Non-Claims
 

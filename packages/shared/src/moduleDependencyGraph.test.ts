@@ -18,10 +18,49 @@ test("invalid module dependency graph fixture fails", () => {
   assert.match(parsed.error.message, /duplicate dependency node id|toNodeId/);
 });
 
+test("duplicate dependency node ids fail", () => {
+  const parsed = ModuleDependencyGraphSchema.safeParse(
+    loadJson("examples/dependencies/duplicate-dependency-node-id.invalid.json"),
+  );
+  assert.equal(parsed.success, false);
+  assert.match(parsed.error.message, /duplicate dependency node id/);
+});
+
+test("duplicate dependency edge ids fail", () => {
+  const parsed = ModuleDependencyGraphSchema.safeParse(
+    loadJson("examples/dependencies/duplicate-dependency-edge-id.invalid.json"),
+  );
+  assert.equal(parsed.success, false);
+  assert.match(parsed.error.message, /duplicate dependency edge id/);
+});
+
+test("missing node references fail", () => {
+  const parsed = ModuleDependencyGraphSchema.safeParse(
+    loadJson("examples/dependencies/missing-node-reference.invalid.json"),
+  );
+  assert.equal(parsed.success, false);
+  assert.match(parsed.error.message, /toNodeId/);
+});
+
 test("unresolved required dependency fixture fails", () => {
   const parsed = ModuleDependencyGraphSchema.safeParse(loadJson("examples/dependencies/unresolved-required-dependency.invalid.json"));
   assert.equal(parsed.success, false);
-  assert.match(parsed.error.message, /required dependency edge/);
+  assert.match(parsed.error.message, /required dependency/);
+});
+
+test("unresolved optional dependency fixture passes", () => {
+  const parsed = ModuleDependencyGraphSchema.safeParse(
+    loadJson("examples/dependencies/unresolved-optional-dependency.valid.json"),
+  );
+  assert.equal(parsed.success, true);
+});
+
+test("external dependencies require sourceRef", () => {
+  const parsed = ModuleDependencyGraphSchema.safeParse(
+    loadJson("examples/dependencies/external-missing-source-ref.invalid.json"),
+  );
+  assert.equal(parsed.success, false);
+  assert.match(parsed.error.message, /sourceRef/);
 });
 
 function loadJson(relativePath: string): unknown {

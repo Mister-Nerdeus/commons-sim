@@ -1,0 +1,31 @@
+{
+  "ruleSetId": "bad-requires-adapter-no-notes",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "bad-adapter-without-notes",
+      "fromResourceType": "food",
+      "toResourceType": "prepared-meals",
+      "fromUnit": "kg/day",
+      "toUnit": "meals/day",
+      "fromUnitFamily": "mass",
+      "toUnitFamily": "count",
+      "fromDirection": "output",
+      "toDirection": "input",
+      "fromTimingModel": "daily",
+      "toTimingModel": "daily",
+      "capacityRelation": "not_checked",
+      "allocationModeCompatibility": {
+        "from": "proportional",
+        "to": "priority"
+      },
+      "criticalityRelation": "not_checked",
+      "decision": "requires_adapter",
+      "rationale": "Raw ingredients require preparation before becoming meals.",
+      "requiresAdapter": true,
+      "adapterNotes": "",
+      "qualityRequirements": ["food-safe"]
+    }
+  ],
+  "validationStatus": "schema_valid"
+}

@@ -7,7 +7,8 @@
       "moduleId": "community-meals",
       "templateId": "community-meals-generic",
       "dependencyType": "service",
-      "state": "required",
+      "requiredness": "required",
+      "state": "satisfied",
       "description": "Community meals module dependency root.",
       "sourceRef": "examples/modules/generic/community-meals.template.json"
     },
@@ -16,6 +17,7 @@
       "moduleId": "community-meals",
       "templateId": "community-meals-generic",
       "dependencyType": "resource",
+      "requiredness": "required",
       "state": "unresolved",
       "description": "Required food supply dependency is unresolved.",
       "sourceRef": "examples/modules/generic/community-meals.template.json"

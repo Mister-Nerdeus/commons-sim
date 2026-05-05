@@ -10,4 +10,4 @@ Basis:
 - Missing compatibility rules fail closed with `MISSING_COMPATIBILITY_RULE`.
 - Adapter-required behavior is documented as a warning-only static validation result.
 - Build, test, determinism, env parity, registry validation, and Docker-inclusive local validation passed.
-- No graph compiler, module execution, runtime resolver, engine refactor, scenario migration, product binding, BOM/export/reporting behavior, or UI workflow was implemented.
+- No graph compiler, module execution, runtime resolver, engine refactor, scenario migration, product binding, BOM/export/reporting behavior, UI workflow, or Batch 15 CLI graph validation command was implemented.

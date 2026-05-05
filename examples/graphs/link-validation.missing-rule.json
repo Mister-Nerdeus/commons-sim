@@ -1,0 +1,20 @@
+{
+  "graphId": "link-validation-missing-rule",
+  "graphKind": "solution",
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "community-meals-source", "moduleId": "community-meals", "label": "Community Meals Source" },
+    { "id": "community-meals-sink", "moduleId": "community-meals", "label": "Community Meals Sink" }
+  ],
+  "edges": [
+    {
+      "id": "meals-to-ingredients-missing-rule",
+      "fromNodeId": "community-meals-source",
+      "fromTerminalId": "food.meals_out",
+      "toNodeId": "community-meals-sink",
+      "toTerminalId": "food.ingredients_in",
+      "resourceType": "prepared-meals",
+      "linkPattern": "direct connection"
+    }
+  ]
+}

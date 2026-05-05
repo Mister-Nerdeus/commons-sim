@@ -1,0 +1,20 @@
+{
+  "graphId": "link-validation-incompatible-unit",
+  "graphKind": "solution",
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "laundry-source", "moduleId": "laundry", "label": "Laundry Source" },
+    { "id": "laundry-sink", "moduleId": "laundry", "label": "Laundry Sink" }
+  ],
+  "edges": [
+    {
+      "id": "loads-unit-mismatch",
+      "fromNodeId": "laundry-source",
+      "fromTerminalId": "laundry.clean_loads_out",
+      "toNodeId": "laundry-sink",
+      "toTerminalId": "laundry.loads_in",
+      "resourceType": "laundry-loads",
+      "linkPattern": "direct connection"
+    }
+  ]
+}

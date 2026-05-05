@@ -13,7 +13,8 @@ export const DependencyCategorySchema = z.enum([
   "information",
 ]);
 
-export const DependencyStateSchema = z.enum(["required", "optional", "satisfied", "unresolved", "external"]);
+export const DependencyRequirednessSchema = z.enum(["required", "optional"]);
+export const DependencyStateSchema = z.enum(["satisfied", "unresolved", "external"]);
 
 export const ModuleDependencyNodeSchema = z
   .object({
@@ -21,11 +22,29 @@ export const ModuleDependencyNodeSchema = z
     moduleId: SlugIdSchema,
     templateId: SlugIdSchema,
     dependencyType: DependencyCategorySchema,
+    requiredness: DependencyRequirednessSchema,
     state: DependencyStateSchema,
     description: z.string().min(1),
-    sourceRef: z.string().min(1),
+    sourceRef: z.string(),
   })
-  .strict();
+  .strict()
+  .superRefine((node, ctx) => {
+    if (node.requiredness === "required" && node.state === "unresolved") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["state"],
+        message: "required dependency nodes may not remain unresolved",
+      });
+    }
+
+    if (node.state === "external" && node.sourceRef.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["sourceRef"],
+        message: "external dependency nodes require a sourceRef",
+      });
+    }
+  });
 
 export const ModuleDependencyEdgeSchema = z
   .object({
@@ -99,6 +118,7 @@ export const ModuleDependencyGraphSchema = z
   });
 
 export type DependencyCategory = z.infer<typeof DependencyCategorySchema>;
+export type DependencyRequiredness = z.infer<typeof DependencyRequirednessSchema>;
 export type DependencyState = z.infer<typeof DependencyStateSchema>;
 export type ModuleDependencyNode = z.infer<typeof ModuleDependencyNodeSchema>;
 export type ModuleDependencyEdge = z.infer<typeof ModuleDependencyEdgeSchema>;

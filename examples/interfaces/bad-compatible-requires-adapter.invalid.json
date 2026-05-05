@@ -1,0 +1,31 @@
+{
+  "ruleSetId": "bad-compatible-requires-adapter",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "bad-compatible-adapter-flag",
+      "fromResourceType": "prepared-meals",
+      "toResourceType": "meal-demand",
+      "fromUnit": "meals/day",
+      "toUnit": "meals/day",
+      "fromUnitFamily": "count",
+      "toUnitFamily": "count",
+      "fromDirection": "output",
+      "toDirection": "input",
+      "fromTimingModel": "daily",
+      "toTimingModel": "daily",
+      "capacityRelation": "source_peak_gte_target_nominal",
+      "allocationModeCompatibility": {
+        "from": "proportional",
+        "to": "priority"
+      },
+      "criticalityRelation": "target_may_exceed_source",
+      "decision": "compatible",
+      "rationale": "Compatible decisions may not require adapters.",
+      "requiresAdapter": true,
+      "adapterNotes": "",
+      "qualityRequirements": ["ready-to-serve"]
+    }
+  ],
+  "validationStatus": "schema_valid"
+}

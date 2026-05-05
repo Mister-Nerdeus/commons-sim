@@ -1,0 +1,20 @@
+{
+  "graphId": "link-validation-invalid-direction-output-output",
+  "graphKind": "solution",
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "laundry-source", "moduleId": "laundry", "label": "Laundry Source" },
+    { "id": "laundry-sink", "moduleId": "laundry", "label": "Laundry Sink" }
+  ],
+  "edges": [
+    {
+      "id": "output-to-output",
+      "fromNodeId": "laundry-source",
+      "fromTerminalId": "laundry.clean_loads_out",
+      "toNodeId": "laundry-sink",
+      "toTerminalId": "laundry.clean_loads_out",
+      "resourceType": "laundry-loads",
+      "linkPattern": "direct connection"
+    }
+  ]
+}

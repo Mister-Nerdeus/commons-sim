@@ -11,6 +11,7 @@
 - `artifacts/batches/batch-15/known-gaps.md`
 - `artifacts/batches/batch-15/go-no-go.md`
 - `artifacts/batches/batch-15/risk-register.md`
+- `artifacts/batches/batch-15/forbidden-scope-review.md`
 - `artifacts/batches/batch-15/issue-46-commands.md`
 - `artifacts/batches/batch-15/issue-46-files-changed.md`
 - `artifacts/batches/batch-15/issue-47-commands.md`

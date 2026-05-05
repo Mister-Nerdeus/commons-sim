@@ -1,0 +1,18 @@
+{
+  "graphId": "external-missing-source-ref",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "id": "community-meals-external-staffing",
+      "moduleId": "community-meals",
+      "templateId": "community-meals-generic",
+      "dependencyType": "labor",
+      "requiredness": "required",
+      "state": "external",
+      "description": "External dependencies must cite their source reference.",
+      "sourceRef": ""
+    }
+  ],
+  "edges": [],
+  "validationStatus": "schema_valid"
+}

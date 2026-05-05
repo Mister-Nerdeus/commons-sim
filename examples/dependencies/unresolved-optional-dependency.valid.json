@@ -1,0 +1,18 @@
+{
+  "graphId": "unresolved-optional-dependency",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "id": "community-meals-optional-info",
+      "moduleId": "community-meals",
+      "templateId": "community-meals-generic",
+      "dependencyType": "information",
+      "requiredness": "optional",
+      "state": "unresolved",
+      "description": "Optional demand detail may remain unresolved in static validation.",
+      "sourceRef": ""
+    }
+  ],
+  "edges": [],
+  "validationStatus": "schema_valid"
+}

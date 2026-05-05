@@ -1,5 +1,5 @@
 {
-  "graphId": "community-services-dependencies-invalid",
+  "graphId": "duplicate-dependency-node-id",
   "version": "1.0.0",
   "nodes": [
     {
@@ -9,7 +9,7 @@
       "dependencyType": "resource",
       "requiredness": "required",
       "state": "satisfied",
-      "description": "Food supply assumption is present.",
+      "description": "Food supply dependency is satisfied.",
       "sourceRef": "examples/modules/generic/community-meals.template.json"
     },
     {
@@ -17,21 +17,12 @@
       "moduleId": "laundry",
       "templateId": "laundry-generic",
       "dependencyType": "service",
-      "requiredness": "required",
+      "requiredness": "optional",
       "state": "satisfied",
-      "description": "Duplicate dependency node id should fail.",
+      "description": "Duplicate node id should fail.",
       "sourceRef": "examples/modules/generic/laundry.template.json"
     }
   ],
-  "edges": [
-    {
-      "id": "missing-node-edge",
-      "fromNodeId": "community-meals-food-supply",
-      "toNodeId": "missing-upstream-node",
-      "dependencyType": "resource",
-      "required": true,
-      "rationale": "Missing node reference should fail."
-    }
-  ],
+  "edges": [],
   "validationStatus": "schema_valid"
 }

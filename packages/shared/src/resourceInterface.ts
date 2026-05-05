@@ -142,6 +142,14 @@ export const ResourceCompatibilityRuleSchema = z
       });
     }
 
+    if (rule.decision === "compatible" && rule.adapterNotes.trim().length > 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["adapterNotes"],
+        message: "adapterNotes must be empty when decision is compatible",
+      });
+    }
+
     if (rule.fromDirection === "input" && rule.toDirection === "input") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

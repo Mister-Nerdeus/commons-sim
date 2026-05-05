@@ -61,8 +61,11 @@ Phase C must not claim any of the following until implemented and audited:
 
 - Compatibility rules distinguish `compatible`, `incompatible`, and `requires_adapter`.
 - Adapter-required graph links are warnings, not graph compiler behavior.
-- Required dependency edges may not target unresolved dependency nodes.
+- Compatible rules cannot carry adapter notes or set `requiresAdapter: true`.
+- Required dependency nodes cannot remain unresolved, and required dependency edges may not target unresolved dependency nodes.
+- Optional unresolved dependency nodes are allowed by the static dependency graph contract.
 - Graph link validation remains pure and side-effect-free.
+- Duplicate module templates are static graph link validation errors.
 
 ## Batch 16 Corrections Carried Forward
 

@@ -1,0 +1,20 @@
+{
+  "graphId": "link-validation-invalid-direction-input-input",
+  "graphKind": "solution",
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "community-meals", "moduleId": "community-meals", "label": "Community Meals" },
+    { "id": "laundry", "moduleId": "laundry", "label": "Laundry" }
+  ],
+  "edges": [
+    {
+      "id": "input-to-input",
+      "fromNodeId": "community-meals",
+      "fromTerminalId": "food.ingredients_in",
+      "toNodeId": "laundry",
+      "toTerminalId": "laundry.loads_in",
+      "resourceType": "food",
+      "linkPattern": "direct connection"
+    }
+  ]
+}

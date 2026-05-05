@@ -1,0 +1,55 @@
+{
+  "ruleSetId": "duplicate-compatibility-rule-id",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "prepared-meals-direct",
+      "fromResourceType": "prepared-meals",
+      "toResourceType": "prepared-meals",
+      "fromUnit": "meals/day",
+      "toUnit": "meals/day",
+      "fromUnitFamily": "count",
+      "toUnitFamily": "count",
+      "fromDirection": "output",
+      "toDirection": "input",
+      "fromTimingModel": "daily",
+      "toTimingModel": "daily",
+      "capacityRelation": "source_peak_gte_target_nominal",
+      "allocationModeCompatibility": {
+        "from": "proportional",
+        "to": "priority"
+      },
+      "criticalityRelation": "target_may_exceed_source",
+      "decision": "compatible",
+      "rationale": "Prepared meal output can satisfy prepared meal input.",
+      "requiresAdapter": false,
+      "adapterNotes": "",
+      "qualityRequirements": ["ready-to-serve"]
+    },
+    {
+      "id": "prepared-meals-direct",
+      "fromResourceType": "prepared-meals",
+      "toResourceType": "meal-demand",
+      "fromUnit": "meals/day",
+      "toUnit": "meals/day",
+      "fromUnitFamily": "count",
+      "toUnitFamily": "count",
+      "fromDirection": "output",
+      "toDirection": "input",
+      "fromTimingModel": "daily",
+      "toTimingModel": "daily",
+      "capacityRelation": "source_peak_gte_target_nominal",
+      "allocationModeCompatibility": {
+        "from": "proportional",
+        "to": "priority"
+      },
+      "criticalityRelation": "target_may_exceed_source",
+      "decision": "compatible",
+      "rationale": "Duplicate rule id should fail.",
+      "requiresAdapter": false,
+      "adapterNotes": "",
+      "qualityRequirements": ["ready-to-serve"]
+    }
+  ],
+  "validationStatus": "schema_valid"
+}

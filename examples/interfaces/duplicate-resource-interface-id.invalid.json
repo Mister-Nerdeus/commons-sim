@@ -1,0 +1,39 @@
+{
+  "registryId": "duplicate-resource-interface-id",
+  "version": "1.0.0",
+  "interfaces": [
+    {
+      "id": "prepared-meals",
+      "resourceType": "prepared-meals",
+      "unit": "meals/day",
+      "unitFamily": "count",
+      "timingModels": ["daily"],
+      "qualityAttributes": ["ready-to-serve"],
+      "allowedDirections": ["output"],
+      "capacityBasis": "Daily prepared meal throughput.",
+      "notes": "First prepared meal interface.",
+      "provenance": {
+        "sourceType": "assumption",
+        "sourceRef": "Batch 15 duplicate id fixture"
+      },
+      "validationStatus": "schema_valid"
+    },
+    {
+      "id": "prepared-meals",
+      "resourceType": "meal-demand",
+      "unit": "meals/day",
+      "unitFamily": "count",
+      "timingModels": ["daily"],
+      "qualityAttributes": ["ready-to-serve"],
+      "allowedDirections": ["input"],
+      "capacityBasis": "Daily meal demand.",
+      "notes": "Duplicate id should fail closed.",
+      "provenance": {
+        "sourceType": "assumption",
+        "sourceRef": "Batch 15 duplicate id fixture"
+      },
+      "validationStatus": "schema_valid"
+    }
+  ],
+  "validationStatus": "schema_valid"
+}
