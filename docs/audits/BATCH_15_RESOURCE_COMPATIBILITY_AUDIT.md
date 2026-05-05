@@ -14,7 +14,7 @@ Batch 15 adds schema-only resource interfaces, compatibility rules, dependency g
 | #47 | Module dependency graph contract exists | `DependencyCategorySchema`, `DependencyStateSchema`, node, edge, and graph schemas exist in `packages/shared/src/moduleDependencyGraph.ts` and are exported | PASS |
 | #47 | Dependency graph invalid states are rejected | Tests cover duplicate node ids, missing node references, and unresolved required dependency fixture | PASS |
 | #48 | Static graph link validation exists | `validateGraphLinks` and result/issue schemas exist in `packages/shared/src/graphLinkValidation.ts` and are exported | PASS |
-| #48 | Validator reports compatibility issues | Tests cover success, missing references, invalid direction, incompatible resource, and adapter-required warning | PASS |
+| #48 | Validator reports compatibility issues | Tests cover success, missing references, invalid direction, incompatible resource, missing compatibility rule fail-closed behavior, and adapter-required warning | PASS |
 | #49 | Audit and validation evidence exists | Batch 15 artifact files and `artifacts/controls/local-validation/latest.json` exist | PASS |
 
 ## Required Questions
@@ -31,18 +31,19 @@ Batch 15 adds schema-only resource interfaces, compatibility rules, dependency g
 10. Does graph link validation catch missing nodes/terminals? Yes.
 11. Does graph link validation catch invalid direction pairs? Yes.
 12. Does graph link validation catch resource/unit incompatibility? Yes.
-13. Is adapter-required behavior documented and tested? Yes; adapter-required returns an `ADAPTER_REQUIRED` warning and `ok: true` if no errors exist.
-14. Did build/test/determinism pass? Yes.
-15. Did local validation pass? Yes, with Docker enabled.
-16. Did engine behavior remain unchanged? Yes; no `packages/engine` files changed and determinism hash stayed `8c9372a7e9a23f95a20ae0fa5bd4d5dab6e0856e2e08c61af3c50428f920c08e`.
-17. What remains explicitly not implemented? Graph compilation, module execution, runtime dependency resolution, engine refactor, scenario migration, product binding, BOM/export/reporting, and UI workflows.
-18. Is the next Phase C issue allowed to start? GO.
+13. Does missing compatibility rule fail closed? Yes; no matching explicit rule returns `MISSING_COMPATIBILITY_RULE` with `severity: "error"`.
+14. Is adapter-required behavior documented and tested? Yes; adapter-required returns an `ADAPTER_REQUIRED` warning and `ok: true` if no errors exist.
+15. Did build/test/determinism pass? Yes.
+16. Did local validation pass? Yes, with Docker enabled.
+17. Did engine behavior remain unchanged? Yes; no `packages/engine` files changed and determinism hash stayed `8c9372a7e9a23f95a20ae0fa5bd4d5dab6e0856e2e08c61af3c50428f920c08e`.
+18. What remains explicitly not implemented? Graph compilation, module execution, runtime dependency resolution, engine refactor, scenario migration, product binding, BOM/export/reporting, and UI workflows.
+19. Is the next Phase C issue allowed to start? GO.
 
 ## Validation Summary
 
 - `git diff --check` - PASS
 - `pnpm --filter @commons-sim/shared build` - PASS
-- `pnpm --filter @commons-sim/shared test` - PASS, 51 tests passed
+- `pnpm --filter @commons-sim/shared test` - PASS, 52 tests passed
 - `pnpm build` - PASS
 - `pnpm test` - PASS
 - `pnpm determinism:check` - PASS, hash `8c9372a7e9a23f95a20ae0fa5bd4d5dab6e0856e2e08c61af3c50428f920c08e`

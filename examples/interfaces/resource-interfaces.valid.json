@@ -3,18 +3,18 @@
   "version": "1.0.0",
   "interfaces": [
     {
-      "id": "prepared-meals-daily",
+      "id": "prepared-meals",
       "resourceType": "prepared-meals",
       "unit": "meals/day",
       "unitFamily": "count",
       "timingModels": ["daily"],
-      "qualityAttributes": ["ready-to-serve"],
-      "allowedDirections": ["output", "input"],
-      "capacityBasis": "nominal_and_peak",
-      "notes": "Prepared meal flow measured as daily meal count.",
+      "qualityAttributes": ["ready-to-serve", "food-safe"],
+      "allowedDirections": ["input", "output"],
+      "capacityBasis": "Daily prepared meal throughput.",
+      "notes": "Generic prepared meal resource interface for settlement food-service modules.",
       "provenance": {
         "sourceType": "assumption",
-        "sourceRef": "Batch 15 resource interface seed"
+        "sourceRef": "Batch 15 generic resource interface seed"
       },
       "validationStatus": "schema_valid"
     },
@@ -26,7 +26,7 @@
       "timingModels": ["daily"],
       "qualityAttributes": ["soiled", "clean"],
       "allowedDirections": ["input", "output"],
-      "capacityBasis": "nominal_and_peak",
+      "capacityBasis": "Daily laundry load throughput.",
       "notes": "Laundry load flow measured as daily load count.",
       "provenance": {
         "sourceType": "assumption",
@@ -42,7 +42,7 @@
       "timingModels": ["daily"],
       "qualityAttributes": ["potable"],
       "allowedDirections": ["input", "output"],
-      "capacityBasis": "nominal_and_peak",
+      "capacityBasis": "Daily potable water throughput.",
       "notes": "Daily potable water flow contract.",
       "provenance": {
         "sourceType": "assumption",

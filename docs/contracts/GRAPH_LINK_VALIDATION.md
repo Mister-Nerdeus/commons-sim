@@ -45,6 +45,7 @@ Expected issue codes include:
 - `INCOMPATIBLE_UNIT`
 - `INCOMPATIBLE_TIMING`
 - `ADAPTER_REQUIRED`
+- `MISSING_COMPATIBILITY_RULE`
 
 ## Adapter-Required Behavior
 
@@ -52,7 +53,7 @@ Rules with `decision: "requires_adapter"` produce an `ADAPTER_REQUIRED` warning.
 
 ## Compatibility Rules
 
-If no explicit compatibility rule matches a link, the validator accepts only exact static compatibility for resource type, unit, and timing model. Resource changes, unit changes, and timing changes are reported as errors unless an explicit rule accounts for them.
+If no explicit compatibility rule matches a link, the validator fails closed with `MISSING_COMPATIBILITY_RULE`. Resource changes, unit changes, and timing changes are also reported as diagnostic errors unless an explicit rule accounts for them.
 
 ## Fixtures
 

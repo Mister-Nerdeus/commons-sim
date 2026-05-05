@@ -1,7 +1,7 @@
 # Issue #46 Commands
 
 - `pnpm --filter @commons-sim/shared build` - PASS
-- `pnpm --filter @commons-sim/shared test` - PASS, 51 tests passed
+- `pnpm --filter @commons-sim/shared test` - PASS, 52 tests passed
 - `pnpm build` - PASS
 - `pnpm test` - PASS
 - `pnpm determinism:check` - PASS, hash `8c9372a7e9a23f95a20ae0fa5bd4d5dab6e0856e2e08c61af3c50428f920c08e`

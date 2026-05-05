@@ -10,7 +10,7 @@
       "timingModels": ["daily"],
       "qualityAttributes": ["ready-to-serve"],
       "allowedDirections": ["output"],
-      "capacityBasis": "nominal_and_peak",
+      "capacityBasis": "Daily prepared meal throughput.",
       "notes": "Prepared meal flow measured as daily meal count.",
       "provenance": {
         "sourceType": "assumption",
@@ -26,7 +26,7 @@
       "timingModels": ["daily"],
       "qualityAttributes": ["ready-to-serve"],
       "allowedDirections": ["output"],
-      "capacityBasis": "nominal_and_peak",
+      "capacityBasis": "Daily prepared meal throughput.",
       "notes": "Duplicate id and invalid unit casing should fail.",
       "provenance": {
         "sourceType": "assumption",

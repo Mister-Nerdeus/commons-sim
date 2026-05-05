@@ -21,6 +21,7 @@ export const GraphLinkValidationIssueCodeSchema = z.enum([
   "INCOMPATIBLE_UNIT",
   "INCOMPATIBLE_TIMING",
   "ADAPTER_REQUIRED",
+  "MISSING_COMPATIBILITY_RULE",
 ]);
 
 export const GraphLinkValidationIssueSchema = z
@@ -104,6 +105,15 @@ export function validateGraphLinks(
       issues.push(...issuesForRule(edge, fromTerminal, toTerminal, rule));
       continue;
     }
+
+    issues.push(issue("MISSING_COMPATIBILITY_RULE", "error", edge.id, "no explicit compatibility rule matches this graph link", {
+      fromResourceType: fromTerminal.resourceType,
+      toResourceType: toTerminal.resourceType,
+      fromUnit: fromTerminal.unit,
+      toUnit: toTerminal.unit,
+      fromTimingModel: fromTerminal.timingModel,
+      toTimingModel: toTerminal.timingModel,
+    }));
 
     if (fromTerminal.resourceType !== toTerminal.resourceType) {
       issues.push(issue("INCOMPATIBLE_RESOURCE_TYPE", "error", edge.id, "terminal resource types are not compatible and no rule allows them", {

@@ -92,6 +92,17 @@ test("adapter-required fixture returns warning and remains ok", () => {
   assert.equal(result.issues[0]?.severity, "warning");
 });
 
+test("missing compatibility rule fails closed", () => {
+  const result = validateGraphLinks(
+    loadGraph("examples/graphs/link-validation.valid.json"),
+    loadTemplates(),
+    { ...loadRules(), rules: [] },
+  );
+
+  assert.equal(result.ok, false);
+  assert.equal(result.issues.some((issue) => issue.code === "MISSING_COMPATIBILITY_RULE"), true);
+});
+
 test("missing graph nodes and terminals are reported as structured errors", () => {
   const graph = loadGraph("examples/graphs/link-validation.valid.json");
   graph.edges = [

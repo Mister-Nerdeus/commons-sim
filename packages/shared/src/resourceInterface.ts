@@ -23,7 +23,7 @@ export const CapacityRelationSchema = z.enum([
   "source_peak_gte_target_nominal",
 ]);
 
-export const ResourceCapacityBasisSchema = z.enum(["nominal", "peak", "nominal_and_peak", "not_applicable"]);
+export const ResourceCapacityBasisSchema = z.string().min(1);
 
 export const CriticalityRelationSchema = z.enum([
   "not_checked",
