@@ -1,0 +1,21 @@
+{
+  "manifestVersion": 2,
+  "projectId": "compile-unsupported-dream",
+  "projectTitle": "Compile Unsupported Dream Project",
+  "createdAtUtc": "2026-05-05T00:00:00.000Z",
+  "updatedAtUtc": "2026-05-05T00:00:00.000Z",
+  "sourceBranch": "develop",
+  "designMode": "dream",
+  "designDocument": {
+    "designVersion": 1,
+    "designId": "compile-unsupported-dream-design",
+    "title": "Compile Unsupported Dream Project",
+    "description": "Dream Mode layout without compiled Scenario V1.",
+    "layoutGraphRef": "examples/layouts/incomplete-dream.layout.json",
+    "userAnnotations": ["Saveable but not compilable yet."],
+    "tags": ["dream", "unsupported-compile"]
+  },
+  "validationResults": [],
+  "aiProposals": [],
+  "metadata": { "notes": "Unsupported content remains saveable in Dream Mode." }
+}

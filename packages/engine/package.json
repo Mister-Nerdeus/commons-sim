@@ -7,12 +7,13 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "c8 --reporter=text-summary --check-coverage --lines 65 --functions 65 --branches 55 --statements 65 node --test dist/test.js dist/submodels.test.js dist/semantic.test.js dist/sensitivity.test.js dist/challenge.test.js",
+    "test": "c8 --reporter=text-summary --check-coverage --lines 65 --functions 65 --branches 55 --statements 65 node --test dist/test.js dist/submodels.test.js dist/semantic.test.js dist/sensitivity.test.js dist/challenge.test.js dist/generators/polygonVillageGenerator.test.js dist/compileToScenarioV1.test.js",
     "lint": "echo \"(add eslint later)\"",
     "format": "prettier -w .",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@commons-sim/shared": "workspace:*"
+    "@commons-sim/shared": "workspace:*",
+    "zod": "^3.23.8"
   }
 }

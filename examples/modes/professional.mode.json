@@ -1,0 +1,18 @@
+{
+  "policyVersion": 1,
+  "mode": "professional",
+  "label": "Professional Mode",
+  "description": "Requires provenance, cost data, and real-world binding before export.",
+  "allowPartialGraphs": false,
+  "allowUnconnectedTerminals": false,
+  "allowExperimentalModules": false,
+  "allowFantasyGeometry": false,
+  "allowMissingCostData": false,
+  "allowMissingRealWorldBinding": false,
+  "allowAiDraftArtifacts": false,
+  "canSaveWithWarnings": false,
+  "canSimulateWithWarnings": false,
+  "canSubmitToLeaderboard": false,
+  "canExportProfessionalReport": true,
+  "lockedFieldPaths": []
+}

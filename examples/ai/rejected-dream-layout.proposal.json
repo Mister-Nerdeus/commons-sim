@@ -1,0 +1,31 @@
+{
+  "proposalVersion": 1,
+  "proposalId": "rejected-dream-layout-proposal",
+  "createdAtUtc": "2026-05-05T00:00:00.000Z",
+  "prompt": "Try an impossible fantasy layout.",
+  "seed": 42,
+  "designMode": "dream",
+  "status": "rejected",
+  "stylePreset": "fantasy",
+  "warnings": [
+    {
+      "code": "fantasy-geometry",
+      "severity": "info",
+      "path": "generatedDesignDocument",
+      "message": "Fantasy geometry is allowed in Dream Mode but not strict modes.",
+      "mode": "dream",
+      "canUserOverride": true
+    }
+  ],
+  "ai": {
+    "origin": "AI",
+    "scope": "Experimental",
+    "confidence": "Low",
+    "validation_status": "Partial"
+  },
+  "userDecision": {
+    "decidedAtUtc": "2026-05-05T00:30:00.000Z",
+    "decision": "rejected",
+    "notes": "Kept as proposal history only."
+  }
+}

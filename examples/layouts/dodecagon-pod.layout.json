@@ -1,0 +1,39 @@
+{
+  "layoutVersion": 1,
+  "layoutId": "dodecagon-pod-layout",
+  "title": "Dodecagon Pod Layout",
+  "units": "ft",
+  "coordinateSystem": "local-cartesian",
+  "designMode": "dream",
+  "scale": { "value": 1, "unit": "ft" },
+  "nodes": [
+    {
+      "id": "outer-service-ring",
+      "kind": "service-road",
+      "geometry": { "type": "ring", "center": { "x": 0, "y": 0 }, "innerRadius": 230, "outerRadius": 250, "sideCount": 12 },
+      "label": "Outer Service Ring"
+    },
+    {
+      "id": "housing-ring",
+      "kind": "lot",
+      "geometry": { "type": "regular-polygon", "center": { "x": 0, "y": 0 }, "radius": 210, "sideCount": 12, "rotationDegrees": 15 },
+      "label": "Housing Ring"
+    },
+    {
+      "id": "central-hub",
+      "kind": "community-hub",
+      "geometry": { "type": "regular-polygon", "center": { "x": 0, "y": 0 }, "radius": 60, "sideCount": 12, "rotationDegrees": 15 },
+      "label": "Central Hub"
+    }
+  ],
+  "edges": [
+    { "id": "housing-served-by-road", "fromNodeId": "outer-service-ring", "toNodeId": "housing-ring", "kind": "serves", "label": "service access" },
+    { "id": "hub-inside-housing", "fromNodeId": "housing-ring", "toNodeId": "central-hub", "kind": "contains", "label": "center" }
+  ],
+  "metadata": {
+    "seed": 1201,
+    "generatorId": "polygon-village-generator",
+    "notes": "Static design-storage fixture, not simulation truth.",
+    "tags": ["dodecagon", "pod"]
+  }
+}

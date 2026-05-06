@@ -1,0 +1,44 @@
+{
+  "manifestVersion": 2,
+  "projectId": "dream-incomplete",
+  "projectTitle": "Dream Incomplete Village",
+  "createdAtUtc": "2026-05-05T00:00:00.000Z",
+  "updatedAtUtc": "2026-05-05T00:00:00.000Z",
+  "sourceBranch": "develop",
+  "designMode": "dream",
+  "designDocument": {
+    "designVersion": 1,
+    "designId": "dream-incomplete-design",
+    "title": "Dream Incomplete Village",
+    "description": "Freeform layout with no compiled Scenario V1 yet.",
+    "layoutGraphRef": "examples/layouts/incomplete-dream.layout.json",
+    "userAnnotations": ["Saveable Dream Mode sketch."],
+    "tags": ["dream", "incomplete"]
+  },
+  "validationResults": [
+    {
+      "ok": true,
+      "mode": "dream",
+      "canSave": true,
+      "canSimulate": false,
+      "canSubmitToLeaderboard": false,
+      "canExportProfessionalReport": false,
+      "issueCount": 1,
+      "issues": [
+        {
+          "code": "missing-compiled-scenario",
+          "severity": "warning",
+          "path": "compiledScenario",
+          "message": "No compiled Scenario V1 is attached yet.",
+          "mode": "dream",
+          "canUserOverride": true
+        }
+      ]
+    }
+  ],
+  "aiProposals": [],
+  "metadata": {
+    "notes": "Dream Mode allows incomplete creative save.",
+    "author": "Codex"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "evidenceType": "runtime-version-proof",
+  "generatedAtUtc": "2026-05-06T01:22:33.131Z",
+  "expectedNode": "22.x",
+  "actualNode": "v22.16.0",
+  "expectedPnpm": "9.x",
+  "actualPnpm": "9.0.0",
+  "ok": true
+}

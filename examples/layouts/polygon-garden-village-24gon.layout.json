@@ -1,0 +1,45 @@
+{
+  "layoutVersion": 1,
+  "layoutId": "polygon-garden-village-24gon-layout",
+  "title": "Polygon Garden Village 24-Gon Layout",
+  "units": "ft",
+  "coordinateSystem": "local-cartesian",
+  "designMode": "dream",
+  "scale": { "value": 1, "unit": "ft" },
+  "nodes": [
+    {
+      "id": "outer-service-ring",
+      "kind": "service-road",
+      "geometry": { "type": "ring", "center": { "x": 0, "y": 0 }, "innerRadius": 430, "outerRadius": 460, "sideCount": 24 },
+      "label": "Outer Service Ring"
+    },
+    {
+      "id": "garden-green",
+      "kind": "green-space",
+      "geometry": { "type": "regular-polygon", "center": { "x": 0, "y": 0 }, "radius": 145, "sideCount": 24, "rotationDegrees": 7.5 },
+      "label": "Inner Garden Green"
+    },
+    {
+      "id": "walking-loop",
+      "kind": "path",
+      "geometry": { "type": "ring", "center": { "x": 0, "y": 0 }, "innerRadius": 175, "outerRadius": 185, "sideCount": 24 },
+      "label": "Walking Loop"
+    },
+    {
+      "id": "north-utility-corridor",
+      "kind": "utility-corridor",
+      "geometry": { "type": "path", "points": [{ "x": 0, "y": 0 }, { "x": 0, "y": 455 }], "width": 16 },
+      "label": "North Utility Corridor"
+    }
+  ],
+  "edges": [
+    { "id": "loop-adjacent-green", "fromNodeId": "walking-loop", "toNodeId": "garden-green", "kind": "adjacent-to", "label": "garden access" },
+    { "id": "road-serves-corridor", "fromNodeId": "outer-service-ring", "toNodeId": "north-utility-corridor", "kind": "serves", "label": "utility access" }
+  ],
+  "metadata": {
+    "seed": 1337,
+    "generatorId": "polygon-village-generator",
+    "notes": "Static 24-gon design-storage fixture.",
+    "tags": ["24-gon", "garden-village"]
+  }
+}

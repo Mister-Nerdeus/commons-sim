@@ -10,3 +10,5 @@ export * from "./sensitivity.js";
 export * from "./capacity.js";
 export * from "./cashflow.js";
 export * from "./stress.js";
+export * from "./generators/polygonVillageGenerator.js";
+export * from "./compileToScenarioV1.js";

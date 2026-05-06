@@ -1,0 +1,18 @@
+{
+  "policyVersion": 1,
+  "mode": "research",
+  "label": "Research Mode",
+  "description": "Requires reproducibility and explicit assumptions.",
+  "allowPartialGraphs": false,
+  "allowUnconnectedTerminals": false,
+  "allowExperimentalModules": true,
+  "allowFantasyGeometry": false,
+  "allowMissingCostData": false,
+  "allowMissingRealWorldBinding": false,
+  "allowAiDraftArtifacts": false,
+  "canSaveWithWarnings": false,
+  "canSimulateWithWarnings": false,
+  "canSubmitToLeaderboard": false,
+  "canExportProfessionalReport": false,
+  "lockedFieldPaths": []
+}

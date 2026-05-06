@@ -14,6 +14,7 @@ import {
   type Scenario,
 } from "@commons-sim/shared";
 import { simulateScenario } from "@commons-sim/engine";
+import { BuilderShell } from "./builder/BuilderShell";
 import baseline from "../../../../scenarios/baseline-48.json";
 import exampleBasic from "../../../../examples/scenarios/basic.json";
 import exampleHighService from "../../../../examples/scenarios/high-service.json";
@@ -67,6 +68,7 @@ export default function App() {
   const [starterId, setStarterId] = useState<StarterTemplateId>("starter-balanced-24");
   const [challengeBenchmarkId, setChallengeBenchmarkId] = useState("balanced-48");
   const [statusMessage, setStatusMessage] = useState("No project actions yet.");
+  const [workspaceView, setWorkspaceView] = useState<"builder" | "scenario">("builder");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const baselineScenario = useMemo(() => {
@@ -268,11 +270,28 @@ export default function App() {
     <div className="workspace-shell">
       <header className="hero">
         <div>
-          <h1>Scenario Comparison Workspace</h1>
-          <p>Guided project creation, explainability, and persistence-aware release comparison.</p>
+          <h1>{workspaceView === "builder" ? "Freeform Builder Shell" : "Scenario Comparison Workspace"}</h1>
+          <p>
+            {workspaceView === "builder"
+              ? "Mode-aware project sketching with static polygon layout evidence."
+              : "Guided project creation, explainability, and persistence-aware release comparison."}
+          </p>
         </div>
       </header>
 
+      <nav className="workspace-tabs" aria-label="Workspace">
+        <button className={workspaceView === "builder" ? "active-tab" : ""} type="button" onClick={() => setWorkspaceView("builder")}>
+          Freeform Builder
+        </button>
+        <button className={workspaceView === "scenario" ? "active-tab" : ""} type="button" onClick={() => setWorkspaceView("scenario")}>
+          Scenario Workspace
+        </button>
+      </nav>
+
+      {workspaceView === "builder" ? (
+        <BuilderShell />
+      ) : (
+        <>
       <section className="panel wizard-panel">
         <h2>Guided Planning Wizard</h2>
         <div className="wizard-controls">
@@ -486,6 +505,8 @@ export default function App() {
           </tbody>
         </table>
       </section>
+        </>
+      )}
     </div>
   );
 }

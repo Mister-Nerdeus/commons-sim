@@ -1,0 +1,44 @@
+{
+  "manifestVersion": 2,
+  "projectId": "polygon-garden-village-24gon.seed-1337",
+  "projectTitle": "Polygon Garden Village 24-Gon",
+  "createdAtUtc": "2026-05-05T00:00:00.000Z",
+  "updatedAtUtc": "2026-05-05T00:00:00.000Z",
+  "sourceBranch": "develop",
+  "designMode": "dream",
+  "designDocument": {
+    "designVersion": 1,
+    "designId": "polygon-garden-village-24gon.seed-1337.design",
+    "title": "Polygon Garden Village 24-Gon",
+    "description": "Deterministic generator fixture; editable design storage only.",
+    "layoutGraphRef": "examples/layouts/polygon-garden-village-24gon.layout.json",
+    "userAnnotations": ["No professional validity or build approval is implied."],
+    "tags": ["generated", "24-gon", "garden"]
+  },
+  "validationResults": [
+    {
+      "ok": true,
+      "mode": "dream",
+      "canSave": true,
+      "canSimulate": false,
+      "canSubmitToLeaderboard": false,
+      "canExportProfessionalReport": false,
+      "issueCount": 1,
+      "issues": [
+        {
+          "code": "deterministic-draft",
+          "severity": "warning",
+          "path": "designDocument",
+          "message": "Generated layout is a deterministic editable draft, not professional validity.",
+          "mode": "dream",
+          "canUserOverride": true
+        }
+      ]
+    }
+  ],
+  "aiProposals": [],
+  "metadata": {
+    "notes": "Generated fixture for seed 1337.",
+    "author": "deterministic-polygon-village-generator"
+  }
+}
