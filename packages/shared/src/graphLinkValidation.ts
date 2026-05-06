@@ -70,29 +70,37 @@ export function validateGraphLinks(
     const toNode = nodesById.get(edge.toNodeId);
 
     if (!fromNode) {
-      issues.push(issue("MISSING_FROM_NODE", "error", edge.id, "fromNodeId does not reference a graph node", {
-        fromNodeId: edge.fromNodeId,
-      }));
+      issues.push(
+        issue("MISSING_FROM_NODE", "error", edge.id, "fromNodeId does not reference a graph node", {
+          fromNodeId: edge.fromNodeId,
+        }),
+      );
     }
 
     if (!toNode) {
-      issues.push(issue("MISSING_TO_NODE", "error", edge.id, "toNodeId does not reference a graph node", {
-        toNodeId: edge.toNodeId,
-      }));
+      issues.push(
+        issue("MISSING_TO_NODE", "error", edge.id, "toNodeId does not reference a graph node", {
+          toNodeId: edge.toNodeId,
+        }),
+      );
     }
 
     if (fromNode && duplicateModuleIds.has(fromNode.moduleId)) {
-      issues.push(issue("DUPLICATE_MODULE_TEMPLATE", "error", edge.id, "fromNode moduleId resolves to multiple templates", {
-        moduleId: fromNode.moduleId,
-        fromNodeId: fromNode.id,
-      }));
+      issues.push(
+        issue("DUPLICATE_MODULE_TEMPLATE", "error", edge.id, "fromNode moduleId resolves to multiple templates", {
+          moduleId: fromNode.moduleId,
+          fromNodeId: fromNode.id,
+        }),
+      );
     }
 
     if (toNode && duplicateModuleIds.has(toNode.moduleId)) {
-      issues.push(issue("DUPLICATE_MODULE_TEMPLATE", "error", edge.id, "toNode moduleId resolves to multiple templates", {
-        moduleId: toNode.moduleId,
-        toNodeId: toNode.id,
-      }));
+      issues.push(
+        issue("DUPLICATE_MODULE_TEMPLATE", "error", edge.id, "toNode moduleId resolves to multiple templates", {
+          moduleId: toNode.moduleId,
+          toNodeId: toNode.id,
+        }),
+      );
     }
 
     if ((fromNode && duplicateModuleIds.has(fromNode.moduleId)) || (toNode && duplicateModuleIds.has(toNode.moduleId))) {
@@ -103,17 +111,21 @@ export function validateGraphLinks(
     const toTerminal = toNode ? findTerminal(templatesByModuleId.get(toNode.moduleId), edge.toTerminalId) : undefined;
 
     if (fromNode && !fromTerminal) {
-      issues.push(issue("MISSING_FROM_TERMINAL", "error", edge.id, "fromTerminalId does not reference a module terminal", {
-        fromNodeId: edge.fromNodeId,
-        fromTerminalId: edge.fromTerminalId,
-      }));
+      issues.push(
+        issue("MISSING_FROM_TERMINAL", "error", edge.id, "fromTerminalId does not reference a module terminal", {
+          fromNodeId: edge.fromNodeId,
+          fromTerminalId: edge.fromTerminalId,
+        }),
+      );
     }
 
     if (toNode && !toTerminal) {
-      issues.push(issue("MISSING_TO_TERMINAL", "error", edge.id, "toTerminalId does not reference a module terminal", {
-        toNodeId: edge.toNodeId,
-        toTerminalId: edge.toTerminalId,
-      }));
+      issues.push(
+        issue("MISSING_TO_TERMINAL", "error", edge.id, "toTerminalId does not reference a module terminal", {
+          toNodeId: edge.toNodeId,
+          toTerminalId: edge.toTerminalId,
+        }),
+      );
     }
 
     if (!fromTerminal || !toTerminal) {
@@ -121,10 +133,22 @@ export function validateGraphLinks(
     }
 
     if (!isValidDirectionPair(fromTerminal.direction, toTerminal.direction)) {
-      issues.push(issue("INVALID_DIRECTION_PAIR", "error", edge.id, "graph edge direction pair is not output-to-input compatible", {
-        fromDirection: fromTerminal.direction,
-        toDirection: toTerminal.direction,
-      }));
+      issues.push(
+        issue("INVALID_DIRECTION_PAIR", "error", edge.id, "graph edge direction pair is not output-to-input compatible", {
+          fromDirection: fromTerminal.direction,
+          toDirection: toTerminal.direction,
+        }),
+      );
+    }
+
+    if (edge.resourceType !== fromTerminal.resourceType) {
+      issues.push(
+        issue("INCOMPATIBLE_RESOURCE_TYPE", "error", edge.id, "edge resourceType does not match the source terminal resourceType", {
+          edgeResourceType: edge.resourceType,
+          fromResourceType: fromTerminal.resourceType,
+          toResourceType: toTerminal.resourceType,
+        }),
+      );
     }
 
     const rule = findRule(rules, fromTerminal, toTerminal);
@@ -133,35 +157,43 @@ export function validateGraphLinks(
       continue;
     }
 
-    issues.push(issue("MISSING_COMPATIBILITY_RULE", "error", edge.id, "no explicit compatibility rule matches this graph link", {
-      fromResourceType: fromTerminal.resourceType,
-      toResourceType: toTerminal.resourceType,
-      fromUnit: fromTerminal.unit,
-      toUnit: toTerminal.unit,
-      fromTimingModel: fromTerminal.timingModel,
-      toTimingModel: toTerminal.timingModel,
-    }));
-
-    if (fromTerminal.resourceType !== toTerminal.resourceType) {
-      issues.push(issue("INCOMPATIBLE_RESOURCE_TYPE", "error", edge.id, "terminal resource types are not compatible and no rule allows them", {
+    issues.push(
+      issue("MISSING_COMPATIBILITY_RULE", "error", edge.id, "no explicit compatibility rule matches this graph link", {
         fromResourceType: fromTerminal.resourceType,
         toResourceType: toTerminal.resourceType,
-        edgeResourceType: edge.resourceType,
-      }));
+        fromUnit: fromTerminal.unit,
+        toUnit: toTerminal.unit,
+        fromTimingModel: fromTerminal.timingModel,
+        toTimingModel: toTerminal.timingModel,
+      }),
+    );
+
+    if (fromTerminal.resourceType !== toTerminal.resourceType) {
+      issues.push(
+        issue("INCOMPATIBLE_RESOURCE_TYPE", "error", edge.id, "terminal resource types are not compatible and no rule allows them", {
+          fromResourceType: fromTerminal.resourceType,
+          toResourceType: toTerminal.resourceType,
+          edgeResourceType: edge.resourceType,
+        }),
+      );
     }
 
     if (fromTerminal.unit !== toTerminal.unit) {
-      issues.push(issue("INCOMPATIBLE_UNIT", "error", edge.id, "terminal units are not compatible and no rule allows them", {
-        fromUnit: fromTerminal.unit,
-        toUnit: toTerminal.unit,
-      }));
+      issues.push(
+        issue("INCOMPATIBLE_UNIT", "error", edge.id, "terminal units are not compatible and no rule allows them", {
+          fromUnit: fromTerminal.unit,
+          toUnit: toTerminal.unit,
+        }),
+      );
     }
 
     if (fromTerminal.timingModel !== toTerminal.timingModel) {
-      issues.push(issue("INCOMPATIBLE_TIMING", "error", edge.id, "terminal timing models are not compatible and no rule allows them", {
-        fromTimingModel: fromTerminal.timingModel,
-        toTimingModel: toTerminal.timingModel,
-      }));
+      issues.push(
+        issue("INCOMPATIBLE_TIMING", "error", edge.id, "terminal timing models are not compatible and no rule allows them", {
+          fromTimingModel: fromTerminal.timingModel,
+          toTimingModel: toTerminal.timingModel,
+        }),
+      );
     }
   }
 
@@ -181,28 +213,66 @@ function isValidDirectionPair(fromDirection: TerminalDirection, toDirection: Ter
   return (fromDirection === "output" || fromDirection === "bidirectional") && (toDirection === "input" || toDirection === "bidirectional");
 }
 
-function findRule(
-  rules: ResourceCompatibilityRule[],
-  fromTerminal: ModuleTerminal,
-  toTerminal: ModuleTerminal,
-): ResourceCompatibilityRule | undefined {
-  return rules.find(
-    (rule) =>
-      rule.fromResourceType === fromTerminal.resourceType &&
-      rule.toResourceType === toTerminal.resourceType &&
-      rule.fromUnit === fromTerminal.unit &&
-      rule.toUnit === toTerminal.unit &&
-      rule.fromTimingModel === fromTerminal.timingModel &&
-      rule.toTimingModel === toTerminal.timingModel,
+function findRule(rules: ResourceCompatibilityRule[], fromTerminal: ModuleTerminal, toTerminal: ModuleTerminal): ResourceCompatibilityRule | undefined {
+  return rules.find((rule) => ruleMatchesTerminals(rule, fromTerminal, toTerminal));
+}
+
+function ruleMatchesTerminals(rule: ResourceCompatibilityRule, fromTerminal: ModuleTerminal, toTerminal: ModuleTerminal): boolean {
+  return (
+    rule.fromResourceType === fromTerminal.resourceType &&
+    rule.toResourceType === toTerminal.resourceType &&
+    rule.fromUnit === fromTerminal.unit &&
+    rule.toUnit === toTerminal.unit &&
+    rule.fromDirection === fromTerminal.direction &&
+    rule.toDirection === toTerminal.direction &&
+    rule.fromTimingModel === fromTerminal.timingModel &&
+    rule.toTimingModel === toTerminal.timingModel &&
+    rule.allocationModeCompatibility.from === fromTerminal.allocationMode &&
+    rule.allocationModeCompatibility.to === toTerminal.allocationMode &&
+    satisfiesCapacityRelation(rule, fromTerminal, toTerminal) &&
+    satisfiesCriticalityRelation(rule, fromTerminal, toTerminal)
   );
 }
 
-function issuesForRule(
-  edge: GraphEdge,
-  fromTerminal: ModuleTerminal,
-  toTerminal: ModuleTerminal,
-  rule: ResourceCompatibilityRule,
-): GraphLinkValidationIssue[] {
+function satisfiesCapacityRelation(rule: ResourceCompatibilityRule, fromTerminal: ModuleTerminal, toTerminal: ModuleTerminal): boolean {
+  switch (rule.capacityRelation) {
+    case "not_checked":
+      return true;
+    case "source_nominal_gte_target_nominal":
+      return fromTerminal.nominalCapacity >= toTerminal.nominalCapacity;
+    case "source_peak_gte_target_peak":
+      return fromTerminal.peakCapacity >= toTerminal.peakCapacity;
+    case "source_peak_gte_target_nominal":
+      return fromTerminal.peakCapacity >= toTerminal.nominalCapacity;
+  }
+}
+
+function satisfiesCriticalityRelation(rule: ResourceCompatibilityRule, fromTerminal: ModuleTerminal, toTerminal: ModuleTerminal): boolean {
+  switch (rule.criticalityRelation) {
+    case "not_checked":
+    case "target_may_exceed_source":
+      return true;
+    case "source_gte_target":
+      return criticalityRank(fromTerminal.criticality) >= criticalityRank(toTerminal.criticality);
+    case "must_match":
+      return fromTerminal.criticality === toTerminal.criticality;
+  }
+}
+
+function criticalityRank(criticality: ModuleTerminal["criticality"]): number {
+  switch (criticality) {
+    case "low":
+      return 0;
+    case "medium":
+      return 1;
+    case "high":
+      return 2;
+    case "critical":
+      return 3;
+  }
+}
+
+function issuesForRule(edge: GraphEdge, fromTerminal: ModuleTerminal, toTerminal: ModuleTerminal, rule: ResourceCompatibilityRule): GraphLinkValidationIssue[] {
   if (rule.decision === "compatible") {
     return [];
   }
