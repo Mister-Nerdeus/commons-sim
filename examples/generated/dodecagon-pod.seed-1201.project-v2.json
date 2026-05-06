@@ -1,0 +1,44 @@
+{
+  "manifestVersion": 2,
+  "projectId": "dodecagon-pod.seed-1201",
+  "projectTitle": "Dodecagon Pod",
+  "createdAtUtc": "2026-05-05T00:00:00.000Z",
+  "updatedAtUtc": "2026-05-05T00:00:00.000Z",
+  "sourceBranch": "develop",
+  "designMode": "dream",
+  "designDocument": {
+    "designVersion": 1,
+    "designId": "dodecagon-pod.seed-1201.design",
+    "title": "Dodecagon Pod",
+    "description": "Deterministic generator fixture; editable design storage only.",
+    "layoutGraphRef": "examples/layouts/dodecagon-pod.layout.json",
+    "userAnnotations": ["No professional validity or build approval is implied."],
+    "tags": ["generated", "dodecagon", "pod"]
+  },
+  "validationResults": [
+    {
+      "ok": true,
+      "mode": "dream",
+      "canSave": true,
+      "canSimulate": false,
+      "canSubmitToLeaderboard": false,
+      "canExportProfessionalReport": false,
+      "issueCount": 1,
+      "issues": [
+        {
+          "code": "deterministic-draft",
+          "severity": "warning",
+          "path": "designDocument",
+          "message": "Generated layout is a deterministic editable draft, not professional validity.",
+          "mode": "dream",
+          "canUserOverride": true
+        }
+      ]
+    }
+  ],
+  "aiProposals": [],
+  "metadata": {
+    "notes": "Generated fixture for seed 1201.",
+    "author": "deterministic-polygon-village-generator"
+  }
+}

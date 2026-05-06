@@ -1,7 +1,13 @@
 import { ProjectManifestSchema, type ProjectManifest } from "./projectManifest.js";
+import { ProjectManifestV2Schema, type ProjectManifestV2 } from "./projectManifestV2.js";
 
 export type MigrationResult = {
   manifest: ProjectManifest;
+  migratedFrom: number | null;
+};
+
+export type MigrationToV2Result = {
+  manifest: ProjectManifestV2;
   migratedFrom: number | null;
 };
 
@@ -40,4 +46,41 @@ export function migrateProjectManifest(input: unknown): MigrationResult {
   }
 
   return { manifest: ProjectManifestSchema.parse(asAny), migratedFrom: null };
+}
+
+export function migrateProjectManifestToV2(input: unknown): MigrationToV2Result {
+  const asAny = input as any;
+
+  if (asAny?.manifestVersion === 2) {
+    return { manifest: ProjectManifestV2Schema.parse(asAny), migratedFrom: null };
+  }
+
+  const v1Result = migrateProjectManifest(input);
+  const v1 = v1Result.manifest;
+  const migrated = ProjectManifestV2Schema.parse({
+    manifestVersion: 2,
+    projectId: v1.projectId,
+    projectTitle: v1.projectTitle,
+    createdAtUtc: v1.createdAtUtc,
+    updatedAtUtc: v1.updatedAtUtc,
+    sourceBranch: v1.sourceBranch,
+    designMode: "soft-sim",
+    designDocument: {
+      designVersion: 1,
+      designId: `${v1.projectId}-design`,
+      title: v1.projectTitle,
+      description: "Migrated from ProjectManifest V1 compiled scenario.",
+      userAnnotations: [],
+      tags: ["migrated-v1"],
+    },
+    compiledScenario: v1.scenario,
+    validationResults: [],
+    aiProposals: [],
+    metadata: {
+      notes: v1.metadata.notes,
+      engineVersion: v1.metadata.engineVersion,
+    },
+  });
+
+  return { manifest: migrated, migratedFrom: v1Result.migratedFrom ?? 1 };
 }

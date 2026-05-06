@@ -1,0 +1,43 @@
+{
+  "manifestVersion": 2,
+  "projectId": "polygon-garden-village",
+  "projectTitle": "Polygon Garden Village",
+  "createdAtUtc": "2026-05-05T00:00:00.000Z",
+  "updatedAtUtc": "2026-05-05T00:00:00.000Z",
+  "sourceBranch": "develop",
+  "designMode": "soft-sim",
+  "designDocument": {
+    "designVersion": 1,
+    "designId": "polygon-garden-village-design",
+    "title": "Polygon Garden Village",
+    "description": "V2 project with editable design storage and compiled Scenario V1.",
+    "layoutGraphRef": "examples/layouts/polygon-garden-village-24gon.layout.json",
+    "userAnnotations": ["Compiled scenario remains the simulation input."],
+    "tags": ["polygon", "garden-village"]
+  },
+  "compiledScenario": {
+    "version": 1,
+    "id": "polygon-garden-village-scenario",
+    "title": "Polygon Garden Village Scenario",
+    "seed": 1337,
+    "horizonMonths": 60,
+    "timestep": "month",
+    "householdCount": 48,
+    "householdMix": { "singles": 12, "couples": 16, "families": 20 },
+    "occupantsPerType": { "single": 1, "couple": 2, "family": 4.5 },
+    "participation": { "meals": 0.75, "laundry": 0.7, "cleaning": 0.5 },
+    "serviceTiers": { "meals": 2, "laundry": 1, "cleaning": 1 },
+    "wageModel": { "fullyLoadedUsdPerHour": 28, "overheadMultiplier": 1.15 },
+    "utilities": { "electricity_kwh": 0.16, "water_gal": 0.006, "sewer_gal": 0.007 },
+    "equipment": [],
+    "reservePolicy": { "initialReserveUsd": 25000, "targetMonthsOfOpex": 3, "maxReserveUsd": 250000 }
+  },
+  "validationResults": [],
+  "aiProposals": [],
+  "metadata": {
+    "notes": "Compiled Scenario V1 is optional in V2 but present here.",
+    "engineVersion": "0.1.0",
+    "modelVersion": "1.1.0",
+    "author": "Codex"
+  }
+}

@@ -43,3 +43,8 @@ These cannot be fully represented in repository files and must be configured in 
 ## Operator Procedure
 - Before merge: verify local validation evidence, review status, and evidence links in PR template.
 - After merge: verify deployment references the reviewed commit and local validation artifact.
+# Local Evidence Gate
+
+Develop, staging, and main changes rely on local validation artifacts as formal evidence. The required local validation evidence must be generated under the declared runtime and must point at the commit being reviewed.
+
+GitHub Actions status is advisory for this repo unless a later governance change explicitly reinstates it as a merge gate.

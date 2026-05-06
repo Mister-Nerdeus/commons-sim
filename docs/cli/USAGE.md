@@ -80,3 +80,6 @@ Runs static graph link validation against supplied generic templates and compati
 - Batch score challenge submissions in a directory.
 - Validate graph links statically.
 - Run with invalid path and verify non-zero exit + machine-readable error.
+# Modalized Contract Validation
+
+The shared package now includes mode policy, ProjectManifestV2, LayoutGraph, and AI proposal contracts. These are schema/validation contracts only. CLI simulation commands continue to run Scenario V1 inputs.

@@ -1,0 +1,22 @@
+{
+  "layoutVersion": 1,
+  "layoutId": "incomplete-dream-layout",
+  "title": "Incomplete Dream Layout",
+  "units": "ft",
+  "coordinateSystem": "local-cartesian",
+  "designMode": "dream",
+  "scale": { "value": 1, "unit": "ft" },
+  "nodes": [
+    {
+      "id": "future-hub-note",
+      "kind": "annotation",
+      "geometry": { "type": "rectangle", "origin": { "x": -20, "y": -20 }, "width": 40, "height": 40, "rotationDegrees": 0 },
+      "label": "Future hub idea"
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "notes": "Incomplete by design; Dream Mode can save this.",
+    "tags": ["incomplete", "dream"]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "policyVersion": 1,
+  "mode": "soft-sim",
+  "label": "Soft Simulation",
+  "description": "Explains likely consequences without treating warnings as blockers.",
+  "allowPartialGraphs": true,
+  "allowUnconnectedTerminals": true,
+  "allowExperimentalModules": true,
+  "allowFantasyGeometry": false,
+  "allowMissingCostData": true,
+  "allowMissingRealWorldBinding": true,
+  "allowAiDraftArtifacts": true,
+  "canSaveWithWarnings": true,
+  "canSimulateWithWarnings": true,
+  "canSubmitToLeaderboard": false,
+  "canExportProfessionalReport": false,
+  "lockedFieldPaths": []
+}

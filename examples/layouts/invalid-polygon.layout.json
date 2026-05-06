@@ -1,0 +1,28 @@
+{
+  "layoutVersion": 1,
+  "layoutId": "invalid-polygon-layout",
+  "title": "Invalid Polygon Layout",
+  "units": "ft",
+  "coordinateSystem": "local-cartesian",
+  "designMode": "challenge",
+  "scale": { "value": 1, "unit": "ft" },
+  "nodes": [
+    {
+      "id": "bad-polygon",
+      "kind": "zone",
+      "geometry": {
+        "type": "polygon",
+        "points": [
+          { "x": 0, "y": 0 },
+          { "x": 10, "y": 0 }
+        ]
+      },
+      "label": "Bad Polygon"
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "notes": "Must fail because polygon has fewer than three points.",
+    "tags": ["invalid"]
+  }
+}

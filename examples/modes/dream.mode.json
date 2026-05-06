@@ -1,0 +1,18 @@
+{
+  "policyVersion": 1,
+  "mode": "dream",
+  "label": "Dream Mode",
+  "description": "Creative sandbox for incomplete and imaginative designs.",
+  "allowPartialGraphs": true,
+  "allowUnconnectedTerminals": true,
+  "allowExperimentalModules": true,
+  "allowFantasyGeometry": true,
+  "allowMissingCostData": true,
+  "allowMissingRealWorldBinding": true,
+  "allowAiDraftArtifacts": true,
+  "canSaveWithWarnings": true,
+  "canSimulateWithWarnings": false,
+  "canSubmitToLeaderboard": false,
+  "canExportProfessionalReport": false,
+  "lockedFieldPaths": []
+}

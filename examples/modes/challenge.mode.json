@@ -1,0 +1,23 @@
+{
+  "policyVersion": 1,
+  "mode": "challenge",
+  "label": "Challenge Mode",
+  "description": "Fair benchmark mode with locked scenario assumptions.",
+  "allowPartialGraphs": false,
+  "allowUnconnectedTerminals": false,
+  "allowExperimentalModules": false,
+  "allowFantasyGeometry": false,
+  "allowMissingCostData": false,
+  "allowMissingRealWorldBinding": true,
+  "allowAiDraftArtifacts": false,
+  "canSaveWithWarnings": true,
+  "canSimulateWithWarnings": false,
+  "canSubmitToLeaderboard": true,
+  "canExportProfessionalReport": false,
+  "lockedFieldPaths": [
+    "compiledScenario.householdCount",
+    "compiledScenario.householdMix",
+    "compiledScenario.wageModel",
+    "compiledScenario.utilities"
+  ]
+}

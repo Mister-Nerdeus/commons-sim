@@ -1,0 +1,35 @@
+{
+  "proposalVersion": 1,
+  "proposalId": "polygon-village-draft-proposal",
+  "createdAtUtc": "2026-05-05T00:00:00.000Z",
+  "prompt": "Draft a polygon garden village with a central green and service ring.",
+  "seed": 1337,
+  "designMode": "dream",
+  "status": "draft",
+  "stylePreset": "polygon-garden",
+  "generatedDesignDocument": {
+    "designVersion": 1,
+    "designId": "ai-polygon-village-design",
+    "title": "AI Draft Polygon Village",
+    "description": "Editable proposal only, not truth-plane evidence.",
+    "layoutGraphRef": "examples/layouts/polygon-garden-village-24gon.layout.json",
+    "userAnnotations": [],
+    "tags": ["ai-draft", "polygon"]
+  },
+  "warnings": [
+    {
+      "code": "ai-draft-not-truth",
+      "severity": "warning",
+      "path": "ai.scope",
+      "message": "AI draft is editable proposal-plane content.",
+      "mode": "dream",
+      "canUserOverride": true
+    }
+  ],
+  "ai": {
+    "origin": "AI",
+    "scope": "Draft",
+    "confidence": "Medium",
+    "validation_status": "Partial"
+  }
+}

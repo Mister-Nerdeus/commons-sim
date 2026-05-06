@@ -1,0 +1,37 @@
+{
+  "manifestVersion": 2,
+  "projectId": "compile-supported",
+  "projectTitle": "Compile Supported Project",
+  "createdAtUtc": "2026-05-05T00:00:00.000Z",
+  "updatedAtUtc": "2026-05-05T00:00:00.000Z",
+  "sourceBranch": "develop",
+  "designMode": "soft-sim",
+  "designDocument": {
+    "designVersion": 1,
+    "designId": "compile-supported-design",
+    "title": "Compile Supported Project",
+    "description": "Project with attached Scenario V1.",
+    "userAnnotations": [],
+    "tags": ["compile-supported"]
+  },
+  "compiledScenario": {
+    "version": 1,
+    "id": "compile-supported-scenario",
+    "title": "Compile Supported Scenario",
+    "seed": 7,
+    "horizonMonths": 12,
+    "timestep": "month",
+    "householdCount": 4,
+    "householdMix": { "singles": 2, "couples": 1, "families": 1 },
+    "occupantsPerType": { "single": 1, "couple": 2, "family": 4.5 },
+    "participation": { "meals": 0.5, "laundry": 0.5, "cleaning": 0.25 },
+    "serviceTiers": { "meals": 1, "laundry": 1, "cleaning": 1 },
+    "wageModel": { "fullyLoadedUsdPerHour": 25, "overheadMultiplier": 1.1 },
+    "utilities": { "electricity_kwh": 0.2, "water_gal": 0.01, "sewer_gal": 0.01 },
+    "equipment": [],
+    "reservePolicy": { "initialReserveUsd": 1000, "targetMonthsOfOpex": 3, "maxReserveUsd": 10000 }
+  },
+  "validationResults": [],
+  "aiProposals": [],
+  "metadata": { "notes": "Supported narrow adapter fixture." }
+}

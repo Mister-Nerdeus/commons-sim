@@ -8,6 +8,7 @@ const operator = getArg("--operator") ?? process.env.USERNAME ?? process.env.USE
 const includeDocker = args.includes("--include-docker");
 
 const commands = [
+  ["node", ["scripts/controls/verify-runtime-version.mjs"]],
   ["node", ["--version"]],
   ["pnpm", ["--version"]],
   ["pnpm", ["install", "--frozen-lockfile"]],
@@ -66,6 +67,31 @@ for (const [command, commandArgs] of commands) {
 }
 
 writeJson(outPath, record);
+
+const currentProofResult = run("node", [
+  "scripts/controls/verify-local-validation-current.mjs",
+  "--evidence",
+  outPath,
+]);
+const currentProofEntry = {
+  command: `node scripts/controls/verify-local-validation-current.mjs --evidence ${outPath}`,
+  exitCode: currentProofResult.status,
+  durationMs: 0,
+  startedAtUtc: new Date().toISOString(),
+  finishedAtUtc: new Date().toISOString(),
+  stdoutTail: tail(currentProofResult.stdout),
+  stderrTail: tail(currentProofResult.stderr),
+};
+record.commands.push(currentProofEntry);
+
+if (currentProofResult.status !== 0) {
+  record.ok = false;
+  writeJson(outPath, record);
+  console.error(JSON.stringify(currentProofEntry, null, 2));
+  process.exit(currentProofResult.status ?? 1);
+}
+
+writeJson(outPath, record);
 console.log(JSON.stringify({ ok: record.ok, path: outPath, commands: record.commands.length }, null, 2));
 
 function getArg(name) {
@@ -75,11 +101,25 @@ function getArg(name) {
 }
 
 function run(command, commandArgs) {
+  if (process.platform === "win32") {
+    return spawnSync([command, ...commandArgs].map(quoteShellArg).join(" "), {
+      encoding: "utf8",
+      shell: true,
+      windowsHide: true,
+    });
+  }
+
   return spawnSync(command, commandArgs, {
     encoding: "utf8",
-    shell: process.platform === "win32",
+    shell: false,
     windowsHide: true,
   });
+}
+
+function quoteShellArg(value) {
+  const stringValue = String(value);
+  if (!/[\s"]/u.test(stringValue)) return stringValue;
+  return `"${stringValue.replace(/"/g, '\\"')}"`;
 }
 
 function tail(value) {

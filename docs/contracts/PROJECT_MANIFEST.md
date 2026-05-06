@@ -28,3 +28,8 @@ Required fields:
 
 - Invalid manifest shape must fail loudly via schema validation.
 - Invalid scenario payload in manifest must fail loudly during load.
+# V1 and V2 Boundary
+
+ProjectManifest V1 remains supported and validates existing Scenario V1 projects. ProjectManifestV2 is the editable freeform design container. V1 can migrate to V2 while preserving the original Scenario V1 as `compiledScenario`.
+
+Scenario V1 is simulation input; ProjectManifestV2 is project/design storage.

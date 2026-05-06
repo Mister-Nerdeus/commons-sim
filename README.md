@@ -122,3 +122,19 @@ Docker Compose runs the API with Postgres storage by default. Local non-Docker d
 - [Risk register](docs/program/RISK_REGISTER.md)
 - [Codex issue template](.github/ISSUE_TEMPLATE/codex-issue.md)
 - [Pull request template](.github/pull_request_template.md)
+# Modalized Freeform Foundation
+
+The repo now separates creative project storage from deterministic simulation input.
+
+- ModePolicy defines Dream, Soft Simulation, Challenge, Professional, and Research validation boundaries.
+- ProjectManifestV2 stores editable designs and optional compiled Scenario V1 inputs.
+- LayoutGraph stores static spatial design data for polygon community layouts.
+- AI proposals remain editable proposal-plane artifacts.
+- `compileToScenarioV1` is a narrow adapter, not a full graph compiler.
+- The web app opens to a builder shell while keeping the existing scenario/challenge workspace accessible.
+
+Local validation is the formal evidence gate. Run:
+
+```bash
+node scripts/controls/run-local-validation.mjs --operator <operator> --include-docker
+```
