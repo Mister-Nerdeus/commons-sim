@@ -10,7 +10,7 @@
 | `@commons-sim/server` | HTTP integration + file-backed storage tests | signed identity, server-side scoring, rate limits, seasons, review workflow, and leaderboard behavior |
 
 ## Coverage Policy
-Coverage thresholds are enforced in package test commands (CI-enforced):
+Coverage thresholds are enforced in package test commands:
 - Engine: lines/functions/statements >= 65%, branches >= 55%
 - Shared: lines/functions/statements >= 60%, branches >= 50%
 - CLI: lines/statements >= 60%, functions >= 45%, branches >= 50%
@@ -42,6 +42,7 @@ Threshold enforcement is non-advisory via `c8 --check-coverage`.
   - finalist review and season creation require admin flow
   - protected write endpoints are rate limited
 
-## CI Integration
-- Workflow: `.github/workflows/ci.yml`
-- `pnpm test` runs package-level coverage gates and fails CI on threshold breaches.
+## Local Validation Integration
+- GitHub Actions is disabled for this project.
+- `pnpm test` runs package-level coverage gates and fails locally on threshold breaches.
+- Merge approval must reference local validation evidence instead of hosted workflow runs.

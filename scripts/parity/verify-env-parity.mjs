@@ -1,13 +1,13 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const workflowExpectations = [
-  { path: ".github/workflows/deploy-dev.yml", branch: "develop", environment: "dev" },
-  { path: ".github/workflows/deploy-staging.yml", branch: "staging", environment: "staging" },
-  { path: ".github/workflows/deploy-prod.yml", branch: "main", environment: "production" },
+const environmentExpectations = [
+  { branch: "develop", environment: "dev", artifact: "artifacts/controls/environments/dev.json" },
+  { branch: "staging", environment: "staging", artifact: "artifacts/controls/environments/staging.json" },
+  { branch: "main", environment: "production", artifact: "artifacts/controls/environments/production.json" },
 ];
 
-const results = workflowExpectations.map((item) => checkWorkflow(item.path, item.branch, item.environment));
+const results = environmentExpectations.map((item) => checkEnvironmentArtifact(item));
 const failures = results.filter((r) => !r.ok);
 
 if (failures.length > 0) {
@@ -17,18 +17,20 @@ if (failures.length > 0) {
 
 console.log(JSON.stringify({ ok: true, checks: results }, null, 2));
 
-function checkWorkflow(relPath, branch, environment) {
-  const fullPath = resolve(relPath);
-  const text = readFileSync(fullPath, "utf8");
-  const hasBranch = text.includes(`branches: [${branch}]`);
-  const hasEnvironment = text.includes(`name: ${environment}`);
+function checkEnvironmentArtifact(expectation) {
+  const fullPath = resolve(expectation.artifact);
+  const hasArtifact = existsSync(fullPath);
+  const parsed = hasArtifact ? JSON.parse(readFileSync(fullPath, "utf8")) : null;
+  const hasEnvironment = parsed?.environment === expectation.environment;
+  const exported = parsed?.status === "exported";
 
   return {
-    path: relPath,
-    branch,
-    environment,
-    ok: hasBranch && hasEnvironment,
-    hasBranch,
+    artifact: expectation.artifact,
+    branch: expectation.branch,
+    environment: expectation.environment,
+    ok: hasArtifact && hasEnvironment && exported,
+    hasArtifact,
     hasEnvironment,
+    exported,
   };
 }

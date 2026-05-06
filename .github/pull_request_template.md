@@ -23,7 +23,7 @@
 
 ## Verification Evidence
 - Commands run:
-- Test/workflow run IDs:
+- Local validation artifact links:
 - Changed-files summary:
 - Audit artifact links:
 - Deployment environment used (`dev`, `staging`, `production`):

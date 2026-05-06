@@ -4,7 +4,7 @@
 - `pnpm determinism:init`: local-only golden creation/update.
 - `pnpm determinism:check`: verification-only check (no file writes).
 
-CI must run only `pnpm determinism:check`.
+Release validation must run only `pnpm determinism:check`; `pnpm determinism:init` is local-only golden creation/update.
 
 ## Golden Scenario Matrix
 | ID | Scenario Input | Snapshot | Hash |
@@ -15,13 +15,13 @@ CI must run only `pnpm determinism:check`.
 1. Run `pnpm determinism:init` locally when output changes are intentional.
 2. Review snapshot/hash diffs in PR.
 3. Document reason for hash change in migration or semantic fix notes.
-4. CI must still pass `pnpm determinism:check` after commit.
+4. Local validation must still pass `pnpm determinism:check` after commit.
 
 ## Drift Failure Behavior
 - `pnpm determinism:check` exits non-zero on hash mismatch or missing goldens.
 - Negative drift assertion is covered by CLI test:
   - `packages/cli/src/determinism.test.ts` (`verifyHash throws on drift`).
 
-## CI Integration
-- Workflow: `.github/workflows/ci.yml`
+## Local Validation Integration
+- GitHub Actions is disabled for this project.
 - Determinism step: `pnpm determinism:check`

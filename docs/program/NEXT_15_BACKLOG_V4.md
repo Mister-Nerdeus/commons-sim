@@ -4,14 +4,14 @@ This ordering reflects current repository state after Issues #16-#29.
 
 1. Automate GitHub branch protection/environment settings verification (API-backed audit)
 2. Add numeric drift thresholds and failure bands to canonical benchmark matrix
-3. Build staging RC evidence bundler (single artifact pack from workflows)
+3. Build staging RC evidence bundler (single artifact pack from local validation artifacts)
 4. Add web automated tests (wizard flow, manifest load, explainability assertions)
-5. Add screenshot capture workflow for release evidence bundles
-6. Implement schema migration dry-run checker in CI for manifest compatibility
+5. Add local screenshot capture command for release evidence bundles
+6. Implement schema migration dry-run checker for manifest compatibility
 7. Add multi-scenario sensitivity batch mode in CLI
 8. Extend canonical library from 3 to 12 scenarios with segment tags
-9. Add parity gate for workflow-required check-name drift
-10. Add production rollback drill workflow and quarterly simulation schedule
+9. Add parity gate for branch/environment evidence drift
+10. Add production rollback drill command and quarterly simulation schedule
 11. Add environment secret age/rotation compliance check artifact
 12. Implement scenario benchmark trend dashboard in web
 13. Add contract publication pipeline for manifest and scenario schemas

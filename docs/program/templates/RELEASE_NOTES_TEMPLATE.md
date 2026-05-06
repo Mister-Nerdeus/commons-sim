@@ -16,7 +16,7 @@
 
 ## Validation Evidence
 
-- CI workflow links:
+- Local validation artifact links:
 - Determinism evidence:
 - Scenario benchmark evidence:
 

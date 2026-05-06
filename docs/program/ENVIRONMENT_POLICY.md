@@ -2,15 +2,15 @@
 
 ## Purpose
 
-Define explicit branch-to-environment deployment authority and control points.
+Define explicit branch-to-environment authority and control points. GitHub Actions is disabled for this project; environment promotion is a manual/local operation backed by local validation evidence.
 
 ## Environment Authority Mapping
 
-| Environment | Source Branch | Deployment Workflow | Authority |
+| Environment | Source Branch | Promotion Mechanism | Authority |
 |---|---|---|---|
-| `dev` | `develop` | `.github/workflows/deploy-dev.yml` | integration validation |
-| `staging` | `staging` | `.github/workflows/deploy-staging.yml` | release-candidate validation |
-| `production` | `main` | `.github/workflows/deploy-prod.yml` | live release authority |
+| `dev` | `develop` | manual/local deployment record | integration validation |
+| `staging` | `staging` | manual/local release-candidate record | release-candidate validation |
+| `production` | `main` | manual/local production release record | live release authority |
 
 ## Deployment Branch Rules
 
@@ -18,7 +18,7 @@ Define explicit branch-to-environment deployment authority and control points.
 - `staging` environment allows deployments from `staging` only.
 - `production` environment allows deployments from `main` only.
 
-GitHub environment branch restrictions and required reviewers must be configured manually in repository settings.
+GitHub environment branch restrictions and required reviewers may be configured manually in repository settings, but no hosted Actions workflow is part of the gate.
 
 ## Secrets and Config Separation Matrix
 
@@ -44,3 +44,4 @@ GitHub environment branch restrictions and required reviewers must be configured
 3. Set environment-specific secrets and variables with no cross-environment reuse.
 4. Set required reviewers for `staging` and `production`.
 5. Record screenshots/exports in `artifacts/batches/batch-05/`.
+6. Keep GitHub Actions disabled in repository settings.
